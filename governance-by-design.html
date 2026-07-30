@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Governance by design: keeping AI agents auditable — Tessera Labs</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="announce">Tessera Labs raises <a href="https://www.forbes.com/sites/annatong/2026/05/05/this-22-year-old-just-raised-60-million-to-automate-this-sneaky-big-enterprise-market/" target="_blank" rel="noopener">$60M Series A</a> led by a16z</div>
+    <div class="nav-bar">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <img src="assets/img/Tessera_Logo_Lite.svg" alt="Tessera Labs">
+          Tessera Labs
+        </a>
+        <div class="nav-right">
+          <a href="index.html#product">Products</a>
+          <a href="index.html#solutions">Solutions</a>
+          <a href="about.html">About</a>
+          <a href="blog.html">Blog</a>
+          <a class="btn" href="about.html#contact">Get a preview</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <script>
+    (function () {
+      var h = document.querySelector('.site-header');
+      if (h) document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
+    })();
+  </script>
+
+  <div class="post-hero">
+    <a class="post-back" href="blog.html">&larr; Back to Blog</a>
+    <span class="blog-tag">Product</span>
+    <h1>Governance by design: keeping AI agents auditable</h1>
+    <p class="post-byline">By Marcus Delgado &middot; March 18, 2026 at 10:40 AM</p>
+  </div>
+
+  <div class="post-body">
+        <p>Enterprises running regulated workloads on SAP don't get to adopt an AI system on faith. Every change to a financial or operational system of record needs to be explainable after the fact, which means the bar for an AI agent operating in that environment isn't just "does it work," it's "can we prove what it did and why."</p>
+        <p>We built Tessera's governance layer around that constraint from the start rather than bolting it on afterward. Every action an agent proposes is logged with the reasoning behind it, the inputs it considered, and the exact diff it would apply, before any of it touches a live system. Nothing executes unilaterally past a defined checkpoint &mdash; agents propose, and a human with the right context approves.</p>
+        <p>This is a meaningfully different model from a black-box automation tool that just produces an output. The audit trail isn't a log tacked onto the side of the system; it's the same record a reviewer uses to approve the change in the first place, which means the explanation always matches what actually happened.</p>
+        <p>For customers operating under SOX or sector-specific compliance regimes, that trail is exportable as a report their auditors can review directly, without needing to take our word for what the agents did.</p>
+        <p>We're expanding this tooling further this year, including finer-grained approval scopes and better tooling for compliance teams to define what "safe to auto-approve" means for their own environment, rather than inheriting a one-size-fits-all default.</p>
+  </div>
+
+  <section class="section post-related">
+    <div class="section-head">
+      <h2>Keep reading</h2>
+    </div>
+    <div class="blog-grid">
+      <a class="blog-card" href="data-harmonization.html">
+        <span class="blog-tag">Engineering</span>
+        <h3>Data harmonization across SAP, Salesforce, and Workday</h3>
+        <p>The technical approach behind Tessera's cross-system data quality and harmonization layer.</p>
+        <span class="blog-meta">February 26, 2026 &middot; Anna Choi</span>
+      </a>
+      <a class="blog-card" href="sap-multi-agent-engine.html">
+        <span class="badge-new">New</span>
+        <span class="blog-tag">Product</span>
+        <h3>Inside the multi-agent engine that plans SAP migrations</h3>
+        <p>How Tessera's agents break a monolithic S/4HANA migration into a governed, auditable sequence of steps.</p>
+        <span class="blog-meta">July 14, 2026 &middot; Priya Nathan</span>
+      </a>
+      <a class="blog-card" href="code-remediation-hardest-part.html">
+        <span class="blog-tag">Engineering</span>
+        <h3>Why code remediation is the hardest part of ERP modernization</h3>
+        <p>Legacy ABAP and custom code are where most migrations stall. Here's how we automate remediation at scale.</p>
+        <span class="blog-meta">June 22, 2026 &middot; Marcus Delgado</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Capabilities</h4>
+        <a href="index.html#product">Product</a>
+        <a href="index.html#solutions">Solutions</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="about.html#careers">Careers</a>
+        <a href="about.html#contact">Contact</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Others</h4>
+        <a href="#">Ethics &amp; Compliance</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="footer-col footer-cta">
+        <h4>See why Fortune 500 companies trust us</h4>
+        <p>We will show you how Tessera accelerates ERP transformations, safeguards continuity, and reduces costs without disruption.</p>
+        <a class="btn on-dark" href="about.html#contact">Get a preview</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
+  </footer>
+
+  <script src="assets/main.js" defer></script>
+</body>
+</html>

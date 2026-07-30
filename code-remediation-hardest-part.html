@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why code remediation is the hardest part of ERP modernization — Tessera Labs</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="announce">Tessera Labs raises <a href="https://www.forbes.com/sites/annatong/2026/05/05/this-22-year-old-just-raised-60-million-to-automate-this-sneaky-big-enterprise-market/" target="_blank" rel="noopener">$60M Series A</a> led by a16z</div>
+    <div class="nav-bar">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <img src="assets/img/Tessera_Logo_Lite.svg" alt="Tessera Labs">
+          Tessera Labs
+        </a>
+        <div class="nav-right">
+          <a href="index.html#product">Products</a>
+          <a href="index.html#solutions">Solutions</a>
+          <a href="about.html">About</a>
+          <a href="blog.html">Blog</a>
+          <a class="btn" href="about.html#contact">Get a preview</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <script>
+    (function () {
+      var h = document.querySelector('.site-header');
+      if (h) document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
+    })();
+  </script>
+
+  <div class="post-hero">
+    <a class="post-back" href="blog.html">&larr; Back to Blog</a>
+    <span class="blog-tag">Engineering</span>
+    <h1>Why code remediation is the hardest part of ERP modernization</h1>
+    <p class="post-byline">By Marcus Delgado &middot; June 22, 2026 at 11:05 AM</p>
+  </div>
+
+  <div class="post-body">
+        <p>Every enterprise SAP environment that's been in production for a decade or more carries a layer of custom ABAP written to solve a problem the standard product didn't handle at the time. Some of it is dead weight. Some of it encodes a business rule nobody has documented anywhere else. Migrations stall not because teams can't move data, but because nobody can say with confidence which custom code belongs in which category.</p>
+        <p>Traditional static-analysis tools flag syntax compatibility issues, which is necessary but nowhere near sufficient. A piece of code can be perfectly valid in the target syntax and still be quietly wrong once the underlying data model has changed. The hard part isn't parsing the code; it's understanding what it's for.</p>
+        <p>Our remediation agent reads the code alongside its change history, any available documentation, and observed runtime behavior from the live system, and uses that context to classify each object as safe to retire, in need of adaptation, or must-preserve as-is. For anything that needs adaptation, it drafts the updated version along with test coverage that exercises the specific behavior the original code was protecting.</p>
+        <p>None of this ships without a human in the loop. Engineers review the classification and the diff before anything merges, and the agent's reasoning &mdash; not just its output &mdash; is part of what gets reviewed, so a reviewer can catch a wrong assumption early rather than downstream in a test failure.</p>
+        <p>In practice, this has taken remediation work that used to consume the middle third of a migration timeline and compressed it into weeks of review rather than months of manual tracing, without lowering the bar on what gets shipped to production.</p>
+  </div>
+
+  <section class="section post-related">
+    <div class="section-head">
+      <h2>Keep reading</h2>
+    </div>
+    <div class="blog-grid">
+      <a class="blog-card" href="series-a-a16z.html">
+        <span class="blog-tag">Company</span>
+        <h3>Tessera raises $60M Series A led by a16z</h3>
+        <p>A look at what the new funding means for our roadmap and the enterprises we serve.</p>
+        <span class="blog-meta">May 5, 2026 &middot; Anna Choi</span>
+      </a>
+      <a class="blog-card" href="fortune-500-case-study.html">
+        <span class="blog-tag">Customers</span>
+        <h3>How a Fortune 500 manufacturer cut migration time by 70%</h3>
+        <p>A case study on compressing a multi-year SAP ECC to S/4HANA migration into a matter of months.</p>
+        <span class="blog-meta">April 9, 2026 &middot; Priya Nathan</span>
+      </a>
+      <a class="blog-card" href="governance-by-design.html">
+        <span class="blog-tag">Product</span>
+        <h3>Governance by design: keeping AI agents auditable</h3>
+        <p>Every action our agents take is logged and traceable, so regulated industries can adopt AI with confidence.</p>
+        <span class="blog-meta">March 18, 2026 &middot; Marcus Delgado</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Capabilities</h4>
+        <a href="index.html#product">Product</a>
+        <a href="index.html#solutions">Solutions</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="about.html#careers">Careers</a>
+        <a href="about.html#contact">Contact</a>
+        <a href="blog.html">Blog</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Others</h4>
+        <a href="#">Ethics &amp; Compliance</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+      <div class="footer-col footer-cta">
+        <h4>See why Fortune 500 companies trust us</h4>
+        <p>We will show you how Tessera accelerates ERP transformations, safeguards continuity, and reduces costs without disruption.</p>
+        <a class="btn on-dark" href="about.html#contact">Get a preview</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
+  </footer>
+
+  <script src="assets/main.js" defer></script>
+</body>
+</html>
