@@ -331,10 +331,12 @@ body:has(.dotgrid)::before {
   .hero h1,
   .hero p.lede {
     text-shadow:
-      0 0 16px #fff,
-      0 0 16px #fff,
-      0 0 32px #fff,
-      0 0 32px #fff;
+      0 0 6px #fff,
+      0 0 6px #fff,
+      0 0 14px #fff,
+      0 0 14px #fff,
+      0 0 30px #fff,
+      0 0 30px #fff;
   }
 }
 
