@@ -70,6 +70,32 @@
     var seeAll = document.getElementById('see-all-positions');
     if (seeAll) seeAll.textContent = 'See all ' + JOBS.length + ' positions';
 
+    // Fixed dot-grid backdrop: the layer itself never moves, so its visibility
+    // is tied to scroll position instead. Fully present at the top of the page,
+    // gone by the time the reader is one screen down, and restored on the way
+    // back up. Reads are rAF-throttled and the listener is passive so this can't
+    // interfere with scroll performance.
+    if (document.querySelector('.dotgrid')) {
+      var dotsQueued = false;
+
+      var updateDots = function () {
+        dotsQueued = false;
+        var fadeOver = Math.max(1, window.innerHeight * 0.75);
+        var remaining = 1 - Math.min(1, window.pageYOffset / fadeOver);
+        document.documentElement.style.setProperty('--dots-opacity', remaining.toFixed(3));
+      };
+
+      var queueDotsUpdate = function () {
+        if (dotsQueued) return;
+        dotsQueued = true;
+        window.requestAnimationFrame(updateDots);
+      };
+
+      window.addEventListener('scroll', queueDotsUpdate, { passive: true });
+      window.addEventListener('resize', queueDotsUpdate);
+      updateDots();
+    }
+
     // Video mute toggle (About). The player runs with controls=0, so this is the
     // only affordance — it drives Vimeo through the postMessage API rather than
     // the SDK, which keeps the page free of an external script dependency.

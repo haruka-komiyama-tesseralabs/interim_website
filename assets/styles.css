@@ -259,16 +259,30 @@ a { color: inherit; text-decoration: none; }
 .dotgrid:has(.hero) {
   min-height: 92vh;
 }
-.dotgrid::before {
+/* The dots are a FIXED viewport layer rather than a box inside .dotgrid, so the
+   page scrolls over a stationary field instead of dragging the pattern along
+   with it. Two consequences worth noting:
+     - It's attached to <body>, not .dotgrid, because a fixed element nested in
+       a positioned ancestor still paints inside that ancestor's stacking
+       context, which would have put the dots on top of the sections below.
+       z-index:-1 keeps it behind all content but still above the body's own
+       background, which the canvas paints first.
+     - :has() scopes it to pages that already had a dot grid (Home, About), so
+       Blog and the post pages are unaffected.
+   The gradient mask keeps the original top-to-bottom falloff; --dots-opacity is
+   driven by scroll position in main.js so the field fades out as the reader
+   moves down the page and returns when they come back up. */
+body:has(.dotgrid)::before {
   content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
+  z-index: -1;
   background-image: radial-gradient(circle, #d4d4d8 1px, transparent 1px);
   background-size: 22px 22px;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 90%);
   mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 90%);
   pointer-events: none;
-  z-index: 0;
+  opacity: var(--dots-opacity, 1);
 }
 .dotgrid > * {
   position: relative;
