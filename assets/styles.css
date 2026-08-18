@@ -322,6 +322,7 @@ body:has(.dotgrid)::before {
   .hero h1 { white-space: nowrap; }
 }
 
+
 /* The headline's line breaks are authored per-breakpoint rather than left to
    the wrapping algorithm, which cannot produce the phone arrangement at all:
    "Transformation" is wider than "The new era", so any column wide enough for
@@ -363,6 +364,23 @@ body:has(.dotgrid)::before {
   width: 960px;
   overflow: hidden;
   z-index: 0;
+}
+/* Taller screens: the art is width-constrained (1000x715 fits the 960px box by
+   width, with height to spare) and top-aligned, so the stacked cards land at a
+   fixed offset however tall the viewport is — while the headline keeps
+   descending with its 44vh padding. They coincide around 900px tall; by 1100px
+   the cards sit ~120px high of the headline.
+   Widening the box scales the art, and since its ratio is fixed that makes it
+   proportionally taller, carrying the cards down to meet the headline. 0.96px of
+   width per 1px of viewport height is what holds the alignment: the cards sit
+   0.459 of the way down the art, and the headline descends at 0.44vh.
+   Must stay immediately after the rule above — same specificity, so it only
+   wins by source order. Scoped to >=1400px and capped at 1300px so the widening
+   art can never reach back into the headline's column. */
+@media (min-width: 1400px) {
+  .dotgrid > .hero-illustration {
+    width: clamp(960px, calc(960px + (100vh - 900px) * 0.96), 1300px);
+  }
 }
 /* The illustration is now an inline <svg> (not an <img>) so specific paths
    inside it can be targeted for the entrance animation below. Fit/position
