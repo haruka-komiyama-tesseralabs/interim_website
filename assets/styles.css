@@ -320,6 +320,22 @@ body:has(.dotgrid)::before {
    headline needs to be free to wrap rather than overflow the viewport */
 @media (min-width: 1201px) {
   .hero h1 { white-space: nowrap; }
+
+  /* The illustration only renders above this width, and its card outlines pass
+     behind the headline. A white halo keeps the text readable over them: the
+     shadows carry no offset, so they spread evenly in every direction, and the
+     same blur is repeated because stacked shadows composite — a single pass at
+     this radius is too faint to cover a 1px stroke. Two radii give a dense core
+     that holds right at the glyph edges plus a wide falloff that dissolves into
+     the page's white background, so the halo never reads as an outline. */
+  .hero h1,
+  .hero p.lede {
+    text-shadow:
+      0 0 16px #fff,
+      0 0 16px #fff,
+      0 0 32px #fff,
+      0 0 32px #fff;
+  }
 }
 
 
