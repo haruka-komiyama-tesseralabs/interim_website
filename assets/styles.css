@@ -60,6 +60,21 @@ a { color: inherit; text-decoration: none; }
   padding: 0 40px;
 }
 
+/* About page's video row. Was an inline style on the element, which made the
+   spacing impossible to tune per-breakpoint — the combination of this bottom
+   padding, .section's own top padding, and .dotgrid's 92vh floor was the
+   source of the large dead gap between the video and the mission statement.
+   Doubled-up selector so it outranks the `.wrap { padding: 0 Npx }` shorthands
+   in the responsive blocks, which would otherwise reset these to zero.
+   padding-bottom is kept equal to .section's vertical padding at every
+   breakpoint. Two stacked sections are separated by both of their paddings, so
+   matching that figure here makes video-to-section and section-to-section
+   render as the same gap. */
+.wrap.video-wrap {
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
 /* Fixed site header (announcement bar + nav) */
 .site-header {
   position: fixed;
@@ -105,6 +120,7 @@ a { color: inherit; text-decoration: none; }
   gap: 4px;
   font-weight: 600;
   font-size: 18px;
+  white-space: nowrap;
 }
 .brand img { width: 32px; height: 32px; }
 .nav-right {
@@ -131,6 +147,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--ink);
   color: #fff;
   cursor: pointer;
+  white-space: nowrap;
 }
 .btn.ghost {
   background: transparent;
@@ -142,6 +159,90 @@ a { color: inherit; text-decoration: none; }
   border-color: #fff;
 }
 
+/* Hamburger — its own outlined button beside the filled CTA, hidden entirely on
+   desktop where .nav-right is the real nav. The bars stack with flex rather than
+   absolute offsets, so the button can take its height from the CTA next to it
+   instead of being pinned to a fixed box. */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+}
+.nav-toggle-bar {
+  width: 18px;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.24s ease, opacity 0.18s ease;
+}
+/* Collapse to an X while the dropdown is open. 5.5px is the bar pitch:
+   1.5px bar + 4px gap. */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+/* Consolidated mobile dropdown. Absolutely positioned against the fixed
+   .site-header so opening it does NOT change the header's offsetHeight —
+   that measurement drives --header-h (and therefore the body's top padding),
+   which would otherwise lurch the whole page down on every menu open. */
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  padding: 6px 20px 18px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+.mobile-nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.mobile-nav a {
+  display: block;
+  font-size: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+/* Dividers separate items, so the last one has nothing to separate — it just
+   drew a line above the panel's own bottom border. */
+.mobile-nav a:last-child {
+  border-bottom: 0;
+}
+/* `display: flex` rather than inheriting `.btn`'s inline-flex: the
+   `.mobile-nav a` rule above sets `display: block`, which outranks `.btn` and
+   left-aligned the label because justify-content does nothing on a block. */
+.mobile-nav a.btn {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid var(--ink);
+  font-size: 16px;
+  margin-top: 16px;
+  padding: 13px 16px;
+}
+
 /* Dot grid background — a full-bleed wrapper so the dots span the entire
    viewport width, with the actual (max-width) content living above them in
    its own stacking layer so it never gets masked/faded along with the dots */
@@ -149,11 +250,13 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   width: 100%;
   overflow: hidden;
-  /* Without an explicit floor, this box only grows as tall as the hero copy
-     + works-with text needs, which had shrunk to the point that the
-     absolutely-positioned illustration (stretched via top:0;bottom:0) had
-     no vertical room to show its full height without cropping into the
-     workflow node at the top. */
+}
+/* The 92vh floor exists purely so the absolutely-positioned hero illustration
+   (stretched via top:0;bottom:0) has vertical room to render at full height
+   without cropping into the workflow node at the top. It's scoped to the
+   homepage hero because About reuses .dotgrid to hold only the video, where an
+   unconditional 92vh floor left a large block of dead space beneath it. */
+.dotgrid:has(.hero) {
   min-height: 92vh;
 }
 .dotgrid::before {
@@ -183,19 +286,39 @@ a { color: inherit; text-decoration: none; }
      viewport; z-index comes for free since .dotgrid > * (this element's
      ancestor .hero) is already bumped to z-index:1 by the dot-grid rule
      below, which is higher than the illustration's z-index:0 */
-  padding-top: 36vh;
+  padding-top: 44vh;
   max-width: 640px;
 }
+/* Only the clamp FLOOR moves for the hero pair — the 8vw slope and 72px cap are
+   untouched, so this reads larger on phones (where the floor is what applies)
+   while tablet and desktop sizes stay exactly as they were. 38px is the ceiling
+   on that floor: above it "ERP Transformation" overflows a 360px-wide screen
+   (the common Android width) and breaks after "ERP", orphaning it on its own
+   line. Phones narrower than ~340px wrap to three lines regardless. */
 .hero h1 {
-  font-size: 72px;
+  font-size: clamp(38px, 8vw, 72px);
   line-height: 1.08;
   font-weight: 600;
   margin: 0 0 16px;
-  white-space: nowrap;
   letter-spacing: -0.06em;
 }
+/* nowrap only where there's genuinely room for the full line — below this the
+   headline needs to be free to wrap rather than overflow the viewport */
+@media (min-width: 1201px) {
+  .hero h1 { white-space: nowrap; }
+}
+
+/* The headline's line breaks are authored per-breakpoint rather than left to
+   the wrapping algorithm, which cannot produce the phone arrangement at all:
+   "Transformation" is wider than "The new era", so any column wide enough for
+   the former also fits the latter and the break after "The new" never happens.
+   Both <br>s carry a trailing space in the markup, so whichever one is switched
+   off leaves its words correctly joined instead of run together.
+     wide  -> The new era of / ERP Transformation
+     phone -> The new / era of ERP / Transformation */
+.hero h1 br.brk-sm { display: none; }
 .hero p.lede {
-  font-size: 28px;
+  font-size: clamp(22px, 3.2vw, 28px);
   line-height: 1.2;
   color: var(--ink-soft);
   margin: 0;
@@ -354,7 +477,7 @@ a { color: inherit; text-decoration: none; }
   margin-top: 14vh;
 }
 .works-with .label {
-  font-size: 28px;
+  font-size: clamp(19px, 3.2vw, 28px);
   line-height: 1.2;
   color: var(--ink);
   margin-bottom: 32px;
@@ -375,11 +498,11 @@ a { color: inherit; text-decoration: none; }
 .section {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 64px 40px;
+  padding: 48px 40px;
   scroll-margin-top: var(--header-h);
 }
 #compliance {
-  padding-bottom: 128px;
+  padding-bottom: 96px;
 }
 .section-head {
   display: flex;
@@ -388,28 +511,34 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 18px;
 }
 .section-head h2 {
-  font-size: 72px;
+  font-size: clamp(32px, 7vw, 72px);
   font-weight: 600;
   margin: 0;
   letter-spacing: -0.06em;
 }
 .section-num {
-  font-size: 72px;
+  font-size: clamp(32px, 7vw, 72px);
   font-weight: 600;
   line-height: 1;
   color: transparent;
   -webkit-text-stroke: 1px var(--ink);
+  flex: none;
+  padding-left: 12px;
 }
 .section-intro {
   color: var(--ink-soft);
-  font-size: 28px;
+  font-size: clamp(18px, 3.2vw, 28px);
   line-height: 1.3;
   margin: 0 0 20px;
 }
 .section-intro + .section-intro { margin-top: -8px; }
+/* The trailing margin is there to separate stacked paragraphs; on the last one
+   it only inflated the gap to the next section, making section-to-section
+   spacing wider than the video-to-section gap above it on About. */
+.section-intro:last-child { margin-bottom: 0; }
 .section-lead {
   font-weight: 600;
-  font-size: 28px;
+  font-size: clamp(18px, 3.2vw, 28px);
   line-height: 1.2;
   margin: 0 0 4px;
   color: var(--ink-soft);
@@ -457,7 +586,14 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 
-/* Blog */
+/* Blog — the index splits its heading and its card grid into two .section
+   blocks so they read as one unit, which means collapsing the padding where
+   the two meet. Previously inline styles on the elements themselves; the
+   doubled-up selector keeps them ahead of the responsive `.section { padding:
+   ... }` shorthands, which would otherwise restore the gap. */
+.section.blog-intro { padding-bottom: 24px; }
+.section.blog-posts { padding-top: 0; }
+
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -546,7 +682,7 @@ a { color: inherit; text-decoration: none; }
   margin: 28px 0 16px;
 }
 .post-hero h1 {
-  font-size: 52px;
+  font-size: clamp(30px, 6.2vw, 52px);
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.08;
@@ -655,12 +791,19 @@ a { color: inherit; text-decoration: none; }
   color: #6b6b70;
 }
 
-/* Video block (About) */
+/* Video block (About)
+   The frame carries the SOURCE's aspect ratio (426x240), not a designed one.
+   That single choice removes both failure modes: a frame wider than the source
+   made Vimeo's player letterbox the video inside it (black bars down the
+   sides), and scaling the iframe up to cover such a frame pushed the player's
+   own control bar past the bottom edge where overflow:hidden clipped it.
+   Matching the ratio means the iframe fills the frame exactly — nothing to pad,
+   nothing to crop, controls fully reachable at every width. */
 .video-block {
   border-radius: 14px;
   overflow: hidden;
   background: #000;
-  aspect-ratio: 16/8.6;
+  aspect-ratio: 426 / 240;
   position: relative;
   z-index: 1;
 }
@@ -671,6 +814,40 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   border: 0;
 }
+
+/* Mute toggle. Vimeo's own "Unmute" pill is rendered inside the iframe and is
+   cross-origin, so it can't be restyled or moved — the player's chrome is
+   switched off with controls=0 and this replaces it. */
+.video-mute {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(9, 9, 11, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+.video-mute:hover { background: rgba(9, 9, 11, 0.72); }
+.video-mute svg {
+  width: 19px;
+  height: 19px;
+  display: block;
+}
+/* Exactly one of the two icons shows, keyed off the button's own state */
+.video-mute .icon-unmuted { display: none; }
+.video-mute[data-muted="false"] .icon-muted { display: none; }
+.video-mute[data-muted="false"] .icon-unmuted { display: block; }
 
 /* Jobs — same separated-widget treatment as the Product/Solutions cards */
 .job-grid {
@@ -846,8 +1023,17 @@ a { color: inherit; text-decoration: none; }
   padding: 24px;
   height: 100%;
   box-sizing: border-box;
+  /* Dissolves in/out as the inquiry type changes — it only describes the
+     Preview flow, so it's irrelevant while Customer support is selected.
+     JS drives .is-fading (opacity only) and then .is-hidden (out of flow),
+     so the panel fades before the grid reflows rather than snapping away. */
+  transition: opacity 0.28s ease;
 }
-.howitworks h4 { font-size: 28px; font-weight: 600; margin: 0 0 18px; }
+.howitworks.is-fading { opacity: 0; }
+.howitworks.is-hidden { display: none; }
+/* With the panel gone, the form takes the full row instead of leaving a hole */
+.contact-grid.is-single { grid-template-columns: 1fr; }
+.howitworks h4 { font-size: clamp(20px, 3.2vw, 28px); font-weight: 600; margin: 0 0 18px; }
 .step { display: flex; gap: 14px; margin-bottom: 20px; }
 .step:last-child { margin-bottom: 0; }
 .step-num {
@@ -860,13 +1046,349 @@ a { color: inherit; text-decoration: none; }
 .step h5 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
 .step p { font-size: 18px; color: var(--muted); line-height: 1.55; margin: 0; }
 
-@media (max-width: 900px) {
-  .dotgrid > .hero-illustration { width: 420px; opacity: 0.5; }
+/* ==========================================================================
+   Responsive
+   Type scales fluidly via clamp() in the base rules above, so these blocks
+   handle layout, spacing, and behavioural changes only.
+   ========================================================================== */
+
+/* Small laptop / tablet — the hero illustration's artwork sits in the right
+   half of its fixed 960px box, so once the viewport narrows past the container
+   width that ink starts crossing under the headline. Shrinking and fading it
+   (the previous approach) still overlapped, so it's dropped outright here.
+   With it gone, the viewport-relative hero spacing that existed to give the
+   illustration vertical room is no longer needed either. */
+@media (max-width: 1200px) {
+  .dotgrid > .hero-illustration { display: none; }
+  .dotgrid:has(.hero) { min-height: 0; }
+  .hero-copy { padding-top: 16vh; }
+  .works-with { margin-top: 10vh; }
+}
+
+@media (max-width: 1000px) {
+  .section { padding: 40px 28px; }
+  .wrap { padding: 0 28px; }
+  /* tracks .section's padding — see .wrap.video-wrap */
+  .wrap.video-wrap { padding-bottom: 40px; }
+  .nav { padding: 16px 28px; }
+  .footer { padding: 48px 28px 24px; }
+  .footer-inner { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
   .card-grid { grid-template-columns: repeat(2, 1fr); }
   .job-grid { grid-template-columns: repeat(2, 1fr); }
   .blog-grid { grid-template-columns: repeat(2, 1fr); }
   .check-grid { grid-template-columns: 1fr; }
-  .footer-inner { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: 1fr; }
+}
+
+/* Consolidated nav — the section links fold into the dropdown, leaving two
+   separate controls at the right edge: the filled CTA, then the outlined
+   hamburger. margin-left:auto collapses the space-between gap that would
+   otherwise strand the pair mid-bar; the flex gap sets the space between them. */
+@media (max-width: 900px) {
+  .nav-right {
+    margin-left: auto;
+    gap: 10px;
+  }
   .nav-right a:not(.btn) { display: none; }
+  .mobile-nav { display: block; }
+
+  .nav-toggle {
+    display: flex;
+    /* stretches to the flex line's height, which the taller CTA sets — so the
+       two buttons stay the same height without hardcoding either */
+    align-self: stretch;
+    width: 40px;
+  }
+  .nav-toggle:active { background: var(--line-soft); }
+
+  /* 44x44 minimum touch target on both controls without changing the paint: a
+     transparent overlay centred on each and grown to 44px. The hamburger's is
+     pinned at its own left edge and grows RIGHTWARD only, so it can never reach
+     back across the gap into the CTA — a mistap on the menu must not fire a
+     link that navigates away. */
+  .nav-right .btn::after,
+  .nav-toggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    min-height: 44px;
+  }
+  .nav-right .btn {
+    position: relative;
+  }
+  .nav-right .btn::after {
+    left: 0;
+    right: 0;
+  }
+  .nav-toggle::after {
+    left: 0;
+    width: 44px;
+  }
+}
+
+/* Phone */
+@media (max-width: 700px) {
+  .announce { font-size: 13px; padding: 8px 14px; }
+  .nav { padding: 14px 20px; }
+  .brand { font-size: 17px; }
+  .brand img { width: 28px; height: 28px; }
+  .section { padding: 30px 20px; }
+  #compliance { padding-bottom: 48px; }
+  .wrap { padding: 0 20px; }
+  .section-head { margin-bottom: 12px; }
+  .section-intro { margin-bottom: 14px; }
+
+  /* Hero fills the first screen with the headline and lede low-left, and the
+     "Works with…" block pulled up so it's already reading above the fold rather
+     than merely hinted at. The 100px reserve below the hero-copy box is what
+     stays visible: 24px of it is the gap, then the label, then the whole first
+     logo row, leaving the second row as the cue that the page continues. svh
+     (not vh) so mobile browser chrome collapsing doesn't shift where the fold
+     actually lands. The reserve only shrinks the box's MINIMUM height, so on
+     very short screens the box simply grows to fit its content and the section
+     slides back below the fold instead of colliding with anything.
+     The copy is lifted off the fold by padding-bottom rather than by shrinking
+     the box: the box's height is what positions the works-with block, so
+     changing it would drag that along with the text. This padding is therefore
+     also the gap between the lede and "Works with…" — kept modest so the two
+     read as one composition rather than as separate screens. */
+  .hero { padding: 0 20px 32px; }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: calc(100svh - var(--header-h) - 100px);
+    padding-top: 0;
+    padding-bottom: 10svh;
+    max-width: none;
+  }
+
+  /* Deliberately oversized hero type — the one place on mobile that's allowed
+     to shout, set in the three-line arrangement the brk-sm rules above produce.
+     The size is pinned to the viewport rather than stepped because
+     "Transformation" is a single unbreakable word measuring 6.24x the font size
+     at this tracking: any value above (viewport - 40px) / 6.24 overflows the
+     screen horizontally with no break opportunity. `15.4vw - 6px` tracks just
+     under that ceiling (~4% clearance at every width), the 64px cap stops it
+     running away on phablets, and the floor sits low enough never to bind
+     before the formula itself would overflow. */
+  .hero h1 {
+    font-size: clamp(32px, calc(15.4vw - 6px), 64px);
+    letter-spacing: -0.05em;
+  }
+  .hero h1 br.brk-sm { display: inline; }
+  .hero h1 br.brk-lg { display: none; }
+  /* Grows with the headline but stays well clear of it, so the hierarchy opens
+     up to roughly 2:1 instead of the 1.7:1 it was at the smaller sizes. */
+  .hero p.lede {
+    font-size: clamp(24px, 6.8vw, 30px);
+  }
+  .works-with { margin-top: 24px; }
+  /* Steps down from a section-heading size to match the section body copy
+     below, so it reads as a caption for the logo rows rather than a title */
+  .works-with .label { font-size: 18px; margin-bottom: 18px; }
+
+  /* Two rows of four. These logos are compact marks (widest ≈ 51×35), so
+     four columns fit comfortably once the height comes down a notch. */
+  .logo-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px 12px;
+    justify-items: center;
+  }
+  .logo-row img { height: 20px; }
+
+  /* Single column, and let the cards size to their content — the fixed
+     heights and line-clamps exist to keep a 4-up row even, which no longer
+     applies once each card owns the full width. */
+  .card-grid,
+  .blog-grid,
+  .check-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  /* Only the grids that sit under section copy need the separating margin —
+     the blog index puts its grid in a section of its own, so a margin there
+     just widens the gap under the intro. */
+  .card-grid,
+  .check-grid,
+  .post-related .blog-grid {
+    margin-top: 24px;
+  }
+  .card,
+  .blog-card {
+    height: auto;
+  }
+  .card h3,
+  .card p,
+  .blog-card h3,
+  .blog-card p {
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+
+  /* Compact widget scale — shared by the Product/Solutions/Compliance cards on
+     the homepage, the job and contact cards on About, and the blog cards. Full
+     -width cards on a phone don't need desktop's generous padding or 18px
+     body copy, and the tighter line-height keeps each card scannable. */
+  .card,
+  .check-item,
+  .blog-card,
+  .job-card,
+  .contact-card,
+  .howitworks {
+    padding: 15px 16px;
+  }
+  .card .icon,
+  .check-item svg {
+    margin-bottom: 9px;
+  }
+  .card h3,
+  .blog-card h3,
+  .job-card h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .card p,
+  .blog-card p,
+  .job-card p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .check-item {
+    font-size: 14px;
+  }
+  .check-text {
+    line-height: 1.35;
+  }
+  .blog-tag {
+    font-size: 13px;
+    margin-bottom: 9px;
+  }
+  .blog-meta {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  .badge-new {
+    font-size: 11px;
+    top: 12px;
+    right: 12px;
+    padding: 2px 7px;
+  }
+  .job-card .apply {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  /* Careers becomes a snap-scrolling strip. JS renders the full job list and
+     hides the pager arrows at this width, so the whole set is reachable by
+     swipe alone. Negative margins let cards bleed to the screen edges while
+     the first card still lines up with the section's text. */
+  .job-grid {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -20px 18px;
+    padding: 0 20px 4px;
+    /* Without this the mandatory snap aligns the first card's edge to the
+       container's edge, cancelling out the padding and leaving the card flush
+       against the screen. Insetting the snapport by the same 20px makes the
+       resting position line up with the section's text instead. */
+    scroll-padding-left: 20px;
+  }
+  .job-grid::-webkit-scrollbar { display: none; }
+  .job-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    height: auto;
+    /* No floor — the compact text scale needs far less room than desktop's
+       268px, and flex stretch already keeps every card in the strip level with
+       the tallest one, so a min-height only adds dead space under "Apply". */
+    min-height: 0;
+  }
+  /* Narrower cards push the longest role titles past the desktop 2-line clamp.
+     Flex stretch keeps every card in the strip the same height regardless. */
+  .job-card h3 { -webkit-line-clamp: 3; }
+  .jobs-arrows { display: none; }
+  .jobs-nav .btn { width: 100%; justify-content: center; }
+
+  /* Inquiry form — inquiry type stacks, and every field gets its own row.
+     Padding and gaps tighten so the inputs and button sit snugly in the card
+     rather than floating in it. */
+  .tab-row { flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .tab { padding: 10px 12px; gap: 9px; }
+  .tab-copy strong { font-size: 14px; }
+  .tab-copy span { font-size: 12px; }
+  .form-row,
+  .form-row.single { grid-template-columns: 1fr; margin-bottom: 10px; }
+  .field label { font-size: 13px; margin-bottom: 4px; }
+  /* 16px is the floor that stops iOS Safari zooming in on focus, so the input
+     text itself stays put while its padding tightens */
+  .field input { font-size: 16px; padding: 9px 11px; }
+  .submit-btn { margin-top: 14px; padding: 12px; font-size: 15px; }
+
+  .howitworks h4 { margin-bottom: 14px; }
+  .step { gap: 10px; margin-bottom: 14px; }
+  .step-num { font-size: 15px; width: 18px; }
+  .step h5 { font-size: 15px; margin-bottom: 3px; }
+  .step p { font-size: 14px; line-height: 1.4; }
+
+  /* About: tighter above the video; below it tracks .section's 30px so the
+     video-to-mission gap matches the section-to-section rhythm */
+  .wrap.video-wrap { padding-top: 24px; padding-bottom: 30px; }
+
+  /* Blog posts */
+  .post-hero { padding: 28px 20px 0; }
+  .post-hero .blog-tag { margin: 20px 0 12px; }
+  .post-byline { padding-bottom: 24px; }
+  .post-body { padding: 28px 20px 56px; }
+  .post-body p { font-size: 17px; line-height: 1.7; margin-bottom: 20px; }
+
+  /* One column per row. Side by side is technically possible down to ~350px, but
+     only with content-sized tracks — "Ethics & Compliance" needs about twice the
+     width of the Company column, so the three end up visibly uneven and tight.
+     Stacking keeps the link lists readable and lets the type stay at full size. */
+  .footer { padding: 40px 20px 22px; }
+  .footer-inner {
+    grid-template-columns: 1fr;
+    row-gap: 26px;
+    padding-bottom: 32px;
+  }
+  .footer-cta p { max-width: none; }
+  .footer .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 420px) {
+  .logo-row { gap: 18px 8px; }
+  .logo-row img { height: 18px; }
+  .job-card { flex-basis: 86%; }
+}
+
+/* Narrowest phones (320px): brand + CTA + hamburger only fit on one line once
+   both the wordmark and the button step down a size. Without this they each
+   wrap to two lines, which also drives the measured header height up. */
+@media (max-width: 380px) {
+  .brand { font-size: 15px; }
+  .brand img { width: 26px; height: 26px; }
+  .nav-right { gap: 8px; }
+  .nav-right .btn { font-size: 12px; padding: 9px 11px; }
+  .nav-toggle { width: 34px; }
+}
+
+
+/* The mobile dropdown and the "How it works" dissolve both cut straight to
+   their end state here. Their JS keeps working either way — it toggles
+   classes and reads no transition timings back out of the CSS. */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav,
+  .howitworks,
+  .nav-toggle-bar {
+    transition: none;
+  }
+  .job-grid { scroll-behavior: auto; }
 }

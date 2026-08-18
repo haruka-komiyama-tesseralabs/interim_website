@@ -22,8 +22,18 @@
           <a href="about.html">About</a>
           <a href="blog.html">Blog</a>
           <a class="btn" href="about.html#contact">Get a preview</a>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
         </div>
       </nav>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
     </div>
   </header>
   <script>
@@ -33,14 +43,14 @@
     })();
   </script>
 
-  <section class="section" id="blog-intro" style="padding-bottom: 24px;">
+  <section class="section blog-intro" id="blog-intro">
     <div class="section-head">
       <h2>Blog</h2>
     </div>
     <p class="section-intro">Notes on enterprise AI, ERP modernization, and building Tessera.</p>
   </section>
 
-  <section class="section" id="blog-posts" style="padding-top: 0;">
+  <section class="section blog-posts" id="blog-posts">
     <div class="blog-grid">
       <a class="blog-card" href="sap-multi-agent-engine.html">
         <span class="badge-new">New</span>
