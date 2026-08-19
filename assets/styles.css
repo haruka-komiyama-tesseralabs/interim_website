@@ -935,6 +935,13 @@ body:has(.dotgrid)::before {
 }
 .footer-cta a.btn {
   display: inline-flex;
+  /* .footer-cta is now a column flex container (for the bottom-alignment fix
+     above), whose default align-items:stretch would otherwise stretch this
+     inline-flex button to the container's full width — align-self overrides
+     that back to hugging the label, matching every other .btn on the site.
+     The explicit width:100% in the <=700px override below still wins over
+     this, so the full-width mobile button is unaffected. */
+  align-self: flex-start;
   margin-top: auto;
   margin-bottom: 12px;
 }
