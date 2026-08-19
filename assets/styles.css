@@ -521,6 +521,16 @@ body:has(.dotgrid)::before {
   gap: 20px;
   flex-wrap: wrap;
 }
+/* The 3-logo Fortune 500 row reads as a tight, deliberate group rather than a
+   set spread to fill the same width as the 8-logo row — centered with a
+   fixed, more generous gap instead of space-between's edge-to-edge spread.
+   align-items:center (inherited) plus a single shared height on every img
+   keeps them vertically level regardless of each source file's own
+   proportions. */
+.logo-row.compact {
+  justify-content: center;
+  gap: 48px;
+}
 .logo-row img {
   height: 24px;
   width: auto;
@@ -1244,7 +1254,11 @@ body:has(.dotgrid)::before {
     justify-items: center;
   }
   .logo-row img { height: 20px; }
-  .trust-logos .logo-row { grid-template-columns: repeat(3, 1fr); }
+  /* Scoped to .compact (the 3-logo group itself) rather than .trust-logos
+     (a spacing-only wrapper class that now sits on the 8-logo block instead,
+     after the two sections traded places) — this needs to follow the logos,
+     not whichever section they happen to be placed in. */
+  .logo-row.compact { grid-template-columns: repeat(3, 1fr); }
 
   /* Single column, and let the cards size to their content — the fixed
      heights and line-clamps exist to keep a 4-up row even, which no longer
