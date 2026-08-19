@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introducing the Enterprise Transformation Index — Tessera Labs</title>
+<link rel="stylesheet" href="assets/styles.css?v=35">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="announce">Tessera Labs raises <a href="https://www.forbes.com/sites/annatong/2026/05/05/this-22-year-old-just-raised-60-million-to-automate-this-sneaky-big-enterprise-market/" target="_blank" rel="noopener">$60M Series A</a> led by a16z</div>
+    <div class="nav-bar">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <img src="assets/img/Tessera_Logo_Lite.svg" alt="Tessera Labs">
+          Tessera Labs
+        </a>
+        <div class="nav-right">
+          <a href="index.html#product">Products</a>
+          <a href="index.html#solutions">Solutions</a>
+          <a href="about.html">About</a>
+          <a href="blog.html">Blog</a>
+          <a class="btn" href="about.html#contact">Get a preview</a>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+    </div>
+  </header>
+  <script>
+    (function () {
+      var h = document.querySelector('.site-header');
+      if (h) document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
+    })();
+  </script>
+
+  <div class="post-hero">
+    <a class="post-back" href="blog.html">&larr; Back to Blog</a>
+    <span class="blog-tag">Research</span>
+    <h1>Introducing the Enterprise Transformation Index</h1>
+    <p class="post-byline">By Kabir Nagrecha and Anirudh Sriram &middot; August 11, 2026</p>
+  </div>
+
+  <div class="post-body">
+        <h2>TL;DR</h2>
+        <ul>
+          <li>Tessera introduces the Enterprise Transformation Index (ETI): a way to measure how much a model's real-world performance improves when paired with deep, accumulated enterprise context, rather than raw intelligence alone.</li>
+          <li>To measure ETI, we built TILES: a new benchmark of 42 real enterprise-transformation tasks across seven suites, created because standard coding, reasoning, and computer-use benchmarks don't capture this kind of work.</li>
+          <li>Across five frontier models, embedding with Tessera lifted ETI by +28.9 points on average.</li>
+        </ul>
+        <p>Recent progress in frontier models suggests that intelligence is rapidly becoming a commodity. The proof is everywhere &mdash; models now prove theorems in mathematics, predict protein structures in biology, accelerate discovery across the physical sciences. The raw horsepower needed to solve a problem is no longer the primary constraint.</p>
+        <p>Enterprise transformation is a different kind of problem. It isn't the intelligence of natural law &mdash; uniform, and discoverable from first principles. It's the intelligence of a specific, path-dependent history that exists nowhere in any training corpus. Why was an integration configured this particular way? Why does a customization survive three system migrations while everything around it gets replaced? What looks irrational today is almost always the trace of a decision, constraint, or dependency set years ago &mdash; and no amount of raw reasoning recovers it. It has to be modeled.</p>
+        <p>That is what Tessera builds: an enterprise world model. It's a living representation of how a specific enterprise actually works &mdash; its systems, its dependencies, its decisions &mdash; assembled from domain-specialized datasets, process mining, enterprise entity graphs, and curated knowledge bases. Combined with the right model for reasoning and orchestration, it produces outcomes a general-purpose model cannot reliably reach on its own.</p>
+        <h2>Intelligence is Horsepower; Wisdom is Knowing Where to Go</h2>
+        <p>The best people &mdash; and the best systems &mdash; combine both intelligence and wisdom.</p>
+        <p>Intelligence is the ability to analyze, reason, generate, and solve problems. It's what frontier models do exceptionally well: synthesize documents, write software, decompose workflows, coordinate sophisticated sequences of actions. But intelligence alone is jagged, not uniform &mdash; a model can excel at a task and still know nothing about the specific system in front of it.</p>
+        <p>Wisdom is different. It's knowing not just what exists, but why: that two systems which look disconnected actually exchange data through a nightly batch job written a decade ago, and that the last time someone touched it, finance reconciliation broke.</p>
+        <p>Organizations build this kind of knowledge slowly. Every implementation, migration, audit, customization, and incident leaves behind another piece of context. None of it looks like much on its own &mdash; together, it's the operating system that lets people navigate an enterprise.</p>
+        <p>This wisdom rarely lives in one place. It's scattered across documentation nobody maintains, buried in the heads of people who've lived through past migrations, and encoded nowhere except the systems themselves.</p>
+        <p>Most progress in frontier models comes from making the model itself smarter &mdash; larger parameter counts, longer context windows, stronger reasoning, better tool use. That progress is real. But in enterprise automation, we've seen it hit a ceiling: a smarter model still can't reason about a history it's never seen. That's the problem Tessera is built to solve.</p>
+        <h2>Inside the Enterprise World Model</h2>
+        <p>We begin with a simple question: what actually exists?</p>
+        <p>In a large enterprise, the answer is scattered across source code, configuration tables, database schemas, documentation, and the memory of people who lived through the last three transformations.</p>
+        <p>Tessera connects to systems like SAP, Oracle, Salesforce, and Workday, converts their raw artifacts into structured form, and links them into an entity graph &mdash; objects within and across systems, shared processes like Order-to-Cash, and the custom code that touches each one. Specialized agents plan and act on top of that graph, drawing on organizational memory that sharpens with every engagement and a knowledge base of practitioner expertise general models don't have.</p>
+        <p>That's the system whose performance we wanted to measure directly. We call the resulting metric the Enterprise Transformation Index, or ETI: not how intelligent the underlying model is, but how much accumulated enterprise context improves what it can actually do.</p>
+        <p>To measure ETI, we needed a benchmark built around real enterprise transformation work &mdash; not coding, web search, or computer use, which is where most frontier-model benchmarks focus. So we built TILES.</p>
+        <h2>TILES: The Enterprise Benchmark</h2>
+        <p>TILES, our enterprise benchmark, contains forty-two tasks drawn from real transformation work across seven suites: SAP ABAP Coding, SAP Configuration Analysis, Finance Schema Modeling &amp; Cleansing, Manufacturing Schema Modeling &amp; Cleansing, Cross-System Schema Reconciliation, Tabular Data Prediction, and Test Requirement &amp; Test-Data Generation.</p>
+        <p>Each task was also labeled by class. Contamination-proof tasks are tasks where the answer exists only inside the customer's environment, not seen in public training data. A raw model cannot know these answers in advance, only reasoning from given context. Public tasks depend on general ERP knowledge. A strong model may already know the answer from public documentation, or at least have seen enough similar material during pretraining to make an informed attempt. Control tasks are tasks where Tessera's knowledge base should not help. They are included as a guardrail. If embedding improves them too much, something is probably wrong: the system may be adding verbosity, leaking information, or shifting the grading rather than supplying useful knowledge.</p>
+        <p>We evaluated five frontier models in two configurations. In the first, the model was run directly on the task. In the second, the same model was embedded with Tessera's agent layer. Every task is graded against an expert-authored rubric where we decomposed a correct answer into discrete, verifiable claims and score the fraction satisfied, using a three-judge LLM ensemble (majority vote; judges disjoint from the models under test).</p>
+        <p>Across all seven suites and all five models, embedding the model in Tessera improved task accuracy by an average of 28.9 percentage points. On contamination-proof tasks, the lift was 64.3 points. On public tasks, the lift was 18.0 points. That is still meaningful, but it is smaller for the reason we would expect &mdash; frontier models already know a fair amount about standard SAP behavior and published ERP concepts. Tessera still helps by embedding the answer and reducing ambiguity, but there is less missing knowledge to supply.</p>
+        <p>On control tasks, the lift was 0.5 points and not statistically significant. That is the result we wanted to see. Tessera does not improve tasks that do not need Tessera. The knowledge base is not simply making answers longer or pushing the evaluator toward higher scores. It helps where enterprise knowledge is needed, and largely stays out of the way where it is not.</p>
+        <p>We also analyzed the lift across suites. Tabular Data Prediction improved by more than sixty points. Test Requirement &amp; Test-Data Generation improved by more than forty-five. SAP Configuration Analysis and Cross-System Schema Reconciliation both improved by more than thirty.</p>
+        <p>A concrete case. We asked a model to review a custom ABAP routine that runs after an S/4HANA conversion. On its own, even a strong model misses that an INSERT into the MSEG table now silently does nothing &mdash; in S/4HANA those tables became compatibility views over MATDOC, so goods movements vanish without an error. It's not a reasoning failure; the model has no way to know this specific system's behavior. Embedded in the knowledge base, the same model flags the silent data loss, cites the governing SAP Note, and recommends the fix. That is the difference between horsepower and knowing where to go.</p>
+        <p>Tessera is model-agnostic by design. The enterprise graph, knowledge base, and agent framework can embed different frontier models, with the benchmark illustrating improvement in every model.</p>
+        <h2>Why Building With the Right Model Matters</h2>
+        <p>But model-agnostic does not mean model-indifferent. Once Tessera supplies the missing enterprise knowledge, the model still has to do the reasoning.</p>
+        <p>Embedding the model in Tessera delivers a large, significant lift for every engine we tested. But model choice still shapes the outcome in two ways. The smallest model gained the most: Claude Haiku 4.5 was the lightest, least expensive engine, and jumps +38 points with embedding. The strongest model sets the ceiling: Claude Opus 4.8 reaches the highest embedded accuracy of any engine tested (90.3%), with Claude Sonnet 5 just behind, because a stronger reasoner exploits the same knowledge more fully.</p>
+        <p>Tessera is able to give Claude a working picture of the enterprise ecosystem, including factors like how the systems depend on each other and what changed over time. Claude turns that context into work. It reasons across the evidence, maintains the thread through long agentic workflows, follows constraints, uses tools, and produces recommendations that a human expert can inspect.</p>
+        <p>Together Tessera and Claude are complementary, allowing them to understand and reshape the sprawling systems a business depends on. In these evaluations, Claude was a particularly strong engine for Tessera's platform. But the broader lesson is architectural: enterprise AI performance comes from aligning frontier model intelligence with the wisdom embedded in the platform around it.</p>
+        <h2>Wisdom Compounds</h2>
+        <p>Tessera's understanding of an enterprise improves the longer it works inside it.</p>
+        <p>Each engagement leaves behind more than a finished task. The platform learns which tables matter, which processes depend on them, which risks actually show up in migration, and which recommendations human experts accept or correct. That knowledge becomes part of the enterprise model.</p>
+        <p>That's why the advantage compounds. Each new engagement starts from everything the last one learned, instead of from zero.</p>
+        <p>That is the broader purpose of the Enterprise Transformation Index: to measure the performance of the combined system &mdash; not only the intelligence of the model, but its ability to use accumulated enterprise context to perform real transformation work. Raw intelligence will keep getting cheaper. The context that turns it into enterprise capability won't.</p>
+        <p class="post-note">Originally published on <a href="https://www.tesseralabs.ai/blog" target="_blank" rel="noopener">tesseralabs.ai</a>.</p>
+  </div>
+
+  <section class="section post-related">
+    <div class="section-head">
+      <h2>Keep reading</h2>
+    </div>
+    <div class="blog-grid">
+      <a class="blog-card" href="system-integration-as-software.html">
+        <span class="blog-tag">Insights</span>
+        <h3>System Integration as Software</h3>
+        <p>Enterprise system integration has been handled by large consulting teams over years. Treating it as software collapses both the cost and the timeline.</p>
+        <span class="blog-meta">May 5, 2026 &middot; Kabir Nagrecha</span>
+      </a>
+      <a class="blog-card" href="erp-migrations-ai-investment.html">
+        <span class="blog-tag">Insights</span>
+        <h3>ERP Migrations are an AI Investment &mdash; not an IT Cost</h3>
+        <p>Mining process knowledge during a modernization builds lasting enterprise AI capability that outlives the migration itself.</p>
+        <span class="blog-meta">March 23, 2026 &middot; Kabir Nagrecha</span>
+      </a>
+      <a class="blog-card" href="sap-ai-pivot.html">
+        <span class="blog-tag">Insights</span>
+        <h3>SAP's AI Pivot Is a Wake-Up Call. Is Your ERP Ready?</h3>
+        <p>SAP's shift toward AI requires enterprises to modernize fragmented systems, legacy code, and data infrastructure to become genuinely AI-ready.</p>
+        <span class="blog-meta">March 16, 2026 &middot; Kabir Nagrecha</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Capabilities</h4>
+        <a href="index.html#product">Product</a>
+        <a href="index.html#solutions">Solutions</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html#careers">Careers</a>
+        <a href="about.html#contact">Contact</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Others</h4>
+        <a href="#">Ethics &amp; Compliance</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="assets/docs/Tessera-EnterpriseAI-Whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a>
+      </div>
+      <div class="footer-col footer-cta">
+        <h4>Trusted by Fortune 500 transformation teams</h4>
+        <p>See how Tessera Labs accelerates ERP transformation, safeguards continuity, and reduces cost without disrupting operations.</p>
+        <a class="btn on-dark" href="about.html#contact">Get a preview</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
+  </footer>
+
+  <script src="assets/main.js?v=35" defer></script>
+</body>
+</html>

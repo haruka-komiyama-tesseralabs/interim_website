@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Integration as Software — Tessera Labs</title>
+<link rel="stylesheet" href="assets/styles.css?v=35">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="announce">Tessera Labs raises <a href="https://www.forbes.com/sites/annatong/2026/05/05/this-22-year-old-just-raised-60-million-to-automate-this-sneaky-big-enterprise-market/" target="_blank" rel="noopener">$60M Series A</a> led by a16z</div>
+    <div class="nav-bar">
+      <nav class="nav">
+        <a class="brand" href="index.html">
+          <img src="assets/img/Tessera_Logo_Lite.svg" alt="Tessera Labs">
+          Tessera Labs
+        </a>
+        <div class="nav-right">
+          <a href="index.html#product">Products</a>
+          <a href="index.html#solutions">Solutions</a>
+          <a href="about.html">About</a>
+          <a href="blog.html">Blog</a>
+          <a class="btn" href="about.html#contact">Get a preview</a>
+          <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+    </div>
+  </header>
+  <script>
+    (function () {
+      var h = document.querySelector('.site-header');
+      if (h) document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px');
+    })();
+  </script>
+
+  <div class="post-hero">
+    <a class="post-back" href="blog.html">&larr; Back to Blog</a>
+    <span class="blog-tag">Insights</span>
+    <h1>System Integration as Software</h1>
+    <p class="post-byline">By Kabir Nagrecha &middot; May 5, 2026</p>
+  </div>
+
+  <div class="post-body">
+        <p>When you fill a prescription, the inventory system that tracked that drug from manufacturer to pharmacy was almost certainly running on the German software giant SAP. Most of the food in your kitchen passed through one too. So did the parts in whatever you drove this morning; and so did the electricity in the building you're sitting in. About three-quarters of the Fortune 500 run their core operations on SAP. SAP is a huge and incredibly important company: and it dominates the industry that keeps much of the world's most important software running.</p>
+        <p>That industry is system integration. Accenture, Deloitte, IBM, Infosys, and TCS dominate the top of the market, and tens of thousands of smaller firms work in their wake. Their work is the connective tissue of enterprise IT &mdash; not only the business process redesigns that follow when a company adopts a new platform of any kind, but also the migrations and integrations between systems that were never really designed to be compatible.</p>
+        <p>Every Fortune 500 firm has hundreds or thousands of these consultants embedded in its operations. Software licenses themselves add up to roughly $300 billion a year globally; the work of making that software actually function inside large companies costs several times more. Total IT services spend is around $1.8 trillion annually, and integration of enterprise applications accounts for a substantial chunk of it.</p>
+        <p>This is one of the largest pieces of enterprise technology that has barely changed in twenty years. The delivery model the global SI industry uses today is essentially the one its predecessors built when SAP itself was a startup. The largest SAP migrations at Fortune 500 companies take three to five years and cost between $100 million and $500 million, and roughly 70 percent of large transformation programs fail to deliver what they set out to accomplish.</p>
+        <p>The reason this work has resisted automation for so long is that it is genuinely difficult.</p>
+        <p>A typical SAP environment contains data from dozens of overlapping systems, many of them with inconsistent schemas and missing documentation, in which basic concepts like &ldquo;customer&rdquo; or &ldquo;order&rdquo; mean entirely different things. And they run millions of lines of custom code &mdash; much of it written by people who left the company long before the current CIO was hired.</p>
+        <p>To make this concrete: picture a global manufacturer that has run on SAP ECC for fifteen years. Their procurement system has been heavily customized over time to handle a specific contract structure with their Tier 1 suppliers, encoded in tens of thousands of lines of ABAP that nobody currently at the company fully understands. Revenue gets booked through a custom recognition workflow that was built for a regulatory environment which has since changed twice. Upgrading this company is its own multi-disciplinary project. Every custom flow has to be analyzed and classified. The new environment then has to behave correctly across every edge case the old one handled. Audit has to pass. The cutover has to be executed on a weekend that cannot run long, because the factories cannot stop. Roughly 10,000 ECC environments globally face some version of this problem, and most of the work has to happen in the next three years.</p>
+        <p>For decades only humans could deal with this kind of mess. Software wasn't capable of the judgment, the contextual reasoning, or the code comprehension the work demands, so a global industry grew up to do it manually. The economics worked out beautifully for the firms at the top and badly for almost everyone else. CIOs know perfectly well that their core systems are aging and expensive to maintain. They also know SAP is ending standard support for ECC in 2027, which puts an enormous amount of upgrade pressure on their desks right now. But the alternative to staying on legacy is a multi-year, multi-hundred-million-dollar program with a failure rate north of two-thirds, so most companies do the rational thing. They wait, patch what they can, pay the extended maintenance fees, and hope the problem can be deferred for another year.</p>
+        <p>I started Tessera because the technology to do this differently has only just arrived, and because the window to build a new kind of company in this space is fairly narrow. I came at the problem from research rather than consulting. What struck me looking at the SI industry from outside was how unusually well its core work matches the strengths of modern AI. The outputs have structure, success criteria are reasonably well-defined, there's an enormous body of prior code and documentation to train against, and the feedback loops are clean. The parts of this work that have been hardest for humans for thirty years are exactly the parts AI has just gotten good at.</p>
+        <p>Until very recently it wasn't. Brittle scripts could shuffle data between identical schemas, but they could not read 20-year-old ABAP and figure out what business problem it had been written to solve. That changed in the last two years, more dramatically than people outside this field tend to appreciate. Modern frontier models can read custom enterprise code, including the obscure dialects like ABAP that most of the world's mission-critical software is written in. Mapping fields across heterogeneous schemas, which is most of what data migration actually consists of, has become newly tractable. Business logic can be inferred from observed system behavior when documentation is missing, which is the usual situation. The long tail of judgment-heavy structured work that historically required teams of $300-an-hour consultants is now within reach of a well-orchestrated agent system, at quality that holds up to the same kind of review human work gets.</p>
+        <p>This is the technical change that makes a different kind of company possible, and Tessera is what comes after it. We are an AI enterprise transformation platform. Software does the work humans used to do, and our people focus on the parts of transformation that genuinely benefit from human judgment: architectural decisions, stakeholder alignment, and the strategic question of how a business should actually run on the other side of a migration.</p>
+        <p>Our first focus is the type of nitty-gritty ERP work in which SAP has excelled for decades. Our agents ingest a customer's ECC environment line by line and field by field, producing a comprehensive map of what is there and how it behaves. From that, they classify each component as keep, replace, or retire, and then they build the actual S/4HANA implementation: writing the new code, generating the test suite, validating the data movements, and orchestrating the cutover itself. A six-person team at Tessera can now deliver work that would historically have required sixty consultants, working over two full years.</p>
+        <p>There is a great deal of activity in the broader space of &ldquo;AI for services&rdquo; right now, and I want to be precise about how Tessera differs from most of it. The dominant pattern in the market today is a kind of &ldquo;autocomplete for consultants&rdquo;: tools that help an existing human bill faster, while still leaving the underlying delivery model intact. We are doing something more structural. We are building software that does the work, and we have organized the company around that economic reality.</p>
+        <p>A reasonable question is why the firms that already dominate this market, like Accenture and Deloitte, aren't the ones doing this. The answer is mostly the standard Innovator's Dilemma. Their entire business model rests on billable hours. Doing the same work in software, with outcome-based pricing, would compress their revenue per migration by something like an order of magnitude in the scenarios where it works best. Leadership at any of those firms can see clearly that the future of this market is software. The firm itself cannot get there, because everything about how those companies hire, train, sell, and account for revenue is calibrated to a fundamentally different shape of business.</p>
+        <p>The longer-term vision goes well beyond SAP. Every large company runs on a constellation of enterprise systems: ERPs, CRMs, HRIS platforms, supply chain tools, financial reporting stacks, all of which need continuous integration, modernization, and migration as the business itself evolves. Almost all of that work can become software. When it does, the cost of running enterprise IT falls by an order of magnitude, freeing up enormous amounts of capital and management attention currently absorbed by maintenance and modernization projects. The speed at which large companies can adapt to new circumstances also accelerates dramatically. When a Fortune 500 CFO wants to consolidate two divisions onto a single financial reporting stack today, the project takes 18 months and a small army of consultants. In the world Tessera is building, it takes weeks. Most of the changes that currently get framed as &ldquo;system integration projects&rdquo; &mdash; territory reorganizations, post-acquisition integrations, subsidiary spin-outs, compliance overhauls &mdash; become things companies just do, rather than year-long programs they have to plan around.</p>
+        <p>The companies that adopt this model first will have a structural advantage over the ones that don't, and that gap will open faster than most people expect.</p>
+        <p>This is the largest market in enterprise software that the AI shift hasn't touched yet. Every business of meaningful size depends on these systems, and the friction of modernizing them is a real drag on productivity for the companies and the economies that depend on them. We are going to take that friction out.</p>
+        <p>If you are an engineer, a researcher, an enterprise software veteran, or anyone who has looked at a $1.8 trillion industry still operating on a delivery model from another era and thought there has to be a better way, we would love to hear from you.</p>
+        <p class="post-note">Originally published on <a href="https://www.tesseralabs.ai/blog" target="_blank" rel="noopener">tesseralabs.ai</a>.</p>
+  </div>
+
+  <section class="section post-related">
+    <div class="section-head">
+      <h2>Keep reading</h2>
+    </div>
+    <div class="blog-grid">
+      <a class="blog-card" href="enterprise-transformation-index.html">
+        <span class="blog-tag">Research</span>
+        <h3>Introducing the Enterprise Transformation Index</h3>
+        <p>A benchmark measuring how enterprise context improves AI model performance on real ERP transformation tasks &mdash; an average accuracy lift of 28.9 percentage points.</p>
+        <span class="blog-meta">August 11, 2026 &middot; Kabir Nagrecha and Anirudh Sriram</span>
+      </a>
+      <a class="blog-card" href="erp-migrations-ai-investment.html">
+        <span class="blog-tag">Insights</span>
+        <h3>ERP Migrations are an AI Investment &mdash; not an IT Cost</h3>
+        <p>Mining process knowledge during a modernization builds lasting enterprise AI capability that outlives the migration itself.</p>
+        <span class="blog-meta">March 23, 2026 &middot; Kabir Nagrecha</span>
+      </a>
+      <a class="blog-card" href="sap-ai-pivot.html">
+        <span class="blog-tag">Insights</span>
+        <h3>SAP's AI Pivot Is a Wake-Up Call. Is Your ERP Ready?</h3>
+        <p>SAP's shift toward AI requires enterprises to modernize fragmented systems, legacy code, and data infrastructure to become genuinely AI-ready.</p>
+        <span class="blog-meta">March 16, 2026 &middot; Kabir Nagrecha</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Capabilities</h4>
+        <a href="index.html#product">Product</a>
+        <a href="index.html#solutions">Solutions</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html#careers">Careers</a>
+        <a href="about.html#contact">Contact</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Others</h4>
+        <a href="#">Ethics &amp; Compliance</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="assets/docs/Tessera-EnterpriseAI-Whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a>
+      </div>
+      <div class="footer-col footer-cta">
+        <h4>Trusted by Fortune 500 transformation teams</h4>
+        <p>See how Tessera Labs accelerates ERP transformation, safeguards continuity, and reduces cost without disrupting operations.</p>
+        <a class="btn on-dark" href="about.html#contact">Get a preview</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
+  </footer>
+
+  <script src="assets/main.js?v=35" defer></script>
+</body>
+</html>

@@ -647,19 +647,19 @@ body:has(.dotgrid)::before {
 .logo-track {
   display: flex;
   width: max-content;
-  /* Measured: 1042px per group / 11.27px per sec = 92.5s. Recompute if the logo
-     heights or the gap below change, or the carousel drifts off the dashes'
-     pace. */
-  animation: logoMarquee 92.5s linear infinite;
+  /* Measured: 1538px per group / 11.27px per sec = 136.5s. Recompute if the
+     logo heights or the gap below change, or the carousel drifts off the
+     dashes' pace. */
+  animation: logoMarquee 136.5s linear infinite;
 }
 .logo-group {
   display: flex;
   align-items: center;
   flex: 0 0 auto;
-  gap: 88px;
+  gap: 150px;
   /* Matches the gap so the spacing across the seam between the two copies is
      identical to the spacing inside each one. */
-  padding-right: 88px;
+  padding-right: 150px;
 }
 .logo-group img {
   /* 50% up from the old 24px row. */
@@ -965,6 +965,44 @@ body:has(.dotgrid)::before {
   line-height: 1.75;
   color: var(--ink-soft);
   margin: 0 0 24px;
+}
+/* The real posts carry subheadings, lists and source links, which the previous
+   placeholder posts (paragraphs only) never needed. Sized between .post-hero h1
+   and the body copy so a long article scans without competing with its title. */
+.post-body h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 44px 0 16px;
+}
+.post-body h2:first-child {
+  margin-top: 0;
+}
+.post-body ul {
+  margin: 0 0 24px;
+  padding-left: 22px;
+}
+.post-body li {
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+.post-body a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  /* Source URLs are long enough to overflow the 760px measure otherwise. */
+  overflow-wrap: anywhere;
+}
+.post-body .post-note {
+  font-size: 16px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin-top: 40px;
 }
 .post-related {
   border-top: 1px solid var(--line);
@@ -1488,10 +1526,10 @@ body:has(.dotgrid)::before {
      here), so it needs no wrapping rules at all — just smaller logos and a
      tighter gap. 30px is 50% up from this breakpoint's old 20px. */
   .logo-group img { height: 30px; }
-  .logo-group { gap: 56px; padding-right: 56px; }
-  /* Track length scales with the logos, so the duration scales with it to hold
-     the same 11.27px/sec: measured 730px per group / 11.27 = 64.8s. */
-  .logo-track { animation-duration: 64.8s; }
+  .logo-group { gap: 96px; padding-right: 96px; }
+  /* Track length scales with the logos and gap, so the duration scales with it
+     to hold the same 11.27px/sec: measured 1050px per group / 11.27 = 93.2s. */
+  .logo-track { animation-duration: 93.2s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1682,6 +1720,8 @@ body:has(.dotgrid)::before {
   .post-byline { padding-bottom: 24px; }
   .post-body { padding: 28px 20px 56px; }
   .post-body p { font-size: 17px; line-height: 1.7; margin-bottom: 20px; }
+  .post-body h2 { font-size: 21px; margin: 32px 0 12px; }
+  .post-body li { font-size: 17px; line-height: 1.7; }
 
   /* One column per row. Side by side is technically possible down to ~350px, but
      only with content-sized tracks — "Ethics & Compliance" needs about twice the
@@ -1699,8 +1739,8 @@ body:has(.dotgrid)::before {
 
 @media (max-width: 420px) {
   .logo-group img { height: 27px; }
-  .logo-group { gap: 44px; padding-right: 44px; }
-  .logo-track { animation-duration: 53.8s; }  /* 606px per group / 11.27 */
+  .logo-group { gap: 76px; padding-right: 76px; }
+  .logo-track { animation-duration: 76.4s; }  /* 861px per group / 11.27 */
   .job-card { flex-basis: 86%; }
 }
 
