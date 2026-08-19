@@ -529,8 +529,17 @@ body:has(.dotgrid)::before {
    proportions. */
 .logo-row.compact {
   justify-content: center;
-  gap: 48px;
+  gap: 64px;
 }
+/* Per-logo scale relative to the row's shared 24px baseline: Merck 1.5x,
+   Xerox down 15%, Micron up ~30%. Set as explicit heights (rather than
+   transform:scale, which would visually overflow its flex box without
+   actually widening the gap around it) so the row's own layout — and the
+   64px gap above — accounts for each logo's real rendered size. Mirrored at
+   the mobile breakpoint below against that breakpoint's 20px baseline. */
+.logo-row.compact img[alt="Merck"] { height: 36px; }
+.logo-row.compact img[alt="Xerox"] { height: 20.4px; }
+.logo-row.compact img[alt="Micron"] { height: 31.2px; }
 .logo-row img {
   height: 24px;
   width: auto;
@@ -1259,6 +1268,9 @@ body:has(.dotgrid)::before {
      after the two sections traded places) — this needs to follow the logos,
      not whichever section they happen to be placed in. */
   .logo-row.compact { grid-template-columns: repeat(3, 1fr); }
+  .logo-row.compact img[alt="Merck"] { height: 30px; }
+  .logo-row.compact img[alt="Xerox"] { height: 17px; }
+  .logo-row.compact img[alt="Micron"] { height: 26px; }
 
   /* Single column, and let the cards size to their content — the fixed
      heights and line-clamps exist to keep a 4-up row even, which no longer
