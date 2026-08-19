@@ -400,7 +400,7 @@ body:has(.dotgrid)::before {
    line-march-2/line-flow-2 endpoint always matches wherever the label lands. */
 .illo-wide { display: none; }
 @media (min-width: 1601px) {
-  .illo-shift { transform: translate(0px, 80px); }
+  .illo-shift { transform: translate(0px, -14px); }
   .illo-narrow { display: none; }
   .illo-wide { display: block; }
 }
@@ -540,6 +540,16 @@ body:has(.dotgrid)::before {
   color: var(--ink);
   margin-bottom: 48px;
 }
+/* Hero's "Trusted by..." label only (not the Security & Compliance section's
+   reuse of .works-with, which stays left-aligned with that section's other
+   copy) — smaller and centered across the full hero width, matching the
+   already-centered logo row beneath it rather than reading as another
+   headline anchored to the narrow hero-copy column. */
+.hero .works-with .label {
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 32px;
+}
 .logo-row {
   display: flex;
   align-items: center;
@@ -565,7 +575,7 @@ body:has(.dotgrid)::before {
    the mobile breakpoint below against that breakpoint's 20px baseline. */
 .logo-row.compact img[alt="Merck"] { height: 42px; }
 .logo-row.compact img[alt="Xerox"] { height: 20.4px; }
-.logo-row.compact img[alt="Micron"] { height: 20.4px; }
+.logo-row.compact img[alt="Micron"] { height: 24px; }
 .logo-row img {
   height: 24px;
   width: auto;
@@ -1300,7 +1310,7 @@ body:has(.dotgrid)::before {
   }
   .logo-row.compact img[alt="Merck"] { height: 35px; }
   .logo-row.compact img[alt="Xerox"] { height: 17px; }
-  .logo-row.compact img[alt="Micron"] { height: 17px; }
+  .logo-row.compact img[alt="Micron"] { height: 20px; }
 
   /* Single column, and let the cards size to their content — the fixed
      heights and line-clamps exist to keep a 4-up row even, which no longer

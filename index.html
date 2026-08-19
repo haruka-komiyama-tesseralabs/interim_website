@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tessera Labs — ERP Transformation, accelerated</title>
-<link rel="stylesheet" href="assets/styles.css?v=17">
+<link rel="stylesheet" href="assets/styles.css?v=18">
 </head>
 <body>
 
@@ -62,10 +62,21 @@
       <svg class="stacked-illustration" viewBox="0 0 1000 980" preserveAspectRatio="xMaxYMin meet" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tessera agent workflow illustration">
       <g clip-path="url(#clip0_52_87558)">
       <g class="illo-shift" transform="translate(0 341)">
+      <!-- Card stack scaled up 30% vertically (Y only, around its own center
+           y=459.5105 in these paths' native coordinates) so it reads as a
+           bigger, more prominent element than the connecting line/label —
+           independent of the illo-shift/box-width scaling above, which
+           affects the whole illustration uniformly. X is deliberately left
+           unscaled: the stack's right vertex already sits only ~3-5 viewBox
+           units from the box's right edge (the box is anchored off-canvas
+           via right:-60px so the illustration bleeds off the page edge by
+           design), so any horizontal growth immediately clips visibly. -->
+      <g class="card-stack" transform="translate(0 459.5105) scale(1 1.3) translate(0 -459.5105)">
       <path class="sq sq-1" d="M143.287 510.584L512.259 602.57C517.342 603.837 522.658 603.837 527.741 602.57L896.713 510.584C902.773 509.073 902.779 500.461 896.72 498.942L527.781 406.451C522.673 405.17 517.327 405.17 512.219 406.451L143.28 498.942C137.221 500.461 137.227 509.073 143.287 510.584Z" fill="white" stroke="black"/>
       <path class="sq sq-2" d="M143.287 480.584L512.259 572.57C517.342 573.837 522.658 573.837 527.741 572.57L896.713 480.584C902.773 479.073 902.779 470.461 896.72 468.942L527.781 376.451C522.673 375.17 517.327 375.17 512.219 376.451L143.28 468.942C137.221 470.461 137.227 479.073 143.287 480.584Z" fill="white" stroke="black"/>
       <path class="sq sq-3" d="M143.287 450.584L512.259 542.57C517.342 543.837 522.658 543.837 527.741 542.57L896.713 450.584C902.773 449.073 902.779 440.461 896.72 438.942L527.781 346.451C522.673 345.17 517.327 345.17 512.219 346.451L143.28 438.942C137.221 440.461 137.227 449.073 143.287 450.584Z" fill="white" stroke="black"/>
       <path class="sq sq-4" d="M143.287 420.584L512.259 512.57C517.342 513.837 522.658 513.837 527.741 512.57L896.713 420.584C902.773 419.073 902.779 410.461 896.72 408.942L527.781 316.451C522.673 315.17 517.327 315.17 512.219 316.451L143.28 408.942C137.221 410.461 137.227 419.073 143.287 420.584Z" fill="white" stroke="black"/>
+      </g>
       <g class="workflow-label" transform="translate(-200 73.5)">
       <rect x="674.5" y="112.5" width="91" height="31" rx="7.5" fill="white"/>
       <rect x="674.5" y="112.5" width="91" height="31" rx="7.5" stroke="black"/>
@@ -78,8 +89,8 @@
       </g>
       <path class="line-flow-2 illo-narrow" d="M520 -90 L520 527" fill="none" stroke="#09090b" stroke-width="1.4"/>
       <path class="line-march-2 illo-narrow" d="M520 -90 L520 527" fill="none"/>
-      <path class="line-flow-2 illo-wide" d="M520 -90 L520 266" fill="none" stroke="#09090b" stroke-width="1.4"/>
-      <path class="line-march-2 illo-wide" d="M520 -90 L520 266" fill="none"/>
+      <path class="line-flow-2 illo-wide" d="M520 -90 L520 172" fill="none" stroke="#09090b" stroke-width="1.4"/>
+      <path class="line-march-2 illo-wide" d="M520 -90 L520 172" fill="none"/>
       </g>
       <defs>
       <clipPath id="clip0_52_87558">
@@ -237,6 +248,6 @@
     <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
   </footer>
 
-  <script src="assets/main.js?v=17" defer></script>
+  <script src="assets/main.js?v=18" defer></script>
 </body>
 </html>
