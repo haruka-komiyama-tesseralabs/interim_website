@@ -647,19 +647,23 @@ body:has(.dotgrid)::before {
 .logo-track {
   display: flex;
   width: max-content;
-  /* Measured: 1538px per group / 11.27px per sec = 136.5s. Recompute if the
-     logo heights or the gap below change, or the carousel drifts off the
-     dashes' pace. */
-  animation: logoMarquee 136.5s linear infinite;
+  /* Measured: 1330px per group / 11.27px per sec = 118s. Recompute if the logo
+     heights or the gap below change, or the carousel drifts off the dashes'
+     pace. */
+  animation: logoMarquee 118s linear infinite;
 }
 .logo-group {
   display: flex;
   align-items: center;
   flex: 0 0 auto;
-  gap: 150px;
+  /* Sized so the strip shows about seven logos at once, with the eighth always
+     entering or leaving at a faded edge. The logos average 42px wide and the
+     strip is 1160px, so a 124px gap puts the logo-to-logo pitch at ~166px =
+     1160/7. At the previous 150px only 6.03 fit. */
+  gap: 124px;
   /* Matches the gap so the spacing across the seam between the two copies is
      identical to the spacing inside each one. */
-  padding-right: 150px;
+  padding-right: 124px;
 }
 .logo-group img {
   /* 50% up from the old 24px row. */
@@ -1526,10 +1530,10 @@ body:has(.dotgrid)::before {
      here), so it needs no wrapping rules at all — just smaller logos and a
      tighter gap. 30px is 50% up from this breakpoint's old 20px. */
   .logo-group img { height: 30px; }
-  .logo-group { gap: 96px; padding-right: 96px; }
+  .logo-group { gap: 79px; padding-right: 79px; }
   /* Track length scales with the logos and gap, so the duration scales with it
-     to hold the same 11.27px/sec: measured 1050px per group / 11.27 = 93.2s. */
-  .logo-track { animation-duration: 93.2s; }
+     to hold the same 11.27px/sec: measured 914px per group / 11.27 = 81.1s. */
+  .logo-track { animation-duration: 81.1s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1739,8 +1743,8 @@ body:has(.dotgrid)::before {
 
 @media (max-width: 420px) {
   .logo-group img { height: 27px; }
-  .logo-group { gap: 76px; padding-right: 76px; }
-  .logo-track { animation-duration: 76.4s; }  /* 861px per group / 11.27 */
+  .logo-group { gap: 63px; padding-right: 63px; }
+  .logo-track { animation-duration: 67.3s; }  /* 758px per group / 11.27 */
   .job-card { flex-basis: 86%; }
 }
 
