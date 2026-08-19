@@ -592,36 +592,36 @@ body:has(.dotgrid)::before {
   gap: 20px;
   flex-wrap: wrap;
 }
-/* The 3-logo Fortune 500 row reads as a tight, deliberate group rather than a
-   set spread to fill the same width as the 8-logo row — centered with a
-   fixed, more generous gap instead of space-between's edge-to-edge spread.
+/* The Fortune 500 row reads as a tight, deliberate group rather than a set
+   spread to fill the same width as the 8-logo row — centered with a fixed,
+   more generous gap instead of space-between's edge-to-edge spread, so it
+   stays centred as a pair now that Micron has been removed.
    Aligned on the wordmarks' BASELINES rather than on the files' boxes: the
-   three files crop differently — measuring the rendered artwork, each
-   wordmark's baseline sits at 74.0% (Merck), 98.5% (Xerox) and 98.1% (Micron)
-   of its file's height, because Merck's file also has to fit the teal symbol
-   that extends above and below the letters. Centering the boxes therefore
-   left Merck's letters ~11px high of the other two. flex-end puts every
-   file's bottom edge on one line, and the translateY below then drops each
-   logo by exactly the empty space its own file leaves under its baseline. */
+   files crop differently — measuring the rendered artwork, each wordmark's
+   baseline sits at 74.0% (Merck) and 98.5% (Xerox) of its file's height,
+   because Merck's file also has to fit the teal symbol that extends above and
+   below the letters. Centering the boxes therefore left Merck's letters ~11px
+   high of Xerox's. flex-end puts both files' bottom edges on one line, and the
+   translateY below then drops each logo by exactly the empty space its own
+   file leaves under its baseline. */
 .logo-row.compact {
   justify-content: center;
   gap: 96px;
   align-items: flex-end;
 }
 /* Per-logo scale relative to the row's shared 24px baseline: Merck 1.5x,
-   Xerox down 15%, Micron up 10%. Set as explicit heights (rather than
-   transform:scale, which would visually overflow its flex box without
-   actually widening the gap around it) so the row's own layout — and the
-   64px gap above — accounts for each logo's real rendered size. Mirrored at
-   the mobile breakpoint below against that breakpoint's 20px baseline.
+   Xerox down 15%. Set as explicit heights (rather than transform:scale, which
+   would visually overflow its flex box without actually widening the gap
+   around it) so the row's own layout — and the 64px gap above — accounts for
+   each logo's real rendered size. Mirrored at the mobile breakpoint below
+   against that breakpoint's 20px baseline.
    The translateY values are the baseline corrections described above. They're
    percentages, which for transforms resolve against the element's OWN height,
-   so the same three values hold at the mobile sizes without restating them.
+   so the same values hold at the mobile sizes without restating them.
    Merck's symbol is centred on its letters, so it dips below the shared
    baseline — that's the logo's own construction, not a misalignment. */
 .logo-row.compact img[alt="Merck"] { height: 42px; transform: translateY(26%); }
 .logo-row.compact img[alt="Xerox"] { height: 20.4px; transform: translateY(1.5%); }
-.logo-row.compact img[alt="Micron"] { height: 26.4px; transform: translateY(1.9%); }
 .logo-row img {
   height: 24px;
   width: auto;
@@ -1360,11 +1360,10 @@ body:has(.dotgrid)::before {
     flex-wrap: wrap;
     gap: 28px 20px;
   }
-  /* All three come down ~12% from 35/17/20 — their relative sizes are kept,
-     so the row still reads as evenly weighted, just smaller on a phone. */
+  /* Both come down ~12% from 35/17 — their relative sizes are kept, so the
+     pair still reads as evenly weighted, just smaller on a phone. */
   .logo-row.compact img[alt="Merck"] { height: 31px; }
   .logo-row.compact img[alt="Xerox"] { height: 15px; }
-  .logo-row.compact img[alt="Micron"] { height: 17.6px; }
 
   /* Single column, and let the cards size to their content — the fixed
      heights and line-clamps exist to keep a 4-up row even, which no longer
