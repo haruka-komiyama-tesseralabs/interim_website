@@ -530,6 +530,12 @@ body:has(.dotgrid)::before {
     animation: none;
     opacity: 1;
   }
+  /* Same reasoning as the marching dashes: an endlessly sliding strip is
+     exactly the motion this preference is asking us to stop. Halting it leaves
+     the first copy of the logos in place, which reads as a normal static row. */
+  .logo-track {
+    animation: none;
+  }
 }
 
 /* Only the hero's "Works with leading enterprise systems" block uses this now;
@@ -620,6 +626,49 @@ body:has(.dotgrid)::before {
 .logo-row img {
   height: 24px;
   width: auto;
+}
+
+/* "Works with leading enterprise systems" carousel.
+   Speed is matched to the hero illustration's marching dashes: that animation
+   advances stroke-dashoffset by 12 viewBox units every 0.9s, and the
+   illustration renders at a fixed 0.845 scale, so the dashes travel
+   12 * 0.845 / 0.9 = 11.27 real px per second. The track's duration below is
+   therefore (one group's width) / 11.27 — see the value's comment.
+   Direction is right-to-left, which is what makes logos leave at the faded
+   left edge and arrive at the faded right edge. */
+.logo-marquee {
+  overflow: hidden;
+  /* Both edges fade so logos dissolve in and out instead of being clipped at a
+     hard boundary. Applied as a mask (not a gradient overlay) so it works over
+     the dot-grid background without having to paint a matching colour. */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+.logo-track {
+  display: flex;
+  width: max-content;
+  /* Measured: 1042px per group / 11.27px per sec = 92.5s. Recompute if the logo
+     heights or the gap below change, or the carousel drifts off the dashes'
+     pace. */
+  animation: logoMarquee 92.5s linear infinite;
+}
+.logo-group {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 88px;
+  /* Matches the gap so the spacing across the seam between the two copies is
+     identical to the spacing inside each one. */
+  padding-right: 88px;
+}
+.logo-group img {
+  /* 50% up from the old 24px row. */
+  height: 36px;
+  width: auto;
+}
+@keyframes logoMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 /* Section pattern */
@@ -801,6 +850,75 @@ body:has(.dotgrid)::before {
   font-size: 14px;
   color: var(--muted);
   margin-top: 14px;
+}
+
+/* "In the news" — press coverage, styled apart from the blog cards on purpose:
+   two columns instead of three, and a horizontal layout (cover image left, text
+   right) so each article's own artwork does the visual work. Two columns is
+   also what two articles need to fill the row the 3-up blog grid occupies; a
+   third column would leave an obvious hole. */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.news-card {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  transition: border-color 0.2s ease;
+}
+.news-card:hover {
+  border-color: var(--ink);
+}
+/* Fixed-basis flex item rather than a width on the img: the image is set to
+   cover this box, so the card's height is free to be driven by its text
+   without the thumbnail letterboxing or distorting. */
+.news-thumb {
+  flex: 0 0 34%;
+  align-self: stretch;
+  min-height: 132px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--line-soft);
+}
+.news-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.news-body {
+  display: flex;
+  flex-direction: column;
+  /* min-width:0 lets the flex item shrink below its content's intrinsic width,
+     which is what allows the headline's line-clamp to kick in instead of the
+     text forcing the thumbnail narrower. */
+  min-width: 0;
+}
+.news-outlet {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.news-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.news-meta {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: auto;
 }
 
 /* Individual blog post page */
@@ -1249,6 +1367,9 @@ body:has(.dotgrid)::before {
   .card-grid { grid-template-columns: repeat(2, 1fr); }
   .job-grid { grid-template-columns: repeat(2, 1fr); }
   .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  /* One per row from here down: side by side, a horizontal card's text column
+     gets too narrow to hold the headline beside its thumbnail. */
+  .news-grid { grid-template-columns: 1fr; }
   .check-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
 }
@@ -1363,15 +1484,14 @@ body:has(.dotgrid)::before {
      below, so it reads as a caption for the logo rows rather than a title */
   .works-with .label { font-size: 18px; margin-bottom: 28px; }
 
-  /* Two rows of four. These logos are compact marks (widest ≈ 51×35), so
-     four columns fit comfortably once the height comes down a notch. */
-  .logo-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 22px 12px;
-    justify-items: center;
-  }
-  .logo-row img { height: 20px; }
+  /* The hero's 8-logo row is a carousel now (it used to be a 4-column grid
+     here), so it needs no wrapping rules at all — just smaller logos and a
+     tighter gap. 30px is 50% up from this breakpoint's old 20px. */
+  .logo-group img { height: 30px; }
+  .logo-group { gap: 56px; padding-right: 56px; }
+  /* Track length scales with the logos, so the duration scales with it to hold
+     the same 11.27px/sec: measured 730px per group / 11.27 = 64.8s. */
+  .logo-track { animation-duration: 64.8s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1406,6 +1526,22 @@ body:has(.dotgrid)::before {
   .blog-card {
     height: auto;
   }
+  /* Thumbnail above the text on a phone — side by side at this width leaves the
+     headline in a column too narrow to read. flex-basis is reset because the
+     34% basis was sized for the horizontal layout. */
+  .news-card {
+    flex-direction: column;
+    gap: 14px;
+    padding: 14px;
+  }
+  .news-thumb {
+    flex: 0 0 auto;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    min-height: 0;
+  }
+  .news-card h3 { font-size: 16px; }
+  .news-outlet, .news-meta { font-size: 13px; }
   /* ...but keep the Product/Solutions widgets a uniform height as a stack.
      1fr rows in an auto-height grid all resolve to the tallest row's content,
      so the cards match each other without a fixed height (which is what
@@ -1562,8 +1698,9 @@ body:has(.dotgrid)::before {
 }
 
 @media (max-width: 420px) {
-  .logo-row { gap: 18px 8px; }
-  .logo-row img { height: 18px; }
+  .logo-group img { height: 27px; }
+  .logo-group { gap: 44px; padding-right: 44px; }
+  .logo-track { animation-duration: 53.8s; }  /* 606px per group / 11.27 */
   .job-card { flex-basis: 86%; }
 }
 

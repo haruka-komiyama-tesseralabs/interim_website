@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog — Tessera Labs</title>
-<link rel="stylesheet" href="assets/styles.css?v=32">
+<link rel="stylesheet" href="assets/styles.css?v=34">
 </head>
 <body>
 
@@ -52,42 +52,69 @@
 
   <section class="section blog-posts" id="blog-posts">
     <div class="blog-grid">
-      <a class="blog-card" href="sap-multi-agent-engine.html">
+      <a class="blog-card" href="https://www.tesseralabs.ai/blog/introducing-the-enterprise-transformation-index" target="_blank" rel="noopener">
         <span class="badge-new">New</span>
-        <span class="blog-tag">Product</span>
-        <h3>Inside the multi-agent engine that plans SAP migrations</h3>
-        <p>How Tessera's agents break a monolithic S/4HANA migration into a governed, auditable sequence of steps.</p>
-        <span class="blog-meta">July 14, 2026 &middot; Priya Nathan</span>
+        <span class="blog-tag">Research</span>
+        <h3>Introducing the Enterprise Transformation Index</h3>
+        <p>A benchmark measuring how enterprise context improves AI model performance on real ERP transformation tasks &mdash; an average accuracy lift of 28.9 percentage points.</p>
+        <span class="blog-meta">August 11, 2026</span>
       </a>
-      <a class="blog-card" href="code-remediation-hardest-part.html">
-        <span class="blog-tag">Engineering</span>
-        <h3>Why code remediation is the hardest part of ERP modernization</h3>
-        <p>Legacy ABAP and custom code are where most migrations stall. Here's how we automate remediation at scale.</p>
-        <span class="blog-meta">June 22, 2026 &middot; Marcus Delgado</span>
+      <a class="blog-card" href="https://www.tesseralabs.ai/blog/system-integration-as-software" target="_blank" rel="noopener">
+        <span class="blog-tag">Insights</span>
+        <h3>System Integration as Software</h3>
+        <p>Enterprise system integration has been handled by large consulting teams over years. Treating it as software collapses both the cost and the timeline.</p>
+        <span class="blog-meta">May 5, 2026</span>
       </a>
-      <a class="blog-card" href="series-a-a16z.html">
-        <span class="blog-tag">Company</span>
-        <h3>Tessera raises $60M Series A led by a16z</h3>
-        <p>A look at what the new funding means for our roadmap and the enterprises we serve.</p>
-        <span class="blog-meta">May 5, 2026 &middot; Anna Choi</span>
+      <a class="blog-card" href="https://www.tesseralabs.ai/blog/migrations-ai-investment" target="_blank" rel="noopener">
+        <span class="blog-tag">Insights</span>
+        <h3>ERP Migrations are an AI Investment &mdash; not an IT Cost</h3>
+        <p>Mining process knowledge during a modernization builds lasting enterprise AI capability that outlives the migration itself.</p>
+        <span class="blog-meta">March 23, 2026</span>
       </a>
-      <a class="blog-card" href="fortune-500-case-study.html">
-        <span class="blog-tag">Customers</span>
-        <h3>How a Fortune 500 manufacturer cut migration time by 70%</h3>
-        <p>A case study on compressing a multi-year SAP ECC to S/4HANA migration into a matter of months.</p>
-        <span class="blog-meta">April 9, 2026 &middot; Priya Nathan</span>
+      <a class="blog-card" href="https://www.tesseralabs.ai/blog/sap-ai-pivot" target="_blank" rel="noopener">
+        <span class="blog-tag">Insights</span>
+        <h3>SAP's AI Pivot Is a Wake-Up Call. Is Your ERP Ready?</h3>
+        <p>SAP's shift toward AI requires enterprises to modernize fragmented systems, legacy code, and data infrastructure to become genuinely AI-ready.</p>
+        <span class="blog-meta">March 16, 2026</span>
       </a>
-      <a class="blog-card" href="governance-by-design.html">
-        <span class="blog-tag">Product</span>
-        <h3>Governance by design: keeping AI agents auditable</h3>
-        <p>Every action our agents take is logged and traceable, so regulated industries can adopt AI with confidence.</p>
-        <span class="blog-meta">March 18, 2026 &middot; Marcus Delgado</span>
+      <a class="blog-card" href="https://www.tesseralabs.ai/blog/ai-execution-gap" target="_blank" rel="noopener">
+        <span class="blog-tag">Insights</span>
+        <h3>The Execution Gap No One Talks About</h3>
+        <p>Enterprise AI projects fail less on technology than on execution &mdash; the structures needed to scale a pilot into production workflows.</p>
+        <span class="blog-meta">March 3, 2026</span>
       </a>
-      <a class="blog-card" href="data-harmonization.html">
-        <span class="blog-tag">Engineering</span>
-        <h3>Data harmonization across SAP, Salesforce, and Workday</h3>
-        <p>The technical approach behind Tessera's cross-system data quality and harmonization layer.</p>
-        <span class="blog-meta">February 26, 2026 &middot; Anna Choi</span>
+    </div>
+  </section>
+
+  <section class="section news" id="news">
+    <div class="section-head">
+      <h2>In the news</h2>
+    </div>
+    <!-- Two columns rather than the blog grid's three, so each card has room for
+         its cover image alongside the text. The grid is defined on .news-grid
+         (not shared with .blog-grid) because these cards are laid out
+         horizontally - thumbnail left, text right - which the 3-up card shape
+         can't accommodate. -->
+    <div class="news-grid">
+      <a class="news-card" href="https://www.forbes.com/sites/annatong/2026/05/05/this-22-year-old-just-raised-60-million-to-automate-this-sneaky-big-enterprise-market/" target="_blank" rel="noopener">
+        <span class="news-thumb">
+          <img src="assets/img/news/forbes-series-a.jpg" alt="" loading="lazy" width="600" height="400">
+        </span>
+        <span class="news-body">
+          <span class="news-outlet">Forbes</span>
+          <h3>This 22 Year-Old Raised $60 Million To Automate A &lsquo;Sneaky Big&rsquo; Enterprise Market</h3>
+          <span class="news-meta">Anna Tong &middot; May 5, 2026</span>
+        </span>
+      </a>
+      <a class="news-card" href="https://erp.today/erp-modernization-ai-tessera-labs-funding/" target="_blank" rel="noopener">
+        <span class="news-thumb">
+          <img src="assets/img/news/erp-today-series-a.jpg" alt="" loading="lazy" width="600" height="400">
+        </span>
+        <span class="news-body">
+          <span class="news-outlet">ERP Today</span>
+          <h3>Can AI Break the ERP Change-Order Cycle? Tessera Labs Just Raised $60M to Try</h3>
+          <span class="news-meta">Tarsilla Moura</span>
+        </span>
       </a>
     </div>
   </section>
@@ -124,6 +151,6 @@
     <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
   </footer>
 
-  <script src="assets/main.js?v=32" defer></script>
+  <script src="assets/main.js?v=34" defer></script>
 </body>
 </html>

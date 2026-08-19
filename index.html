@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tessera Labs — ERP Transformation, accelerated</title>
-<link rel="stylesheet" href="assets/styles.css?v=32">
+<link rel="stylesheet" href="assets/styles.css?v=34">
 </head>
 <body>
 
@@ -117,15 +117,33 @@
 
       <div class="works-with">
         <p class="label">Works with leading enterprise systems</p>
-        <div class="logo-row">
-          <img src="assets/logos/sap-ecc.svg" alt="SAP ECC">
-          <img src="assets/logos/oracle.svg" alt="Oracle">
-          <img src="assets/logos/salesforce.svg" alt="Salesforce">
-          <img src="assets/logos/hex-suite.svg" alt="">
-          <img src="assets/logos/sap-ariba.svg" alt="SAP Ariba">
-          <img src="assets/logos/workday.svg" alt="Workday">
-          <img src="assets/logos/netsuite.svg" alt="NetSuite">
-          <img src="assets/logos/sap-s4hana.svg" alt="SAP S/4HANA">
+        <!-- Carousel. The strip is the logo set twice over: the track slides
+             left by exactly half its width, which lands the second copy where
+             the first began, so the loop is seamless. The duplicate is
+             aria-hidden with empty alts so assistive tech reads the list once. -->
+        <div class="logo-marquee">
+          <div class="logo-track">
+            <div class="logo-group">
+              <img src="assets/logos/sap-ecc.svg" alt="SAP ECC">
+              <img src="assets/logos/oracle.svg" alt="Oracle">
+              <img src="assets/logos/salesforce.svg" alt="Salesforce">
+              <img src="assets/logos/hex-suite.svg" alt="">
+              <img src="assets/logos/sap-ariba.svg" alt="SAP Ariba">
+              <img src="assets/logos/workday.svg" alt="Workday">
+              <img src="assets/logos/netsuite.svg" alt="NetSuite">
+              <img src="assets/logos/sap-s4hana.svg" alt="SAP S/4HANA">
+            </div>
+            <div class="logo-group" aria-hidden="true">
+              <img src="assets/logos/sap-ecc.svg" alt="">
+              <img src="assets/logos/oracle.svg" alt="">
+              <img src="assets/logos/salesforce.svg" alt="">
+              <img src="assets/logos/hex-suite.svg" alt="">
+              <img src="assets/logos/sap-ariba.svg" alt="">
+              <img src="assets/logos/workday.svg" alt="">
+              <img src="assets/logos/netsuite.svg" alt="">
+              <img src="assets/logos/sap-s4hana.svg" alt="">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -264,6 +282,6 @@
     <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
   </footer>
 
-  <script src="assets/main.js?v=32" defer></script>
+  <script src="assets/main.js?v=34" defer></script>
 </body>
 </html>
