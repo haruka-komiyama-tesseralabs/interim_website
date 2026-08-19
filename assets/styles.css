@@ -1001,25 +1001,25 @@ body:has(.dotgrid)::before {
   /* Source URLs are long enough to overflow the 760px measure otherwise. */
   overflow-wrap: anywhere;
 }
-/* Article figures (charts). The image sits in a light frame because the charts
-   have transparent/white backgrounds and would otherwise float without an edge
-   against the page. Given an explicit width/height in the markup so the caption
-   below doesn't jump once the image loads. */
+/* Article figures (charts), matching how they present in the source article:
+   the chart sits directly on the page with no frame, and the caption below is
+   italic. (An earlier version boxed the image; the source doesn't, and the
+   border competed with the charts' own gridlines.) Explicit width/height in the
+   markup keeps the caption from jumping as the image loads. */
 .post-figure {
-  margin: 36px 0;
+  margin: 40px 0;
 }
 .post-figure img {
   width: 100%;
   height: auto;
-  border: 1px solid var(--line);
-  border-radius: 8px;
   background: #fff;
 }
 .post-figure figcaption {
-  font-size: 15px;
-  color: var(--muted);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--ink-soft);
   line-height: 1.5;
-  margin-top: 12px;
+  margin-top: 18px;
 }
 .post-body .post-note {
   font-size: 16px;
@@ -1746,8 +1746,8 @@ body:has(.dotgrid)::before {
   .post-body p { font-size: 17px; line-height: 1.7; margin-bottom: 20px; }
   .post-body h2 { font-size: 21px; margin: 32px 0 12px; }
   .post-body li { font-size: 17px; line-height: 1.7; }
-  .post-figure { margin: 26px 0; }
-  .post-figure figcaption { font-size: 14px; margin-top: 10px; }
+  .post-figure { margin: 28px 0; }
+  .post-figure figcaption { font-size: 15px; margin-top: 12px; }
 
   /* One column per row. Side by side is technically possible down to ~350px, but
      only with content-sized tracks — "Ethics & Compliance" needs about twice the

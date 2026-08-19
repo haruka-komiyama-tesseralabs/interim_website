@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Introducing the Enterprise Transformation Index — Tessera Labs</title>
-<link rel="stylesheet" href="assets/styles.css?v=37">
+<link rel="stylesheet" href="assets/styles.css?v=38">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
   </div>
 
   <div class="post-body">
-        <h2>TL;DR</h2>
+        <p><strong>TL;DR</strong></p>
         <ul>
           <li>Tessera introduces the Enterprise Transformation Index (ETI): a way to measure how much a model's real-world performance improves when paired with deep, accumulated enterprise context, rather than raw intelligence alone.</li>
           <li>To measure ETI, we built TILES: a new benchmark of 42 real enterprise-transformation tasks across seven suites, created because standard coding, reasoning, and computer-use benchmarks don't capture this kind of work.</li>
@@ -72,17 +72,25 @@
         <p>This wisdom rarely lives in one place. It's scattered across documentation nobody maintains, buried in the heads of people who've lived through past migrations, and encoded nowhere except the systems themselves.</p>
         <p>Most progress in frontier models comes from making the model itself smarter &mdash; larger parameter counts, longer context windows, stronger reasoning, better tool use. That progress is real. But in enterprise automation, we've seen it hit a ceiling: a smarter model still can't reason about a history it's never seen. That's the problem Tessera is built to solve.</p>
         <h2>Inside the Enterprise World Model</h2>
-        <p>We begin with a simple question: what actually exists?</p>
+        <p>We begin with a simple question: <strong>what actually exists?</strong></p>
         <p>In a large enterprise, the answer is scattered across source code, configuration tables, database schemas, documentation, and the memory of people who lived through the last three transformations.</p>
-        <p>Tessera connects to systems like SAP, Oracle, Salesforce, and Workday, converts their raw artifacts into structured form, and links them into an entity graph &mdash; objects within and across systems, shared processes like Order-to-Cash, and the custom code that touches each one. Specialized agents plan and act on top of that graph, drawing on organizational memory that sharpens with every engagement and a knowledge base of practitioner expertise general models don't have.</p>
-        <p>That's the system whose performance we wanted to measure directly. We call the resulting metric the Enterprise Transformation Index, or ETI: not how intelligent the underlying model is, but how much accumulated enterprise context improves what it can actually do.</p>
-        <p>To measure ETI, we needed a benchmark built around real enterprise transformation work &mdash; not coding, web search, or computer use, which is where most frontier-model benchmarks focus. So we built TILES.</p>
+        <p>Tessera connects to systems like SAP, Oracle, Salesforce, and Workday, converts their raw artifacts into structured form, and links them into an entity graph &mdash; objects within and across systems, shared processes like Order-to-Cash, and the custom code that touches each one. Specialized agents plan and act on top of that graph, drawing on organizational memory that sharpens with every engagement and a knowledge base of practitioner expertise general models don't have. Full architecture details are in our <a href="assets/docs/Tessera-EnterpriseAI-Whitepaper.pdf" target="_blank" rel="noopener">technical whitepaper</a>.</p>
+        <p>That's the system whose performance we wanted to measure directly. We call the resulting metric the <strong>Enterprise Transformation Index, or ETI</strong>: not how intelligent the underlying model is, but how much accumulated enterprise context improves what it can actually do.</p>
+        <p>To measure ETI, we needed a benchmark built around real enterprise transformation work &mdash; not coding, web search, or computer use, which is where most frontier-model benchmarks focus. So we built <strong>TILES</strong>.</p>
         <h2>TILES: The Enterprise Benchmark</h2>
         <p>TILES, our enterprise benchmark, contains forty-two tasks drawn from real transformation work across seven suites: SAP ABAP Coding, SAP Configuration Analysis, Finance Schema Modeling &amp; Cleansing, Manufacturing Schema Modeling &amp; Cleansing, Cross-System Schema Reconciliation, Tabular Data Prediction, and Test Requirement &amp; Test-Data Generation.</p>
-        <p>Each task was also labeled by class. Contamination-proof tasks are tasks where the answer exists only inside the customer's environment, not seen in public training data. A raw model cannot know these answers in advance, only reasoning from given context. Public tasks depend on general ERP knowledge. A strong model may already know the answer from public documentation, or at least have seen enough similar material during pretraining to make an informed attempt. Control tasks are tasks where Tessera's knowledge base should not help. They are included as a guardrail. If embedding improves them too much, something is probably wrong: the system may be adding verbosity, leaking information, or shifting the grading rather than supplying useful knowledge.</p>
+        <p>Each task was also labeled by class.</p>
+        <p><strong>Contamination-proof tasks</strong> are tasks where the answer exists only inside the customer's environment, not seen in public training data. A raw model cannot know these answers in advance, only reasoning from given context.</p>
+        <p><strong>Public tasks</strong> depend on general ERP knowledge. A strong model may already know the answer from public documentation, or at least have seen enough similar material during pretraining to make an informed attempt.</p>
+        <p><strong>Control tasks</strong> are tasks where Tessera's knowledge base should not help. They are included as a guardrail. If embedding improves them too much, something is probably wrong: the system may be adding verbosity, leaking information, or shifting the grading rather than supplying useful knowledge.</p>
         <p>We evaluated five frontier models in two configurations. In the first, the model was run directly on the task. In the second, the same model was embedded with Tessera's agent layer. Every task is graded against an expert-authored rubric where we decomposed a correct answer into discrete, verifiable claims and score the fraction satisfied, using a three-judge LLM ensemble (majority vote; judges disjoint from the models under test).</p>
-        <p>Across all seven suites and all five models, embedding the model in Tessera improved task accuracy by an average of 28.9 percentage points. On contamination-proof tasks, the lift was 64.3 points. On public tasks, the lift was 18.0 points. That is still meaningful, but it is smaller for the reason we would expect &mdash; frontier models already know a fair amount about standard SAP behavior and published ERP concepts. Tessera still helps by embedding the answer and reducing ambiguity, but there is less missing knowledge to supply.</p>
-        <p>On control tasks, the lift was 0.5 points and not statistically significant. That is the result we wanted to see. Tessera does not improve tasks that do not need Tessera. The knowledge base is not simply making answers longer or pushing the evaluator toward higher scores. It helps where enterprise knowledge is needed, and largely stays out of the way where it is not.</p>
+        <p>Across all seven suites and all five models, embedding the model in Tessera improved task accuracy by an average of <strong>28.9 percentage points</strong>:</p>
+        <ul>
+          <li>On <strong>contamination-proof tasks</strong>, the lift was <strong>64.3 points</strong>.</li>
+          <li>On <strong>public tasks</strong>, the lift was <strong>18.0 points</strong>. That is still meaningful, but it is smaller for the reason we would expect. Frontier models already know a fair amount about standard SAP behavior and published ERP concepts. Tessera still helps by embedding the answer and reducing ambiguity, but there is less missing knowledge to supply.</li>
+          <li>On <strong>control tasks</strong>, the lift was <strong>0.5 points</strong> and not statistically significant. That is the result we wanted to see. Tessera does not improve tasks that do not need Tessera. The knowledge base is not simply making answers longer or pushing the evaluator toward higher scores. It helps where enterprise knowledge is needed, and largely stays out of the way where it is not.</li>
+        </ul>
+        <p>Full multi-agent architecture and per-suite analysis in our <a href="assets/docs/Tessera-EnterpriseAI-Whitepaper.pdf" target="_blank" rel="noopener">technical whitepaper</a>.</p>
         <figure class="post-figure">
           <img src="assets/img/blog/eti-fig2-lift-by-task-class.png" alt="Lift by task class, with 95% confidence intervals" width="1282" height="476" loading="lazy">
           <figcaption>Figure 2: Lift by task class, with 95% confidence intervals.</figcaption>
@@ -92,17 +100,24 @@
           <img src="assets/img/blog/eti-fig3-lift-by-suite.png" alt="Knowledge-base lift by task suite" width="1240" height="600" loading="lazy">
           <figcaption>Figure 3: Knowledge-base lift by task suite.</figcaption>
         </figure>
-        <p>A concrete case. We asked a model to review a custom ABAP routine that runs after an S/4HANA conversion. On its own, even a strong model misses that an INSERT into the MSEG table now silently does nothing &mdash; in S/4HANA those tables became compatibility views over MATDOC, so goods movements vanish without an error. It's not a reasoning failure; the model has no way to know this specific system's behavior. Embedded in the knowledge base, the same model flags the silent data loss, cites the governing SAP Note, and recommends the fix. That is the difference between horsepower and knowing where to go.</p>
+        <p><strong>A concrete case.</strong> We asked a model to review a custom ABAP routine that runs after an S/4HANA conversion. On its own, even a strong model misses that an INSERT into the MSEG table now silently does nothing &mdash; in S/4HANA those tables became compatibility views over MATDOC, so goods movements vanish without an error. It's not a reasoning failure; the model has no way to know this specific system's behavior. Embedded in the knowledge base, the same model flags the silent data loss, cites the governing SAP Note, and recommends the fix. That is the difference between horsepower and knowing where to go.</p>
         <p>Tessera is model-agnostic by design. The enterprise graph, knowledge base, and agent framework can embed different frontier models, with the benchmark illustrating improvement in every model.</p>
+        <p>But model-agnostic does not mean model-indifferent.</p>
+        <p>Once Tessera supplies the missing enterprise knowledge, the model still has to do the reasoning. That is where Claude was strongest.</p>
         <h2>Why Building With the Right Model Matters</h2>
-        <p>But model-agnostic does not mean model-indifferent. Once Tessera supplies the missing enterprise knowledge, the model still has to do the reasoning.</p>
-        <p>Embedding the model in Tessera delivers a large, significant lift for every engine we tested. But model choice still shapes the outcome in two ways. The smallest model gained the most: Claude Haiku 4.5 was the lightest, least expensive engine, and jumps +38 points with embedding. The strongest model sets the ceiling: Claude Opus 4.8 reaches the highest embedded accuracy of any engine tested (90.3%), with Claude Sonnet 5 just behind, because a stronger reasoner exploits the same knowledge more fully.</p>
+        <p>Embedding the model in Tessera delivers a large, significant lift for every engine we tested. But model choice still shapes the outcome in two ways:</p>
+        <ul>
+          <li>The smallest model gained the most. <strong>Claude Haiku 4.5</strong> was the lightest, least expensive engine, <strong>jumps +38 points</strong> with embedding.</li>
+          <li>The strongest model sets the ceiling. <strong>Claude Opus 4.8 reaches the highest embedded accuracy of any engine tested (90.3%),</strong> with Claude Sonnet 5 just behind, because a stronger reasoner exploits the same knowledge more fully.</li>
+        </ul>
         <figure class="post-figure">
           <img src="assets/img/blog/eti-fig4-raw-vs-embedded.png" alt="Raw versus embedded accuracy by model" width="1240" height="690" loading="lazy">
           <figcaption>Figure 4: Raw vs. embedded accuracy by model.</figcaption>
         </figure>
-        <p>Tessera is able to give Claude a working picture of the enterprise ecosystem, including factors like how the systems depend on each other and what changed over time. Claude turns that context into work. It reasons across the evidence, maintains the thread through long agentic workflows, follows constraints, uses tools, and produces recommendations that a human expert can inspect.</p>
-        <p>Together Tessera and Claude are complementary, allowing them to understand and reshape the sprawling systems a business depends on. In these evaluations, Claude was a particularly strong engine for Tessera's platform. But the broader lesson is architectural: enterprise AI performance comes from aligning frontier model intelligence with the wisdom embedded in the platform around it.</p>
+        <p>Tessera is able to give Claude a working picture of the enterprise ecosystem, including factors like how the systems depend on each other and what changed over time.</p>
+        <p>Claude turns that context into work. It reasons across the evidence, maintains the thread through long agentic workflows, follows constraints, uses tools, and produces recommendations that a human expert can inspect.</p>
+        <p>Together Tessera and Claude are complementary, allowing them to understand and reshape the sprawling systems a business depends on.</p>
+        <p>In these evaluations, Claude was a particularly strong engine for Tessera's platform. But the broader lesson is architectural: enterprise AI performance comes from aligning frontier model intelligence with the wisdom embedded in the platform around it.</p>
         <h2>Wisdom Compounds</h2>
         <p>Tessera's understanding of an enterprise improves the longer it works inside it.</p>
         <p>Each engagement leaves behind more than a finished task. The platform learns which tables matter, which processes depend on them, which risks actually show up in migration, and which recommendations human experts accept or correct. That knowledge becomes part of the enterprise model.</p>
@@ -169,6 +184,6 @@
     <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
   </footer>
 
-  <script src="assets/main.js?v=37" defer></script>
+  <script src="assets/main.js?v=38" defer></script>
 </body>
 </html>
