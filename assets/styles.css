@@ -294,11 +294,11 @@ body:has(.dotgrid)::before {
   /* Shared by .hero-copy's padding-top and .works-with's margin-top below, so
      the two can't drift apart — see the comment on .works-with. */
   --hero-copy-pad: 27vh;
-  --hero-block-total: 456px;
+  --hero-block-total: 416px;
   /* Generous bottom padding so the logo row is clearly separated from "Why
      now" rather than reading as part of it — this plus #context's own 72px top
      padding is the full gap. */
-  padding: 0 40px 120px;
+  padding: 0 40px 176px;
   max-width: var(--container);
   margin: 0 auto;
 }
@@ -542,18 +542,22 @@ body:has(.dotgrid)::before {
    .trust-band section (below), so the .trust-logos position modifier that
    existed for them is gone. */
 .works-with {
-  /* Sits as close under the hero copy as the illustration allows. The card
-     stack's vertical position is FIXED (in this width band the box is a flat
-     640px, so the SVG's scale is width-bound and doesn't track viewport
+  /* The card stack's vertical position is FIXED (in this width band the box is
+     a flat 640px, so the SVG's scale is width-bound and doesn't track viewport
      height), while this block's position is driven by --hero-copy-pad in vh.
      A plain vh margin therefore let the row ride up into the stack as the
-     viewport got shorter — at 1344x720 it overlapped the cards by 65px.
-     So: below the ~912px-tall crossover, hold the copy-pad + this margin at a
-     constant --hero-block-total, which keeps the gap to the fixed stack
-     constant (~16px) at every shorter height; above it, revert to growing
-     with the viewport (27vh + 23vh) as before. Both branches are ~12-23px
-     tighter than the previous 25vh, which lifts the row a little. */
-  margin-top: max(calc(var(--hero-block-total) - var(--hero-copy-pad)), 23vh);
+     viewport got shorter — at 1344x720 it overlapped the cards by 65px. So:
+     below the ~894px-tall crossover, hold the copy-pad + this margin at a
+     constant --hero-block-total, which keeps the distance to the fixed stack
+     constant at every shorter height; above it, revert to growing with the
+     viewport as before.
+     What limits how high this can sit is the RIGHTMOST logos, the only part of
+     the block that is actually under the illustration — the label is
+     left-aligned and ends well short of the stack's left vertex, so comparing
+     the block's top edge against the stack's lowest point (which is its bottom
+     vertex, over on the right) badly understates the real headroom. Measured
+     per logo, the last three clear the artwork above them by ~109px here. */
+  margin-top: max(calc(var(--hero-block-total) - var(--hero-copy-pad)), 19.5vh);
 }
 .works-with .label {
   font-size: clamp(19px, 3.2vw, 28px);
@@ -1209,8 +1213,8 @@ body:has(.dotgrid)::before {
 @media (max-width: 1000px) {
   .section { padding: 40px 28px; }
   /* Scales with .section's reduced padding at this breakpoint — the desktop
-     120px was set against 72px sections and reads as dead space here. */
-  .hero { padding: 0 28px 72px; }
+     176px was set against 72px sections and reads as dead space here. */
+  .hero { padding: 0 28px 96px; }
   /* Stays proportionally the most generous section on the page, but 112px of
      tint above and below is a lot of empty screen once the viewport is this
      narrow. */
