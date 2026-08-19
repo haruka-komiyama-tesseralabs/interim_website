@@ -383,19 +383,16 @@ body:has(.dotgrid)::before {
   right: -60px;
   bottom: 0;
 
-  /* Flat 845px floor: that is exactly what the old growth formula produced at
-     1728px, the width where the sizing was judged right, so the illustration
-     now renders at that one size everywhere from 1201px (where it first
-     appears) up to 1728px instead of shrinking on narrower screens. Above
-     1728px the affine term takes over and it keeps growing as before —
-     1.6px per 1px of viewport, capped at 1550px — so large monitors are
-     unchanged.
-     The box stays anchored to the viewport's right edge while the hero copy is
-     anchored to the centred 1240px container, so at narrower widths the stack
-     now runs behind the headline rather than being scaled down to avoid it.
-     That's intended: the illustration sits at z-index 0 under the copy, which
-     carries a white glow for exactly this case. */
-  width: clamp(845px, calc(640px + (100vw - 1600px) * 1.6), 1550px);
+  /* ONE fixed size at every screen size — no growth, no shrink. 845px is what
+     the old responsive formula produced at 1728px, the width where the sizing
+     was judged right. Because the box is anchored to the viewport's right edge
+     while the hero copy is anchored to the centred 1240px container, the only
+     thing that changes with viewport width is how far left the illustration
+     sits relative to the copy: as the screen narrows it slides over the
+     headline and runs behind it. That's intended — it sits at z-index 0 under
+     the copy, which carries a white glow for exactly this case. */
+  --illo-w: 845px;
+  width: var(--illo-w);
   overflow: hidden;
   z-index: 0;
 }
@@ -412,11 +409,19 @@ body:has(.dotgrid)::before {
    is handled by the SVG's own preserveAspectRatio="xMaxYMin meet" attribute
    (the inline-SVG equivalent of object-fit:contain + object-position:right
    top) since CSS object-fit isn't reliable on inline SVG elements. */
+/* Sized in px rather than stretched to the box (was width/height 100% with
+   inset: 0). preserveAspectRatio="meet" renders at min(width/1000,
+   height/980), so a box-filling SVG let the box's HEIGHT decide the scale
+   whenever the viewport got short — the illustration quietly shrank, which is
+   exactly what it must not do. Pinning height to width * 0.98 (the viewBox's
+   1000x980 ratio) makes the two factors equal, so the scale is always
+   --illo-w / 1000 and depends on nothing else. */
 .hero-illustration svg.stacked-illustration {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  right: 0;
+  width: var(--illo-w);
+  height: calc(var(--illo-w) * 0.98);
   display: block;
 }
 
