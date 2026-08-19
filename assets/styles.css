@@ -391,6 +391,19 @@ body:has(.dotgrid)::before {
   overflow: hidden;
   z-index: 0;
 }
+/* .illo-shift's transform is baked in SVG viewBox units, so its real on-screen
+   effect scales with the box width above (box_width/1000) — the default 341
+   is tuned for the flat 640px zone (<=1600px). Past 1600px the box grows well
+   past that, so the same 341 overshoots badly (cards drifting far below the
+   hero text); this override swaps in a smaller shift tuned for the enlarged
+   illustration. .illo-narrow/.illo-wide toggle alongside it so the visible
+   line-march-2/line-flow-2 endpoint always matches wherever the label lands. */
+.illo-wide { display: none; }
+@media (min-width: 1601px) {
+  .illo-shift { transform: translate(0px, 80px); }
+  .illo-narrow { display: none; }
+  .illo-wide { display: block; }
+}
 /* The illustration is now an inline <svg> (not an <img>) so specific paths
    inside it can be targeted for the entrance animation below. Fit/position
    is handled by the SVG's own preserveAspectRatio="xMaxYMin meet" attribute

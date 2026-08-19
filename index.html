@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tessera Labs — ERP Transformation, accelerated</title>
-<link rel="stylesheet" href="assets/styles.css?v=16">
+<link rel="stylesheet" href="assets/styles.css?v=17">
 </head>
 <body>
 
@@ -45,19 +45,20 @@
 
   <div class="dotgrid">
     <div class="hero-illustration">
-      <!-- Box is a fixed 760px (was 960-1300px, widened on tall/wide screens) so it
-           stays clear of the hero-copy column at every width this section shows in
-           (>=1201px) — that widening was the main source of overlap risk on tall
-           screens. The stacked cards/label/lower line segment are shifted down 220
-           viewBox units via the .illo-shift group below so they land beside the
-           headline+subheader block rather than above it; the upper line segment
-           (line-march-2/line-flow-2) is hardcoded OUTSIDE that group so its far end
-           always touches the box's true top edge regardless of the shift.
-           Trade-off: since the box no longer widens with viewport height, this shift
-           is a fixed value tuned for ~900px-tall viewports (a common laptop height) —
-           alignment drifts to roughly +/-90px at 700-1100px tall, though horizontal
-           clearance from the headline (the actual overlap concern) holds at every
-           height, since it's controlled by the box's now-fixed width, not by dy. -->
+      <!-- Box width is flat 640px through 1600px viewport width (kept narrow there
+           on purpose — that's the tightest-clearance zone against the hero-copy
+           column) then grows up to 1550px beyond that. Because the shift below is
+           baked in viewBox units, its real on-screen effect scales with the box's
+           rendered size (box_width/1000) — a single dy value can't stay correctly
+           aligned across that whole width range, so dy is split at the same 1600px
+           breakpoint as the width formula: .illo-shift's default transform (341) is
+           tuned for the flat 640px zone, and a CSS override at >=1601px switches it
+           to a smaller value tuned for the enlarged illustration, restoring the
+           cards to sit alongside the hero text instead of drifting well past it.
+           line-march-2/line-flow-2 sit outside the shifted group (so their far end
+           always touches the box's true top edge) and are duplicated as -narrow/
+           -wide variants, toggled by the same breakpoint, so the visible one's
+           endpoint keeps matching wherever the label ends up. -->
       <svg class="stacked-illustration" viewBox="0 0 1000 980" preserveAspectRatio="xMaxYMin meet" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tessera agent workflow illustration">
       <g clip-path="url(#clip0_52_87558)">
       <g class="illo-shift" transform="translate(0 341)">
@@ -75,8 +76,10 @@
       <path class="line-flow" d="M520 217 L520 403" fill="none" stroke="#09090b" stroke-width="1.4"/>
       <path class="line-march" d="M520 217 L520 403" fill="none"/>
       </g>
-      <path class="line-flow-2" d="M520 -90 L520 527" fill="none" stroke="#09090b" stroke-width="1.4"/>
-      <path class="line-march-2" d="M520 -90 L520 527" fill="none"/>
+      <path class="line-flow-2 illo-narrow" d="M520 -90 L520 527" fill="none" stroke="#09090b" stroke-width="1.4"/>
+      <path class="line-march-2 illo-narrow" d="M520 -90 L520 527" fill="none"/>
+      <path class="line-flow-2 illo-wide" d="M520 -90 L520 266" fill="none" stroke="#09090b" stroke-width="1.4"/>
+      <path class="line-march-2 illo-wide" d="M520 -90 L520 266" fill="none"/>
       </g>
       <defs>
       <clipPath id="clip0_52_87558">
@@ -234,6 +237,6 @@
     <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
   </footer>
 
-  <script src="assets/main.js?v=16" defer></script>
+  <script src="assets/main.js?v=17" defer></script>
 </body>
 </html>
