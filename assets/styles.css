@@ -72,7 +72,7 @@ a { color: inherit; text-decoration: none; }
    render as the same gap. */
 .wrap.video-wrap {
   padding-top: 40px;
-  padding-bottom: 48px;
+  padding-bottom: 72px;
 }
 
 /* Fixed site header (announcement bar + nav) */
@@ -373,6 +373,13 @@ body:has(.dotgrid)::before {
   width: 960px;
   overflow: hidden;
   z-index: 0;
+  /* The artwork is top-anchored in a box that stretches the full hero height,
+     so the stacked cards render noticeably above the vertical center of the
+     headline+subheader block (measured ~74px high at 900px tall) rather than
+     beside it. A paint-only nudge — transform doesn't affect the box's own
+     layout or its top:0/bottom:0 sizing, so this can't push the box past the
+     bottom of .dotgrid or reintroduce clipping. */
+  transform: translateY(56px);
 }
 /* Taller screens: the art is width-constrained (1000x715 fits the 960px box by
    width, with height to spare) and top-aligned, so the stacked cards land at a
@@ -539,11 +546,15 @@ body:has(.dotgrid)::before {
 .section {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 48px 40px;
+  padding: 72px 40px;
   scroll-margin-top: var(--header-h);
 }
+/* Desktop-only increase (was 48px): the two narrower breakpoints below define
+   their own padding and are intentionally left alone. #compliance's extra
+   bottom padding grows by the same 24px so the gap it adds beyond a normal
+   section stays proportional to the new baseline. */
 #compliance {
-  padding-bottom: 96px;
+  padding-bottom: 120px;
 }
 .section-head {
   display: flex;
@@ -584,12 +595,19 @@ body:has(.dotgrid)::before {
   margin: 0 0 4px;
   color: var(--ink-soft);
 }
+/* Requested for these two sections only, not Security & Compliance's lead —
+   an extra line of space between the bold lead and the paragraph beneath it.
+   em-based so "one line" holds at the lead's own font-size at every width. */
+#product .section-lead,
+#solutions .section-lead {
+  margin-bottom: 1.5em;
+}
 
 /* Card grid — Product / Solutions: four separate boxes, matching the
    Compliance section's separated-widget treatment */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-top: 40px;
 }
