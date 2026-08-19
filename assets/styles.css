@@ -372,9 +372,13 @@ body:has(.dotgrid)::before {
   bottom: 0;
   /* Reduced from 960px: at the widths where this box first appears (>=1201px)
      its left edge sat close enough to the hero-copy column to overlap it once
-     any extra widening was added. A smaller, fixed box keeps clear of the
-     540-640px-wide headline column at every width this section supports. */
-  width: 640px;
+     any extra widening was added. Flat at 640px through 1201-1600px (the range
+     actually tested for overlap); past 1600px the box's right-viewport anchor
+     has moved far enough from the fixed 640px text column that there's ample
+     room to scale up, so it doesn't stay visibly undersized on large
+     monitors. clamp() floor matches the narrow-safe value exactly, so nothing
+     changes below the 1600px crossover (40vw = 640px at vw=1600). */
+  width: clamp(640px, 40vw, 1000px);
   overflow: hidden;
   z-index: 0;
 }
@@ -512,7 +516,7 @@ body:has(.dotgrid)::before {
   font-size: clamp(19px, 3.2vw, 28px);
   line-height: 1.2;
   color: var(--ink);
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 .logo-row {
   display: flex;
@@ -529,7 +533,7 @@ body:has(.dotgrid)::before {
    proportions. */
 .logo-row.compact {
   justify-content: center;
-  gap: 64px;
+  gap: 96px;
 }
 /* Per-logo scale relative to the row's shared 24px baseline: Merck 1.5x,
    Xerox down 15%, Micron up ~30%. Set as explicit heights (rather than
@@ -537,9 +541,9 @@ body:has(.dotgrid)::before {
    actually widening the gap around it) so the row's own layout — and the
    64px gap above — accounts for each logo's real rendered size. Mirrored at
    the mobile breakpoint below against that breakpoint's 20px baseline. */
-.logo-row.compact img[alt="Merck"] { height: 36px; }
+.logo-row.compact img[alt="Merck"] { height: 42px; }
 .logo-row.compact img[alt="Xerox"] { height: 20.4px; }
-.logo-row.compact img[alt="Micron"] { height: 31.2px; }
+.logo-row.compact img[alt="Micron"] { height: 20.4px; }
 .logo-row img {
   height: 24px;
   width: auto;
@@ -1252,7 +1256,7 @@ body:has(.dotgrid)::before {
   .works-with { margin-top: 24px; }
   /* Steps down from a section-heading size to match the section body copy
      below, so it reads as a caption for the logo rows rather than a title */
-  .works-with .label { font-size: 18px; margin-bottom: 18px; }
+  .works-with .label { font-size: 18px; margin-bottom: 28px; }
 
   /* Two rows of four. These logos are compact marks (widest ≈ 51×35), so
      four columns fit comfortably once the height comes down a notch. */
@@ -1267,10 +1271,14 @@ body:has(.dotgrid)::before {
      (a spacing-only wrapper class that now sits on the 8-logo block instead,
      after the two sections traded places) — this needs to follow the logos,
      not whichever section they happen to be placed in. */
-  .logo-row.compact { grid-template-columns: repeat(3, 1fr); }
-  .logo-row.compact img[alt="Merck"] { height: 30px; }
+  .logo-row.compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 20px;
+  }
+  .logo-row.compact img[alt="Merck"] { height: 35px; }
   .logo-row.compact img[alt="Xerox"] { height: 17px; }
-  .logo-row.compact img[alt="Micron"] { height: 26px; }
+  .logo-row.compact img[alt="Micron"] { height: 17px; }
 
   /* Single column, and let the cards size to their content — the fixed
      heights and line-clamps exist to keep a 4-up row even, which no longer
