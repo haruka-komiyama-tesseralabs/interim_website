@@ -341,15 +341,6 @@ body:has(.dotgrid)::before {
 }
 
 
-/* The headline's line breaks are authored per-breakpoint rather than left to
-   the wrapping algorithm, which cannot produce the phone arrangement at all:
-   "Transformation" is wider than "The new era", so any column wide enough for
-   the former also fits the latter and the break after "The new" never happens.
-   Both <br>s carry a trailing space in the markup, so whichever one is switched
-   off leaves its words correctly joined instead of run together.
-     wide  -> The new era of / ERP Transformation
-     phone -> The new / era of ERP / Transformation */
-.hero h1 br.brk-sm { display: none; }
 .hero p.lede {
   font-size: clamp(22px, 3.2vw, 28px);
   line-height: 1.2;
@@ -1216,7 +1207,8 @@ body:has(.dotgrid)::before {
   }
 
   /* Deliberately oversized hero type — the one place on mobile that's allowed
-     to shout, set in the three-line arrangement the brk-sm rules above produce.
+     to shout. The headline carries its own <br>, so it sets on two lines where
+     they fit and three on narrow phones, where "ERP Transformation" wraps.
      The size is pinned to the viewport rather than stepped because
      "Transformation" is a single unbreakable word measuring 6.24x the font size
      at this tracking: any value above (viewport - 40px) / 6.24 overflows the
@@ -1228,8 +1220,6 @@ body:has(.dotgrid)::before {
     font-size: clamp(32px, calc(15.4vw - 6px), 64px);
     letter-spacing: -0.05em;
   }
-  .hero h1 br.brk-sm { display: inline; }
-  .hero h1 br.brk-lg { display: none; }
   /* Grows with the headline but stays well clear of it, so the hierarchy opens
      up to roughly 2:1 instead of the 1.7:1 it was at the smaller sizes. */
   .hero p.lede {
