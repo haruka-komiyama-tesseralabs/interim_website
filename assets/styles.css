@@ -400,7 +400,7 @@ body:has(.dotgrid)::before {
    line-march-2/line-flow-2 endpoint always matches wherever the label lands. */
 .illo-wide { display: none; }
 @media (min-width: 1601px) {
-  .illo-shift { transform: translate(0px, -14px); }
+  .illo-shift { transform: translate(0px, 0px); }
   .illo-narrow { display: none; }
   .illo-wide { display: block; }
 }
@@ -540,12 +540,13 @@ body:has(.dotgrid)::before {
   color: var(--ink);
   margin-bottom: 48px;
 }
-/* Hero's "Trusted by..." label only (not the Security & Compliance section's
-   reuse of .works-with, which stays left-aligned with that section's other
-   copy) — smaller and centered across the full hero width, matching the
-   already-centered logo row beneath it rather than reading as another
-   headline anchored to the narrow hero-copy column. */
-.hero .works-with .label {
+/* The "Trusted by Fortune 500..." block only — smaller and centered to match
+   the already-centered 3-logo row beneath it, rather than reading as another
+   section headline. Keyed to .fortune-logos (not a position selector) so the
+   treatment travels with that block wherever it's placed; the 8-logo "Works
+   with leading enterprise systems" block keeps the full-size left-aligned
+   label. */
+.works-with.fortune-logos .label {
   font-size: 15px;
   text-align: center;
   margin-bottom: 32px;

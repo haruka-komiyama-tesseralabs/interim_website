@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tessera Labs — ERP Transformation, accelerated</title>
-<link rel="stylesheet" href="assets/styles.css?v=18">
+<link rel="stylesheet" href="assets/styles.css?v=19">
 </head>
 <body>
 
@@ -62,16 +62,21 @@
       <svg class="stacked-illustration" viewBox="0 0 1000 980" preserveAspectRatio="xMaxYMin meet" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tessera agent workflow illustration">
       <g clip-path="url(#clip0_52_87558)">
       <g class="illo-shift" transform="translate(0 341)">
-      <!-- Card stack scaled up 30% vertically (Y only, around its own center
-           y=459.5105 in these paths' native coordinates) so it reads as a
-           bigger, more prominent element than the connecting line/label —
-           independent of the illo-shift/box-width scaling above, which
-           affects the whole illustration uniformly. X is deliberately left
-           unscaled: the stack's right vertex already sits only ~3-5 viewBox
-           units from the box's right edge (the box is anchored off-canvas
-           via right:-60px so the illustration bleeds off the page edge by
-           design), so any horizontal growth immediately clips visibly. -->
-      <g class="card-stack" transform="translate(0 459.5105) scale(1 1.3) translate(0 -459.5105)">
+      <!-- Card stack scaled up uniformly (both axes, so the isometric
+           proportions are preserved) around its own center (520, 459.5105 in
+           these paths' native coordinates), so it reads as a bigger, more
+           prominent element than the connecting line/label. The center is
+           the same x the line/ellipse/arrow sit on, so they stay centered on
+           the stack as it grows.
+           1.2 is the ceiling the surrounding layout allows: growing the stack
+           moves its left vertex toward the hero copy, and clearance from the
+           headline's glyph edge bottoms out at ~34px around 1900-2000px wide
+           (where the box has begun growing but the text is still capped by
+           the 1240px container) and at ~0 near 1201px, the narrowest width
+           this illustration is shown at. Right-side growth is free — the box
+           is anchored off-canvas via right:-60px, so the stack bleeds past
+           the page edge by design. -->
+      <g class="card-stack" transform="translate(520 459.5105) scale(1.2) translate(-520 -459.5105)">
       <path class="sq sq-1" d="M143.287 510.584L512.259 602.57C517.342 603.837 522.658 603.837 527.741 602.57L896.713 510.584C902.773 509.073 902.779 500.461 896.72 498.942L527.781 406.451C522.673 405.17 517.327 405.17 512.219 406.451L143.28 498.942C137.221 500.461 137.227 509.073 143.287 510.584Z" fill="white" stroke="black"/>
       <path class="sq sq-2" d="M143.287 480.584L512.259 572.57C517.342 573.837 522.658 573.837 527.741 572.57L896.713 480.584C902.773 479.073 902.779 470.461 896.72 468.942L527.781 376.451C522.673 375.17 517.327 375.17 512.219 376.451L143.28 468.942C137.221 470.461 137.227 479.073 143.287 480.584Z" fill="white" stroke="black"/>
       <path class="sq sq-3" d="M143.287 450.584L512.259 542.57C517.342 543.837 522.658 543.837 527.741 542.57L896.713 450.584C902.773 449.073 902.779 440.461 896.72 438.942L527.781 346.451C522.673 345.17 517.327 345.17 512.219 346.451L143.28 438.942C137.221 440.461 137.227 449.073 143.287 450.584Z" fill="white" stroke="black"/>
@@ -89,8 +94,8 @@
       </g>
       <path class="line-flow-2 illo-narrow" d="M520 -90 L520 527" fill="none" stroke="#09090b" stroke-width="1.4"/>
       <path class="line-march-2 illo-narrow" d="M520 -90 L520 527" fill="none"/>
-      <path class="line-flow-2 illo-wide" d="M520 -90 L520 172" fill="none" stroke="#09090b" stroke-width="1.4"/>
-      <path class="line-march-2 illo-wide" d="M520 -90 L520 172" fill="none"/>
+      <path class="line-flow-2 illo-wide" d="M520 -90 L520 186" fill="none" stroke="#09090b" stroke-width="1.4"/>
+      <path class="line-march-2 illo-wide" d="M520 -90 L520 186" fill="none"/>
       </g>
       <defs>
       <clipPath id="clip0_52_87558">
@@ -106,11 +111,16 @@
       </div>
 
       <div class="works-with">
-        <p class="label">Trusted by Fortune 500 enterprises to modernize their most critical systems</p>
-        <div class="logo-row compact">
-          <img src="assets/logos/merck.svg" alt="Merck">
-          <img src="assets/logos/xerox.svg" alt="Xerox">
-          <img src="assets/logos/micron.png" alt="Micron">
+        <p class="label">Works with leading enterprise systems</p>
+        <div class="logo-row">
+          <img src="assets/logos/sap-ecc.svg" alt="SAP ECC">
+          <img src="assets/logos/oracle.svg" alt="Oracle">
+          <img src="assets/logos/salesforce.svg" alt="Salesforce">
+          <img src="assets/logos/hex-suite.svg" alt="">
+          <img src="assets/logos/sap-ariba.svg" alt="SAP Ariba">
+          <img src="assets/logos/workday.svg" alt="Workday">
+          <img src="assets/logos/netsuite.svg" alt="NetSuite">
+          <img src="assets/logos/sap-s4hana.svg" alt="SAP S/4HANA">
         </div>
       </div>
     </div>
@@ -201,17 +211,12 @@
       </div>
     </div>
 
-    <div class="works-with trust-logos">
-      <p class="label">Works with leading enterprise systems</p>
-      <div class="logo-row">
-        <img src="assets/logos/sap-ecc.svg" alt="SAP ECC">
-        <img src="assets/logos/oracle.svg" alt="Oracle">
-        <img src="assets/logos/salesforce.svg" alt="Salesforce">
-        <img src="assets/logos/hex-suite.svg" alt="">
-        <img src="assets/logos/sap-ariba.svg" alt="SAP Ariba">
-        <img src="assets/logos/workday.svg" alt="Workday">
-        <img src="assets/logos/netsuite.svg" alt="NetSuite">
-        <img src="assets/logos/sap-s4hana.svg" alt="SAP S/4HANA">
+    <div class="works-with trust-logos fortune-logos">
+      <p class="label">Trusted by Fortune 500 enterprises to modernize their most critical systems</p>
+      <div class="logo-row compact">
+        <img src="assets/logos/merck.svg" alt="Merck">
+        <img src="assets/logos/xerox.svg" alt="Xerox">
+        <img src="assets/logos/micron.png" alt="Micron">
       </div>
     </div>
   </section>
@@ -248,6 +253,6 @@
     <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
   </footer>
 
-  <script src="assets/main.js?v=18" defer></script>
+  <script src="assets/main.js?v=19" defer></script>
 </body>
 </html>
