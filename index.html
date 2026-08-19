@@ -51,10 +51,12 @@
            baked in viewBox units, its real on-screen effect scales with the box's
            rendered size (box_width/1000) — a single dy value can't stay correctly
            aligned across that whole width range, so dy is split at the same 1600px
-           breakpoint as the width formula: .illo-shift's default transform (341) is
+           breakpoint as the width formula: .illo-shift's default transform (375) is
            tuned for the flat 640px zone, and a CSS override at >=1601px switches it
-           to a smaller value tuned for the enlarged illustration, restoring the
-           cards to sit alongside the hero text instead of drifting well past it.
+           to a much smaller value tuned for the enlarged illustration, keeping the
+           cards alongside the hero text instead of drifting well past it. The two
+           bands work out to roughly the same real-pixel shift (0.64px per unit at
+           640px wide vs 1.07px at 1280px), which is why the numbers differ so much.
            line-march-2/line-flow-2 sit outside the shifted group (so their far end
            always touches the box's true top edge) and are duplicated as -narrow/
            -wide variants, toggled by the same breakpoint, so the visible one's
