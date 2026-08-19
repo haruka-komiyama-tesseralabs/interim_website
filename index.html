@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tessera Labs — ERP Transformation, accelerated</title>
-<link rel="stylesheet" href="assets/styles.css?v=27">
+<link rel="stylesheet" href="assets/styles.css?v=28">
 </head>
 <body>
 
@@ -45,25 +45,30 @@
 
   <div class="dotgrid">
     <div class="hero-illustration">
-      <!-- Box width is flat 640px through 1600px viewport width (kept narrow there
-           on purpose — that's the tightest-clearance zone against the hero-copy
-           column) then grows up to 1550px beyond that. Because the shift below is
-           baked in viewBox units, its real on-screen effect scales with the box's
-           rendered size (box_width/1000) — a single dy value can't stay correctly
-           aligned across that whole width range, so dy is split at the same 1600px
-           breakpoint as the width formula: .illo-shift's default transform (375) is
-           tuned for the flat 640px zone, and a CSS override at >=1601px switches it
-           to a much smaller value tuned for the enlarged illustration, keeping the
-           cards alongside the hero text instead of drifting well past it. The two
-           bands work out to roughly the same real-pixel shift (0.64px per unit at
-           640px wide vs 1.07px at 1280px), which is why the numbers differ so much.
-           line-march-2/line-flow-2 sit outside the shifted group (so their far end
-           always touches the box's true top edge) and are duplicated as -narrow/
-           -wide variants, toggled by the same breakpoint, so the visible one's
-           endpoint keeps matching wherever the label ends up. -->
+      <!-- The illustration renders at ONE size at every width it appears at:
+           the width below has a flat 845px floor, which is exactly what the
+           old growth formula produced at 1728px, where the sizing was judged
+           right. Above 1728px it still grows as before, so large monitors are
+           unchanged. Because the width is constant, the shift baked into
+           .illo-shift in viewBox units maps to a constant on-screen offset, so
+           a single value works everywhere — the old split either side of
+           1600px (a second shift plus a duplicate pair of upper line
+           segments) is gone. That split was what cut the bottom off below
+           1601px: its much larger shift put the card stack at y=1060 in a
+           980-tall canvas, clipping ~50px off the bottom. With the single
+           shift the stack ends at y=652, well inside the canvas.
+           The canvas height is deliberately left at 980 even though the content
+           now only reaches 652: with preserveAspectRatio "meet" the render
+           scale is min(width/1000, height/canvasHeight), so shrinking the
+           canvas would REMOVE the height-derived cap that keeps the
+           illustration in proportion on wide screens — tried 760 and the stack
+           grew from 1031px to 1329px wide at 2560px, running 151px into the
+           logo row.
+           line-march-2/line-flow-2 stay OUTSIDE the shifted group so their far
+           end always runs past the box's top edge regardless of the shift. -->
       <svg class="stacked-illustration" viewBox="0 0 1000 980" preserveAspectRatio="xMaxYMin meet" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tessera agent workflow illustration">
       <g clip-path="url(#clip0_52_87558)">
-      <g class="illo-shift" transform="translate(0 375)">
+      <g class="illo-shift" transform="translate(0 20)">
       <!-- Card stack scaled up uniformly (both axes, so the isometric
            proportions are preserved) around its own center (520, 459.5105 in
            these paths' native coordinates), so it reads as a bigger, more
@@ -94,10 +99,8 @@
       <path class="line-flow" d="M520 217 L520 403" fill="none" stroke="#09090b" stroke-width="1.4"/>
       <path class="line-march" d="M520 217 L520 403" fill="none"/>
       </g>
-      <path class="line-flow-2 illo-narrow" d="M520 -90 L520 561" fill="none" stroke="#09090b" stroke-width="1.4"/>
-      <path class="line-march-2 illo-narrow" d="M520 -90 L520 561" fill="none"/>
-      <path class="line-flow-2 illo-wide" d="M520 -90 L520 206" fill="none" stroke="#09090b" stroke-width="1.4"/>
-      <path class="line-march-2 illo-wide" d="M520 -90 L520 206" fill="none"/>
+      <path class="line-flow-2" d="M520 -90 L520 206" fill="none" stroke="#09090b" stroke-width="1.4"/>
+      <path class="line-march-2" d="M520 -90 L520 206" fill="none"/>
       </g>
       <defs>
       <clipPath id="clip0_52_87558">
@@ -261,6 +264,6 @@
     <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
   </footer>
 
-  <script src="assets/main.js?v=27" defer></script>
+  <script src="assets/main.js?v=28" defer></script>
 </body>
 </html>

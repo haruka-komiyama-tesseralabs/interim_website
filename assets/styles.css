@@ -72,7 +72,7 @@ a { color: inherit; text-decoration: none; }
    render as the same gap. */
 .wrap.video-wrap {
   padding-top: 40px;
-  padding-bottom: 72px;
+  padding-bottom: 112px;
 }
 
 /* Fixed site header (announcement bar + nav) */
@@ -295,10 +295,9 @@ body:has(.dotgrid)::before {
      the two can't drift apart — see the comment on .works-with. */
   --hero-copy-pad: 27vh;
   --hero-block-total: 416px;
-  /* Generous bottom padding so the logo row is clearly separated from "Why
-     now" rather than reading as part of it — this plus #context's own 72px top
-     padding is the full gap. */
-  padding: 0 40px 176px;
+  /* Matches .section's vertical padding so the hero-to-"Why now" gap is the
+     same 224px as every other section boundary. */
+  padding: 0 40px 112px;
   max-width: var(--container);
   margin: 0 auto;
 }
@@ -383,40 +382,31 @@ body:has(.dotgrid)::before {
   top: 0;
   right: -60px;
   bottom: 0;
-  /* Reduced from 960px: at the widths where this box first appears (>=1201px)
-     its left edge sat close enough to the hero-copy column to overlap it once
-     any extra widening was added. Flat at 640px through 1201-1600px (the range
-     actually tested for overlap); past 1600px the box's right-viewport anchor
-     has moved far enough from the fixed 640px text column that there's ample
-     room to scale up, so it doesn't stay visibly undersized on large
-     monitors. clamp() floor matches the narrow-safe value exactly, so nothing
-     changes below the 1600px crossover (40vw = 640px at vw=1600). */
-  /* Flat at 640px through 1201-1600px (the range verified clear of the
-     hero-copy column — see the comment on this rule's earlier history in the
-     component above); grows past 1600px since there's ample clearance out
-     there (345-465px measured at 1920-2560px against the 76px floor at
-     1201px). Affine rather than a plain Nvw so the 640px floor and the
-     1600px crossover are exact rather than approximate: at vw=1600 the calc
-     term is 0 (640px, matching the floor precisely), and it scales up 1.6px
-     per 1px of viewport beyond that — reaching 1152px at 1920px (50% bigger
-     than a flat-40vw formula would give there) before capping at 1550px. */
-  width: clamp(640px, calc(640px + (100vw - 1600px) * 1.6), 1550px);
+
+  /* Flat 845px floor: that is exactly what the old growth formula produced at
+     1728px, the width where the sizing was judged right, so the illustration
+     now renders at that one size everywhere from 1201px (where it first
+     appears) up to 1728px instead of shrinking on narrower screens. Above
+     1728px the affine term takes over and it keeps growing as before —
+     1.6px per 1px of viewport, capped at 1550px — so large monitors are
+     unchanged.
+     The box stays anchored to the viewport's right edge while the hero copy is
+     anchored to the centred 1240px container, so at narrower widths the stack
+     now runs behind the headline rather than being scaled down to avoid it.
+     That's intended: the illustration sits at z-index 0 under the copy, which
+     carries a white glow for exactly this case. */
+  width: clamp(845px, calc(640px + (100vw - 1600px) * 1.6), 1550px);
   overflow: hidden;
   z-index: 0;
 }
-/* .illo-shift's transform is baked in SVG viewBox units, so its real on-screen
-   effect scales with the box width above (box_width/1000) — the default 341
-   is tuned for the flat 640px zone (<=1600px). Past 1600px the box grows well
-   past that, so the same 341 overshoots badly (cards drifting far below the
-   hero text); this override swaps in a smaller shift tuned for the enlarged
-   illustration. .illo-narrow/.illo-wide toggle alongside it so the visible
-   line-march-2/line-flow-2 endpoint always matches wherever the label lands. */
-.illo-wide { display: none; }
-@media (min-width: 1601px) {
-  .illo-shift { transform: translate(0px, 20px); }
-  .illo-narrow { display: none; }
-  .illo-wide { display: block; }
-}
+/* The illustration is now ONE size across every width it appears at (the flat
+   845px floor on the width above), so the shift baked into .illo-shift in
+   viewBox units maps to a single, constant on-screen offset. The two-band
+   split this used to need — a separate shift and a separate pair of upper line
+   segments either side of 1600px — is gone with it. That split was also the
+   cause of the bottom of the illustration being cut off below 1601px: the
+   narrow band's much larger shift pushed the card stack to y=1060 in a canvas
+   that ends at 980, clipping ~50px off the bottom. */
 /* The illustration is now an inline <svg> (not an <img>) so specific paths
    inside it can be targeted for the entrance animation below. Fit/position
    is handled by the SVG's own preserveAspectRatio="xMaxYMin meet" attribute
@@ -628,10 +618,16 @@ body:has(.dotgrid)::before {
 }
 
 /* Section pattern */
+/* 112px vertical, so two stacked sections are separated by 224px — the single
+   spacing figure used between every section on the page. It's the old
+   hero-to-"Why now" gap (176px hero padding + 72px section padding = 248px)
+   less 10%, applied everywhere instead of just under the hero. .hero's
+   padding-bottom and .wrap.video-wrap's track this value, and .trust-band's
+   own 112px padding lands on the same 224px total. */
 .section {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 72px 40px;
+  padding: 112px 40px;
   scroll-margin-top: var(--header-h);
 }
 /* Desktop-only increase (was 48px): the two narrower breakpoints below define
@@ -1212,9 +1208,8 @@ body:has(.dotgrid)::before {
 
 @media (max-width: 1000px) {
   .section { padding: 40px 28px; }
-  /* Scales with .section's reduced padding at this breakpoint — the desktop
-     176px was set against 72px sections and reads as dead space here. */
-  .hero { padding: 0 28px 96px; }
+  /* Tracks .section's reduced padding at this breakpoint, same as on desktop. */
+  .hero { padding: 0 28px 40px; }
   /* Stays proportionally the most generous section on the page, but 112px of
      tint above and below is a lot of empty screen once the viewport is this
      narrow. */
@@ -1308,7 +1303,7 @@ body:has(.dotgrid)::before {
      changing it would drag that along with the text. This padding is therefore
      also the gap between the lede and "Works with…" — kept modest so the two
      read as one composition rather than as separate screens. */
-  .hero { padding: 0 20px 32px; }
+  .hero { padding: 0 20px 30px; }
   .hero-copy {
     display: flex;
     flex-direction: column;
