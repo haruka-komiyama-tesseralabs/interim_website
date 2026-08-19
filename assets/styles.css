@@ -370,33 +370,13 @@ body:has(.dotgrid)::before {
   top: 0;
   right: -60px;
   bottom: 0;
-  width: 960px;
+  /* Reduced from 960px: at the widths where this box first appears (>=1201px)
+     its left edge sat close enough to the hero-copy column to overlap it once
+     any extra widening was added. A smaller, fixed box keeps clear of the
+     540-640px-wide headline column at every width this section supports. */
+  width: 640px;
   overflow: hidden;
   z-index: 0;
-  /* The artwork is top-anchored in a box that stretches the full hero height,
-     so the stacked cards render noticeably above the vertical center of the
-     headline+subheader block (measured ~74px high at 900px tall) rather than
-     beside it. A paint-only nudge — transform doesn't affect the box's own
-     layout or its top:0/bottom:0 sizing, so this can't push the box past the
-     bottom of .dotgrid or reintroduce clipping. */
-  transform: translateY(56px);
-}
-/* Taller screens: the art is width-constrained (1000x715 fits the 960px box by
-   width, with height to spare) and top-aligned, so the stacked cards land at a
-   fixed offset however tall the viewport is — while the headline keeps
-   descending with its 44vh padding. They coincide around 900px tall; by 1100px
-   the cards sit ~120px high of the headline.
-   Widening the box scales the art, and since its ratio is fixed that makes it
-   proportionally taller, carrying the cards down to meet the headline. 0.96px of
-   width per 1px of viewport height is what holds the alignment: the cards sit
-   0.459 of the way down the art, and the headline descends at 0.44vh.
-   Must stay immediately after the rule above — same specificity, so it only
-   wins by source order. Scoped to >=1400px and capped at 1300px so the widening
-   art can never reach back into the headline's column. */
-@media (min-width: 1400px) {
-  .dotgrid > .hero-illustration {
-    width: clamp(960px, calc(960px + (100vh - 900px) * 0.96), 1300px);
-  }
 }
 /* The illustration is now an inline <svg> (not an <img>) so specific paths
    inside it can be targeted for the entrance animation below. Fit/position
@@ -474,11 +454,13 @@ body:has(.dotgrid)::before {
   opacity: 0;
   animation: lineMarchFadeIn 1s ease-out 0.4s both;
 }
-.stacked-illustration .line-march {
-  animation: lineMarchFadeIn 1s ease-out 0.4s both, lineMarch 0.9s linear 0.4s infinite;
-}
+/* Both segments are authored top-to-bottom in their own "d" (see index.html),
+   so using the SAME keyframe on both makes the dashes travel the same visual
+   direction on each — down, into the stacked cards — instead of the two
+   halves appearing to march toward/away from each other at the label. */
+.stacked-illustration .line-march,
 .stacked-illustration .line-march-2 {
-  animation: lineMarchFadeIn 1s ease-out 0.4s both, lineMarchReverse 0.9s linear 0.4s infinite;
+  animation: lineMarchFadeIn 1s ease-out 0.4s both, lineMarch 0.9s linear 0.4s infinite;
 }
 
 @keyframes lineMarchFadeIn {
@@ -489,11 +471,6 @@ body:has(.dotgrid)::before {
 @keyframes lineMarch {
   0% { stroke-dashoffset: 0; }
   100% { stroke-dashoffset: -12; }
-}
-
-@keyframes lineMarchReverse {
-  0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: 12; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -523,6 +500,13 @@ body:has(.dotgrid)::before {
 
 .works-with {
   margin-top: 14vh;
+}
+/* Reused for the "Trusted by Fortune 500..." block under Security & Compliance
+   — same label+logo-row treatment, but 14vh only made sense positioned right
+   below the hero lede; here it just needs normal in-flow spacing above the
+   check-grid it follows. */
+.works-with.trust-logos {
+  margin-top: 48px;
 }
 .works-with .label {
   font-size: clamp(19px, 3.2vw, 28px);
@@ -560,7 +544,7 @@ body:has(.dotgrid)::before {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 28px;
 }
 .section-head h2 {
   font-size: clamp(32px, 7vw, 72px);
@@ -809,7 +793,10 @@ body:has(.dotgrid)::before {
   padding: 56px 40px 28px;
 }
 .footer-inner {
-  max-width: var(--container);
+  /* matches nav/section's effective content width (container minus
+     their own 40px+40px side padding), since footer's padding lives on
+     the outer .footer instead of here */
+  max-width: calc(var(--container) - 80px);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr) 1.6fr;
@@ -842,7 +829,7 @@ body:has(.dotgrid)::before {
   font-size: 16px;
 }
 .footer-bottom {
-  max-width: var(--container);
+  max-width: calc(var(--container) - 80px);
   margin: 0 auto;
   border-top: 1px solid var(--footer-line);
   padding-top: 20px;
@@ -1257,6 +1244,7 @@ body:has(.dotgrid)::before {
     justify-items: center;
   }
   .logo-row img { height: 20px; }
+  .trust-logos .logo-row { grid-template-columns: repeat(3, 1fr); }
 
   /* Single column, and let the cards size to their content — the fixed
      heights and line-clamps exist to keep a 4-up row even, which no longer

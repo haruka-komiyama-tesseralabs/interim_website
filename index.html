@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tessera Labs — ERP Transformation, accelerated</title>
-<link rel="stylesheet" href="assets/styles.css?v=5">
+<link rel="stylesheet" href="assets/styles.css?v=10">
 </head>
 <body>
 
@@ -45,23 +45,38 @@
 
   <div class="dotgrid">
     <div class="hero-illustration">
+      <!-- Box is a fixed 760px (was 960-1300px, widened on tall/wide screens) so it
+           stays clear of the hero-copy column at every width this section shows in
+           (>=1201px) — that widening was the main source of overlap risk on tall
+           screens. The stacked cards/label/lower line segment are shifted down 220
+           viewBox units via the .illo-shift group below so they land beside the
+           headline+subheader block rather than above it; the upper line segment
+           (line-march-2/line-flow-2) is hardcoded OUTSIDE that group so its far end
+           always touches the box's true top edge regardless of the shift.
+           Trade-off: since the box no longer widens with viewport height, this shift
+           is a fixed value tuned for ~900px-tall viewports (a common laptop height) —
+           alignment drifts to roughly +/-90px at 700-1100px tall, though horizontal
+           clearance from the headline (the actual overlap concern) holds at every
+           height, since it's controlled by the box's now-fixed width, not by dy. -->
       <svg class="stacked-illustration" viewBox="0 0 1000 715" preserveAspectRatio="xMaxYMin meet" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tessera agent workflow illustration">
       <g clip-path="url(#clip0_52_87558)">
+      <g class="illo-shift" transform="translate(0 341)">
       <path class="sq sq-1" d="M143.287 510.584L512.259 602.57C517.342 603.837 522.658 603.837 527.741 602.57L896.713 510.584C902.773 509.073 902.779 500.461 896.72 498.942L527.781 406.451C522.673 405.17 517.327 405.17 512.219 406.451L143.28 498.942C137.221 500.461 137.227 509.073 143.287 510.584Z" fill="white" stroke="black"/>
       <path class="sq sq-2" d="M143.287 480.584L512.259 572.57C517.342 573.837 522.658 573.837 527.741 572.57L896.713 480.584C902.773 479.073 902.779 470.461 896.72 468.942L527.781 376.451C522.673 375.17 517.327 375.17 512.219 376.451L143.28 468.942C137.221 470.461 137.227 479.073 143.287 480.584Z" fill="white" stroke="black"/>
       <path class="sq sq-3" d="M143.287 450.584L512.259 542.57C517.342 543.837 522.658 543.837 527.741 542.57L896.713 450.584C902.773 449.073 902.779 440.461 896.72 438.942L527.781 346.451C522.673 345.17 517.327 345.17 512.219 346.451L143.28 438.942C137.221 440.461 137.227 449.073 143.287 450.584Z" fill="white" stroke="black"/>
       <path class="sq sq-4" d="M143.287 420.584L512.259 512.57C517.342 513.837 522.658 513.837 527.741 512.57L896.713 420.584C902.773 419.073 902.779 410.461 896.72 408.942L527.781 316.451C522.673 315.17 517.327 315.17 512.219 316.451L143.28 408.942C137.221 410.461 137.227 419.073 143.287 420.584Z" fill="white" stroke="black"/>
-      <g class="workflow-label" transform="translate(-200 73.5)">
+      <g class="workflow-label" transform="translate(-200 414.5)">
       <rect x="674.5" y="112.5" width="91" height="31" rx="7.5" fill="white"/>
       <rect x="674.5" y="112.5" width="91" height="31" rx="7.5" stroke="black"/>
       <path d="M685.164 132L684.012 123.6H685.248L685.944 129.708L686.976 123.6H688.224L689.256 129.708L689.952 123.6H691.188L690.036 132H688.56L687.6 126.06L686.64 132H685.164ZM694.795 132.144C694.115 132.144 693.527 131.968 693.031 131.616C692.535 131.264 692.155 130.764 691.891 130.116C691.627 129.468 691.495 128.696 691.495 127.8C691.495 126.904 691.627 126.132 691.891 125.484C692.155 124.836 692.535 124.336 693.031 123.984C693.527 123.632 694.115 123.456 694.795 123.456C695.483 123.456 696.071 123.632 696.559 123.984C697.055 124.336 697.435 124.836 697.699 125.484C697.963 126.132 698.095 126.904 698.095 127.8C698.095 128.696 697.963 129.468 697.699 130.116C697.435 130.764 697.055 131.264 696.559 131.616C696.071 131.968 695.483 132.144 694.795 132.144ZM694.795 130.944C695.395 130.944 695.879 130.676 696.247 130.14C696.615 129.596 696.799 128.816 696.799 127.8C696.799 126.784 696.615 126.008 696.247 125.472C695.879 124.928 695.395 124.656 694.795 124.656C694.187 124.656 693.699 124.928 693.331 125.472C692.971 126.008 692.791 126.784 692.791 127.8C692.791 128.816 692.971 129.596 693.331 130.14C693.699 130.676 694.187 130.944 694.795 130.944ZM699.291 132V123.6H702.039C702.695 123.6 703.235 123.712 703.659 123.936C704.091 124.16 704.411 124.464 704.619 124.848C704.835 125.224 704.943 125.652 704.943 126.132C704.943 126.676 704.803 127.16 704.523 127.584C704.251 128 703.831 128.304 703.263 128.496L705.027 132H703.551L701.943 128.676H700.563V132H699.291ZM700.563 127.524H701.967C702.543 127.524 702.963 127.396 703.227 127.14C703.499 126.884 703.635 126.548 703.635 126.132C703.635 125.708 703.503 125.372 703.239 125.124C702.975 124.868 702.547 124.74 701.955 124.74H700.563V127.524ZM706.498 132V123.6H707.77V127.44L710.746 123.6H712.318L709.03 127.764V127.836L712.39 132H710.782L707.77 128.232V132H706.498ZM713.789 132V123.6H719.177V124.788H715.061V127.356H718.517V128.472H715.061V132H713.789ZM720.949 132V123.6H722.221V130.86H726.361V132H720.949ZM730.772 132.144C730.092 132.144 729.504 131.968 729.008 131.616C728.512 131.264 728.132 130.764 727.868 130.116C727.604 129.468 727.472 128.696 727.472 127.8C727.472 126.904 727.604 126.132 727.868 125.484C728.132 124.836 728.512 124.336 729.008 123.984C729.504 123.632 730.092 123.456 730.772 123.456C731.46 123.456 732.048 123.632 732.536 123.984C733.032 124.336 733.412 124.836 733.676 125.484C733.94 126.132 734.072 126.904 734.072 127.8C734.072 128.696 733.94 129.468 733.676 130.116C733.412 130.764 733.032 131.264 732.536 131.616C732.048 131.968 731.46 132.144 730.772 132.144ZM730.772 130.944C731.372 130.944 731.856 130.676 732.224 130.14C732.592 129.596 732.776 128.816 732.776 127.8C732.776 126.784 732.592 126.008 732.224 125.472C731.856 124.928 731.372 124.656 730.772 124.656C730.164 124.656 729.676 124.928 729.308 125.472C728.948 126.008 728.768 126.784 728.768 127.8C728.768 128.816 728.948 129.596 729.308 130.14C729.676 130.676 730.164 130.944 730.772 130.944ZM735.531 132L734.379 123.6H735.615L736.311 129.708L737.343 123.6H738.591L739.623 129.708L740.319 123.6H741.555L740.403 132H738.927L737.967 126.06L737.007 132H735.531ZM749.55 132V130.86H751.626V125.1L749.646 125.46V124.428L752.118 123.6H752.898V130.86H755.13V132H749.55Z" fill="black"/>
       </g>
       <path class="sq sq-4" d="M520 390.5C547.586 390.5 572.543 393.296 590.59 397.808C599.616 400.064 606.886 402.743 611.887 405.699C616.921 408.675 619.5 411.834 619.5 415C619.5 418.166 616.921 421.325 611.887 424.301C606.886 427.257 599.616 429.936 590.59 432.192C572.543 436.704 547.586 439.5 520 439.5C492.414 439.5 467.457 436.704 449.41 432.192C440.384 429.936 433.114 427.257 428.113 424.301C423.079 421.325 420.5 418.166 420.5 415C420.5 411.834 423.079 408.675 428.113 405.699C433.114 402.743 440.384 400.064 449.41 397.808C467.457 393.296 492.414 390.5 520 390.5Z" fill="white" stroke="black"/>
       <path class="line-arrow" d="M519.505 405.495C519.778 405.768 520.222 405.768 520.495 405.495L524.95 401.04C525.223 400.767 525.223 400.324 524.95 400.05C524.676 399.777 524.233 399.777 523.96 400.05L520 404.01L516.04 400.05C515.767 399.777 515.324 399.777 515.05 400.05C514.777 400.324 514.777 400.767 515.05 401.04L519.505 405.495Z" fill="black"/>
-      <path class="line-flow" d="M520 217 L520 403" fill="none" stroke="#09090b" stroke-width="1.4"/>
-      <path class="line-march" d="M520 217 L520 403" fill="none"/>
-      <path class="line-flow-2" d="M520 -90 L520 186" fill="none" stroke="#09090b" stroke-width="1.4"/>
-      <path class="line-march-2" d="M520 -90 L520 186" fill="none"/>
+      <path class="line-flow" d="M520 558 L520 744" fill="none" stroke="#09090b" stroke-width="1.4"/>
+      <path class="line-march" d="M520 558 L520 744" fill="none"/>
+      </g>
+      <path class="line-flow-2" d="M520 -90 L520 527" fill="none" stroke="#09090b" stroke-width="1.4"/>
+      <path class="line-march-2" d="M520 -90 L520 527" fill="none"/>
       </g>
       <defs>
       <clipPath id="clip0_52_87558">
@@ -176,6 +191,15 @@
         <span class="check-text">SOC 2-compliant protections</span>
       </div>
     </div>
+
+    <div class="works-with trust-logos">
+      <p class="label">Trusted by Fortune 500 enterprises to modernize their most critical systems</p>
+      <div class="logo-row">
+        <img src="assets/logos/merck.svg" alt="Merck">
+        <img src="assets/logos/xerox.svg" alt="Xerox">
+        <img src="assets/logos/micron.png" alt="Micron">
+      </div>
+    </div>
   </section>
 
   <footer class="footer">
@@ -210,6 +234,6 @@
     <div class="footer-bottom">© 2026 Tessera Labs. All rights reserved.</div>
   </footer>
 
-  <script src="assets/main.js?v=5" defer></script>
+  <script src="assets/main.js?v=10" defer></script>
 </body>
 </html>
