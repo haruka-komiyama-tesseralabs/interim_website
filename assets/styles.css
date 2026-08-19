@@ -306,7 +306,7 @@ body:has(.dotgrid)::before {
      the latest 4vh back so the logo row below doesn't ride up with the text —
      the illustration's card stack clears that row by only ~28px at 1344x900,
      so letting it move would put the two into overlap. */
-  padding-top: 34vh;
+  padding-top: 31vh;
   max-width: 640px;
 }
 /* Only the clamp FLOOR moves for the hero pair — the 8vw slope and 72px cap are
@@ -535,14 +535,14 @@ body:has(.dotgrid)::before {
    .trust-band section (below), so the .trust-logos position modifier that
    existed for them is gone. */
 .works-with {
-  /* 14vh + the 4vh of hero-copy padding-top given back when the headline was
-     last lifted, so this block holds its position while the text above it
-     moves up. Same unit as that padding, so they stay in step at every
-     viewport height. Deliberately does NOT absorb the earlier 44->38vh
-     reduction too: this block is meant to sit just above the fold, and
-     restoring the full 10vh pushed its label to the very bottom edge of a
-     900px-tall viewport. */
-  margin-top: 18vh;
+  /* 14vh + the 7vh of hero-copy padding-top given back across the rounds that
+     lifted the headline from 38vh to 31vh, so this block holds its position
+     while the text above it moves up. Same unit as that padding, so they stay
+     in step at every viewport height. Deliberately does NOT absorb the first
+     44->38vh reduction too: this block is meant to sit just above the fold,
+     and restoring the full amount pushed its label to the very bottom edge of
+     a 900px-tall viewport. */
+  margin-top: 21vh;
 }
 .works-with .label {
   font-size: clamp(19px, 3.2vw, 28px);
@@ -595,7 +595,7 @@ body:has(.dotgrid)::before {
    the mobile breakpoint below against that breakpoint's 20px baseline. */
 .logo-row.compact img[alt="Merck"] { height: 42px; }
 .logo-row.compact img[alt="Xerox"] { height: 20.4px; }
-.logo-row.compact img[alt="Micron"] { height: 24px; }
+.logo-row.compact img[alt="Micron"] { height: 26.4px; }
 .logo-row img {
   height: 24px;
   width: auto;
@@ -1331,9 +1331,11 @@ body:has(.dotgrid)::before {
     flex-wrap: wrap;
     gap: 28px 20px;
   }
-  .logo-row.compact img[alt="Merck"] { height: 35px; }
-  .logo-row.compact img[alt="Xerox"] { height: 17px; }
-  .logo-row.compact img[alt="Micron"] { height: 20px; }
+  /* All three come down ~12% from 35/17/20 — their relative sizes are kept,
+     so the row still reads as evenly weighted, just smaller on a phone. */
+  .logo-row.compact img[alt="Merck"] { height: 31px; }
+  .logo-row.compact img[alt="Xerox"] { height: 15px; }
+  .logo-row.compact img[alt="Micron"] { height: 17.6px; }
 
   /* Single column, and let the cards size to their content — the fixed
      heights and line-clamps exist to keep a 4-up row even, which no longer
