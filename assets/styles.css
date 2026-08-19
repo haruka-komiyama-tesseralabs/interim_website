@@ -403,7 +403,7 @@ body:has(.dotgrid)::before {
    line-march-2/line-flow-2 endpoint always matches wherever the label lands. */
 .illo-wide { display: none; }
 @media (min-width: 1601px) {
-  .illo-shift { transform: translate(0px, 0px); }
+  .illo-shift { transform: translate(0px, 20px); }
   .illo-narrow { display: none; }
   .illo-wide { display: block; }
 }
@@ -554,7 +554,7 @@ body:has(.dotgrid)::before {
   margin: 0 auto;
 }
 .trust-band-label {
-  font-size: clamp(24px, 2.5vw, 32px);
+  font-size: clamp(22px, 2.2vw, 28px);
   line-height: 1.25;
   color: var(--ink);
   text-align: center;
@@ -1345,6 +1345,19 @@ body:has(.dotgrid)::before {
   .card,
   .blog-card {
     height: auto;
+  }
+  /* ...but keep the Product/Solutions widgets a uniform height as a stack.
+     1fr rows in an auto-height grid all resolve to the tallest row's content,
+     so the cards match each other without a fixed height (which is what
+     desktop's 232px does) and without clamping copy away. The min-height then
+     brings the two grids into line with EACH OTHER: they're separate grids, so
+     1fr can only equalize within one, and Solutions' copy is shorter than
+     Product's. Both are floors, so nothing is ever truncated. */
+  .card-grid {
+    grid-auto-rows: 1fr;
+  }
+  .card {
+    min-height: 143px;
   }
   .card h3,
   .card p,
