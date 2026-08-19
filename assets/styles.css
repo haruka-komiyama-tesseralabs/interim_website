@@ -378,7 +378,16 @@ body:has(.dotgrid)::before {
      room to scale up, so it doesn't stay visibly undersized on large
      monitors. clamp() floor matches the narrow-safe value exactly, so nothing
      changes below the 1600px crossover (40vw = 640px at vw=1600). */
-  width: clamp(640px, 40vw, 1000px);
+  /* Flat at 640px through 1201-1600px (the range verified clear of the
+     hero-copy column — see the comment on this rule's earlier history in the
+     component above); grows past 1600px since there's ample clearance out
+     there (345-465px measured at 1920-2560px against the 76px floor at
+     1201px). Affine rather than a plain Nvw so the 640px floor and the
+     1600px crossover are exact rather than approximate: at vw=1600 the calc
+     term is 0 (640px, matching the floor precisely), and it scales up 1.6px
+     per 1px of viewport beyond that — reaching 1152px at 1920px (50% bigger
+     than a flat-40vw formula would give there) before capping at 1550px. */
+  width: clamp(640px, calc(640px + (100vw - 1600px) * 1.6), 1550px);
   overflow: hidden;
   z-index: 0;
 }
