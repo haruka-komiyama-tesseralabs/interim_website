@@ -300,10 +300,13 @@ body:has(.dotgrid)::before {
      viewport; z-index comes for free since .dotgrid > * (this element's
      ancestor .hero) is already bumped to z-index:1 by the dot-grid rule
      below, which is higher than the illustration's z-index:0.
-     Lifted from 44vh: the illustration deliberately stays put, so this only
-     moves the copy up relative to it (>1200px — the narrower breakpoints set
-     their own hero spacing). */
-  padding-top: 38vh;
+     Lifted from 44vh in two passes: the illustration deliberately stays put,
+     so this only moves the copy up relative to it (>1200px — the narrower
+     breakpoints set their own hero spacing). .works-with's margin-top gives
+     the latest 4vh back so the logo row below doesn't ride up with the text —
+     the illustration's card stack clears that row by only ~28px at 1344x900,
+     so letting it move would put the two into overlap. */
+  padding-top: 34vh;
   max-width: 640px;
 }
 /* Only the clamp FLOOR moves for the hero pair — the 8vw slope and 72px cap are
@@ -532,7 +535,14 @@ body:has(.dotgrid)::before {
    .trust-band section (below), so the .trust-logos position modifier that
    existed for them is gone. */
 .works-with {
-  margin-top: 14vh;
+  /* 14vh + the 4vh of hero-copy padding-top given back when the headline was
+     last lifted, so this block holds its position while the text above it
+     moves up. Same unit as that padding, so they stay in step at every
+     viewport height. Deliberately does NOT absorb the earlier 44->38vh
+     reduction too: this block is meant to sit just above the fold, and
+     restoring the full 10vh pushed its label to the very bottom edge of a
+     900px-tall viewport. */
+  margin-top: 18vh;
 }
 .works-with .label {
   font-size: clamp(19px, 3.2vw, 28px);
@@ -554,7 +564,7 @@ body:has(.dotgrid)::before {
   margin: 0 auto;
 }
 .trust-band-label {
-  font-size: clamp(22px, 2.2vw, 28px);
+  font-size: clamp(19px, 1.9vw, 24px);
   line-height: 1.25;
   color: var(--ink);
   text-align: center;
