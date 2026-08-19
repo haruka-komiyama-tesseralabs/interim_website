@@ -306,7 +306,7 @@ body:has(.dotgrid)::before {
      the latest 4vh back so the logo row below doesn't ride up with the text —
      the illustration's card stack clears that row by only ~28px at 1344x900,
      so letting it move would put the two into overlap. */
-  padding-top: 31vh;
+  padding-top: 27vh;
   max-width: 640px;
 }
 /* Only the clamp FLOOR moves for the hero pair — the 8vw slope and 72px cap are
@@ -535,14 +535,14 @@ body:has(.dotgrid)::before {
    .trust-band section (below), so the .trust-logos position modifier that
    existed for them is gone. */
 .works-with {
-  /* 14vh + the 7vh of hero-copy padding-top given back across the rounds that
-     lifted the headline from 38vh to 31vh, so this block holds its position
+  /* 14vh + the 11vh of hero-copy padding-top given back across the rounds that
+     lifted the headline from 38vh to 27vh, so this block holds its position
      while the text above it moves up. Same unit as that padding, so they stay
      in step at every viewport height. Deliberately does NOT absorb the first
      44->38vh reduction too: this block is meant to sit just above the fold,
      and restoring the full amount pushed its label to the very bottom edge of
      a 900px-tall viewport. */
-  margin-top: 21vh;
+  margin-top: 25vh;
 }
 .works-with .label {
   font-size: clamp(19px, 3.2vw, 28px);
@@ -580,22 +580,33 @@ body:has(.dotgrid)::before {
 /* The 3-logo Fortune 500 row reads as a tight, deliberate group rather than a
    set spread to fill the same width as the 8-logo row — centered with a
    fixed, more generous gap instead of space-between's edge-to-edge spread.
-   align-items:center (inherited) plus a single shared height on every img
-   keeps them vertically level regardless of each source file's own
-   proportions. */
+   Aligned on the wordmarks' BASELINES rather than on the files' boxes: the
+   three files crop differently — measuring the rendered artwork, each
+   wordmark's baseline sits at 74.0% (Merck), 98.5% (Xerox) and 98.1% (Micron)
+   of its file's height, because Merck's file also has to fit the teal symbol
+   that extends above and below the letters. Centering the boxes therefore
+   left Merck's letters ~11px high of the other two. flex-end puts every
+   file's bottom edge on one line, and the translateY below then drops each
+   logo by exactly the empty space its own file leaves under its baseline. */
 .logo-row.compact {
   justify-content: center;
   gap: 96px;
+  align-items: flex-end;
 }
 /* Per-logo scale relative to the row's shared 24px baseline: Merck 1.5x,
-   Xerox down 15%, Micron up ~30%. Set as explicit heights (rather than
+   Xerox down 15%, Micron up 10%. Set as explicit heights (rather than
    transform:scale, which would visually overflow its flex box without
    actually widening the gap around it) so the row's own layout — and the
    64px gap above — accounts for each logo's real rendered size. Mirrored at
-   the mobile breakpoint below against that breakpoint's 20px baseline. */
-.logo-row.compact img[alt="Merck"] { height: 42px; }
-.logo-row.compact img[alt="Xerox"] { height: 20.4px; }
-.logo-row.compact img[alt="Micron"] { height: 26.4px; }
+   the mobile breakpoint below against that breakpoint's 20px baseline.
+   The translateY values are the baseline corrections described above. They're
+   percentages, which for transforms resolve against the element's OWN height,
+   so the same three values hold at the mobile sizes without restating them.
+   Merck's symbol is centred on its letters, so it dips below the shared
+   baseline — that's the logo's own construction, not a misalignment. */
+.logo-row.compact img[alt="Merck"] { height: 42px; transform: translateY(26%); }
+.logo-row.compact img[alt="Xerox"] { height: 20.4px; transform: translateY(1.5%); }
+.logo-row.compact img[alt="Micron"] { height: 26.4px; transform: translateY(1.9%); }
 .logo-row img {
   height: 24px;
   width: auto;
