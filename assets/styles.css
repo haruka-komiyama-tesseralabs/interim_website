@@ -299,8 +299,11 @@ body:has(.dotgrid)::before {
   /* pushes the headline down toward the bottom third of a typical laptop
      viewport; z-index comes for free since .dotgrid > * (this element's
      ancestor .hero) is already bumped to z-index:1 by the dot-grid rule
-     below, which is higher than the illustration's z-index:0 */
-  padding-top: 44vh;
+     below, which is higher than the illustration's z-index:0.
+     Lifted from 44vh: the illustration deliberately stays put, so this only
+     moves the copy up relative to it (>1200px — the narrower breakpoints set
+     their own hero spacing). */
+  padding-top: 38vh;
   max-width: 640px;
 }
 /* Only the clamp FLOOR moves for the hero pair — the 8vw slope and 72px cap are
@@ -524,15 +527,12 @@ body:has(.dotgrid)::before {
   }
 }
 
+/* Only the hero's "Works with leading enterprise systems" block uses this now;
+   the Fortune 500 logos it used to share styles with have their own full-bleed
+   .trust-band section (below), so the .trust-logos position modifier that
+   existed for them is gone. */
 .works-with {
   margin-top: 14vh;
-}
-/* Reused for the "Trusted by Fortune 500..." block under Security & Compliance
-   — same label+logo-row treatment, but 14vh only made sense positioned right
-   below the hero lede; here it just needs normal in-flow spacing above the
-   check-grid it follows. */
-.works-with.trust-logos {
-  margin-top: 48px;
 }
 .works-with .label {
   font-size: clamp(19px, 3.2vw, 28px);
@@ -540,16 +540,25 @@ body:has(.dotgrid)::before {
   color: var(--ink);
   margin-bottom: 48px;
 }
-/* The "Trusted by Fortune 500..." block only — smaller and centered to match
-   the already-centered 3-logo row beneath it, rather than reading as another
-   section headline. Keyed to .fortune-logos (not a position selector) so the
-   treatment travels with that block wherever it's placed; the 8-logo "Works
-   with leading enterprise systems" block keeps the full-size left-aligned
-   label. */
-.works-with.fortune-logos .label {
-  font-size: 15px;
+/* Full-bleed Fortune 500 band. The tint is carried on a section that spans the
+   viewport while an inner wrapper re-applies the normal container, so the
+   background reaches both edges of the screen. The generous breathing room
+   above and below is padding rather than margin for the same reason — margin
+   would leave the gap untinted and collapse the band down onto its content. */
+.trust-band {
+  background: #f8f8f8;
+  padding: 112px 40px;
+}
+.trust-band-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.trust-band-label {
+  font-size: clamp(24px, 2.5vw, 32px);
+  line-height: 1.25;
+  color: var(--ink);
   text-align: center;
-  margin-bottom: 32px;
+  margin: 0 0 64px;
 }
 .logo-row {
   display: flex;
@@ -590,12 +599,10 @@ body:has(.dotgrid)::before {
   scroll-margin-top: var(--header-h);
 }
 /* Desktop-only increase (was 48px): the two narrower breakpoints below define
-   their own padding and are intentionally left alone. #compliance's extra
-   bottom padding grows by the same 24px so the gap it adds beyond a normal
-   section stays proportional to the new baseline. */
-#compliance {
-  padding-bottom: 120px;
-}
+   their own padding and are intentionally left alone.
+   #compliance used to carry extra bottom padding to separate itself from the
+   Fortune 500 logos nested at its end; that block is now the .trust-band
+   section below, whose own padding supplies the gap, so the override is gone. */
 .section-head {
   display: flex;
   align-items: flex-start;
@@ -1169,6 +1176,11 @@ body:has(.dotgrid)::before {
 
 @media (max-width: 1000px) {
   .section { padding: 40px 28px; }
+  /* Stays proportionally the most generous section on the page, but 112px of
+     tint above and below is a lot of empty screen once the viewport is this
+     narrow. */
+  .trust-band { padding: 72px 28px; }
+  .trust-band-label { margin-bottom: 44px; }
   .wrap { padding: 0 28px; }
   /* tracks .section's padding — see .wrap.video-wrap */
   .wrap.video-wrap { padding-bottom: 40px; }
@@ -1237,7 +1249,8 @@ body:has(.dotgrid)::before {
   .brand { font-size: 17px; }
   .brand img { width: 28px; height: 28px; }
   .section { padding: 30px 20px; }
-  #compliance { padding-bottom: 48px; }
+  .trust-band { padding: 56px 20px; }
+  .trust-band-label { margin-bottom: 32px; }
   .wrap { padding: 0 20px; }
   .section-head { margin-bottom: 12px; }
   .section-intro { margin-bottom: 14px; }
@@ -1300,10 +1313,9 @@ body:has(.dotgrid)::before {
     justify-items: center;
   }
   .logo-row img { height: 20px; }
-  /* Scoped to .compact (the 3-logo group itself) rather than .trust-logos
-     (a spacing-only wrapper class that now sits on the 8-logo block instead,
-     after the two sections traded places) — this needs to follow the logos,
-     not whichever section they happen to be placed in. */
+  /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
+     this needs to follow the logos, not whichever section they're placed in,
+     which has now changed several times. */
   .logo-row.compact {
     display: flex;
     flex-wrap: wrap;
