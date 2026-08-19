@@ -915,6 +915,18 @@ body:has(.dotgrid)::before {
   color: var(--footer-text);
   margin-bottom: 12px;
 }
+/* .footer-col items are grid-stretched to the row's tallest column (see
+   .footer-inner), but plain block content just flows from the top, so the CTA
+   column's shorter h4+p+button left the button floating above the bottom
+   instead of sitting level with the last link in the columns beside it. Flex
+   column + margin-top:auto pushes the button to the bottom of the stretched
+   height; margin-bottom:12px then matches the 12px margin-bottom every
+   .footer-col a already carries, so the button's bottom edge lands exactly
+   where Press/Whitepaper's do rather than flush with the column's outer edge. */
+.footer-cta {
+  display: flex;
+  flex-direction: column;
+}
 .footer-cta p {
   font-size: 16px;
   line-height: 1.6;
@@ -923,7 +935,8 @@ body:has(.dotgrid)::before {
 }
 .footer-cta a.btn {
   display: inline-flex;
-  margin-bottom: 0;
+  margin-top: auto;
+  margin-bottom: 12px;
 }
 .footer .btn {
   font-size: 16px;
