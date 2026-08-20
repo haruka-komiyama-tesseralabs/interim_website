@@ -1021,13 +1021,6 @@ body:has(.dotgrid)::before {
   line-height: 1.5;
   margin-top: 18px;
 }
-.post-body .post-note {
-  font-size: 16px;
-  color: var(--muted);
-  border-top: 1px solid var(--line);
-  padding-top: 20px;
-  margin-top: 40px;
-}
 .post-related {
   border-top: 1px solid var(--line);
 }
