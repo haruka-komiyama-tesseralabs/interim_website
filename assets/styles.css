@@ -647,10 +647,10 @@ body:has(.dotgrid)::before {
 .logo-track {
   display: flex;
   width: max-content;
-  /* Measured: 2007px per group / 11.27px per sec = 178.1s. Recompute if the
+  /* Measured: 2023px per group / 11.27px per sec = 179.6s. Recompute if the
      logo heights or the gap below change, or the carousel drifts off the
      dashes' pace. */
-  animation: logoMarquee 178.1s linear infinite;
+  animation: logoMarquee 179.6s linear infinite;
 }
 .logo-group {
   display: flex;
@@ -658,11 +658,11 @@ body:has(.dotgrid)::before {
   flex: 0 0 auto;
   /* Spread out well beyond the density needed to keep 7 visible (the previous
      target) — now closer to 4-5 logos in view at once, with generous air
-     between them. */
-  gap: 150px;
+     between them. 10% tighter than that (150px) per a later request. */
+  gap: 135px;
   /* Matches the gap so the spacing across the seam between the two copies is
      identical to the spacing inside each one. */
-  padding-right: 150px;
+  padding-right: 135px;
 }
 .logo-group img {
   /* 50% up from the old 24px row. */
@@ -681,7 +681,6 @@ body:has(.dotgrid)::before {
 .logo-group img[src$="sap.png"] { height: 25.2px; }        /* -30% */
 .logo-group img[src$="salesforce.svg"] { height: 70.2px; }  /* +50% then +30% */
 .logo-group img[src$="snowflake.png"] { height: 32.4px; }  /* -10% */
-.logo-group img[src$="databricks.png"] { height: 43.2px; } /* +20% */
 .logo-group img[src$="oracle.png"] { height: 15.12px; }    /* -30% then 60% of that */
 .logo-group img[src$="servicenow.png"] { height: 25.2px; } /* -30% */
 @keyframes logoMarquee {
@@ -1568,13 +1567,12 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="sap.png"] { height: 21px; }
   .logo-group img[src$="salesforce.svg"] { height: 58.5px; }
   .logo-group img[src$="snowflake.png"] { height: 27px; }
-  .logo-group img[src$="databricks.png"] { height: 36px; }
   .logo-group img[src$="oracle.png"] { height: 12.6px; }
   .logo-group img[src$="servicenow.png"] { height: 21px; }
-  .logo-group { gap: 95px; padding-right: 95px; }
+  .logo-group { gap: 85.5px; padding-right: 85.5px; }
   /* Track length scales with the logos and gap, so the duration scales with it
      to hold the same 11.27px/sec: measured 914px per group / 11.27 = 81.1s. */
-  .logo-track { animation-duration: 127.2s; }
+  .logo-track { animation-duration: 130.5s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1789,11 +1787,10 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="sap.png"] { height: 18.9px; }
   .logo-group img[src$="salesforce.svg"] { height: 52.65px; }
   .logo-group img[src$="snowflake.png"] { height: 24.3px; }
-  .logo-group img[src$="databricks.png"] { height: 32.4px; }
   .logo-group img[src$="oracle.png"] { height: 11.34px; }
   .logo-group img[src$="servicenow.png"] { height: 18.9px; }
-  .logo-group { gap: 75px; padding-right: 75px; }
-  .logo-track { animation-duration: 107s; }  /* 1205px per group / 11.27 */
+  .logo-group { gap: 67.5px; padding-right: 67.5px; }
+  .logo-track { animation-duration: 110.8s; }  /* 1248px per group / 11.27 */
   .job-card { flex-basis: 86%; }
 }
 
