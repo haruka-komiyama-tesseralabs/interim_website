@@ -647,10 +647,10 @@ body:has(.dotgrid)::before {
 .logo-track {
   display: flex;
   width: max-content;
-  /* Measured: 1330px per group / 11.27px per sec = 118s. Recompute if the logo
-     heights or the gap below change, or the carousel drifts off the dashes'
-     pace. */
-  animation: logoMarquee 118s linear infinite;
+  /* Measured: 1170px per group / 11.27px per sec = 103.8s. Recompute if the
+     logo heights or the gap below change, or the carousel drifts off the
+     dashes' pace. */
+  animation: logoMarquee 103.8s linear infinite;
 }
 .logo-group {
   display: flex;
@@ -671,6 +671,21 @@ body:has(.dotgrid)::before {
   height: 36px;
   width: auto;
 }
+/* Per-logo scale relative to that 36px baseline. The new logo set mixes
+   icon-only marks (Salesforce, Databricks) with full wordmarks of very
+   different visual weight at the same height (ORACLE and SERVICENOW read as
+   bold and dominant; Salesforce's cloud mark nearly disappears next to them),
+   so each is nudged individually rather than relying on uniform height alone.
+   Targeted by src rather than alt text or a class, since each image appears
+   twice (the visible group and its aria-hidden duplicate for the marquee
+   loop) and this way both copies are covered with one rule. Mirrored at the
+   two narrower breakpoints against their own 30px/27px baselines. */
+.logo-group img[src$="sap.png"] { height: 25.2px; }        /* -30% */
+.logo-group img[src$="salesforce.svg"] { height: 54px; }   /* +50% */
+.logo-group img[src$="snowflake.png"] { height: 32.4px; }  /* -10% */
+.logo-group img[src$="databricks.png"] { height: 43.2px; } /* +20% */
+.logo-group img[src$="oracle.png"] { height: 25.2px; }     /* -30% */
+.logo-group img[src$="servicenow.png"] { height: 25.2px; } /* -30% */
 @keyframes logoMarquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -1552,10 +1567,16 @@ body:has(.dotgrid)::before {
      here), so it needs no wrapping rules at all — just smaller logos and a
      tighter gap. 30px is 50% up from this breakpoint's old 20px. */
   .logo-group img { height: 30px; }
+  .logo-group img[src$="sap.png"] { height: 21px; }
+  .logo-group img[src$="salesforce.svg"] { height: 45px; }
+  .logo-group img[src$="snowflake.png"] { height: 27px; }
+  .logo-group img[src$="databricks.png"] { height: 36px; }
+  .logo-group img[src$="oracle.png"] { height: 21px; }
+  .logo-group img[src$="servicenow.png"] { height: 21px; }
   .logo-group { gap: 24px; padding-right: 24px; }
   /* Track length scales with the logos and gap, so the duration scales with it
      to hold the same 11.27px/sec: measured 914px per group / 11.27 = 81.1s. */
-  .logo-track { animation-duration: 92.9s; }
+  .logo-track { animation-duration: 81.1s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1767,8 +1788,14 @@ body:has(.dotgrid)::before {
 
 @media (max-width: 420px) {
   .logo-group img { height: 27px; }
+  .logo-group img[src$="sap.png"] { height: 18.9px; }
+  .logo-group img[src$="salesforce.svg"] { height: 40.5px; }
+  .logo-group img[src$="snowflake.png"] { height: 24.3px; }
+  .logo-group img[src$="databricks.png"] { height: 32.4px; }
+  .logo-group img[src$="oracle.png"] { height: 18.9px; }
+  .logo-group img[src$="servicenow.png"] { height: 18.9px; }
   .logo-group { gap: 19px; padding-right: 19px; }
-  .logo-track { animation-duration: 81.8s; }  /* 922px per group / 11.27 */
+  .logo-track { animation-duration: 71.1s; }  /* 801px per group / 11.27 */
   .job-card { flex-basis: 86%; }
 }
 
