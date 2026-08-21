@@ -657,13 +657,14 @@ body:has(.dotgrid)::before {
   align-items: center;
   flex: 0 0 auto;
   /* Sized so the strip shows about seven logos at once, with the eighth always
-     entering or leaving at a faded edge. The logos average 42px wide and the
-     strip is 1160px, so a 124px gap puts the logo-to-logo pitch at ~166px =
-     1160/7. At the previous 150px only 6.03 fit. */
-  gap: 124px;
+     entering or leaving at a faded edge. Recomputed for the new logo set: full
+     wordmarks average ~128px wide (vs ~42px for the old small icon marks), so
+     the gap that keeps 7 visible in a 1160px strip is much smaller here (38px
+     vs the old set's 124px). */
+  gap: 38px;
   /* Matches the gap so the spacing across the seam between the two copies is
      identical to the spacing inside each one. */
-  padding-right: 124px;
+  padding-right: 38px;
 }
 .logo-group img {
   /* 50% up from the old 24px row. */
@@ -1551,10 +1552,10 @@ body:has(.dotgrid)::before {
      here), so it needs no wrapping rules at all — just smaller logos and a
      tighter gap. 30px is 50% up from this breakpoint's old 20px. */
   .logo-group img { height: 30px; }
-  .logo-group { gap: 79px; padding-right: 79px; }
+  .logo-group { gap: 24px; padding-right: 24px; }
   /* Track length scales with the logos and gap, so the duration scales with it
      to hold the same 11.27px/sec: measured 914px per group / 11.27 = 81.1s. */
-  .logo-track { animation-duration: 81.1s; }
+  .logo-track { animation-duration: 92.9s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1766,8 +1767,8 @@ body:has(.dotgrid)::before {
 
 @media (max-width: 420px) {
   .logo-group img { height: 27px; }
-  .logo-group { gap: 63px; padding-right: 63px; }
-  .logo-track { animation-duration: 67.3s; }  /* 758px per group / 11.27 */
+  .logo-group { gap: 19px; padding-right: 19px; }
+  .logo-track { animation-duration: 81.8s; }  /* 922px per group / 11.27 */
   .job-card { flex-basis: 86%; }
 }
 
