@@ -744,7 +744,10 @@ body:has(.dotgrid)::before {
    Compliance section's separated-widget treatment */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* 4 columns, not 3 -- Product and Solutions both carry a 4th card now, and
+     the request was for the row to fill the full content width rather than
+     leave the 4th card as an orphan alone in a partial second row. */
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin-top: 40px;
 }
@@ -752,10 +755,12 @@ body:has(.dotgrid)::before {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 22px 20px;
-  /* 260px/4-line clamp (was 232px/3): the Code & process intelligence card's
-     copy needs a 4th line at this width, and a shared fixed height is what
-     keeps all six Product/Solutions cards level with each other. */
-  height: 260px;
+  /* 288px/5-line clamp (was 232px/3, then 260px/4): moving to 4 columns
+     narrowed every card, which pushed the two longest descriptions
+     (Code & process intelligence, Business change) onto a 5th line. A shared
+     fixed height is what keeps all eight Product/Solutions cards level with
+     each other regardless of how much text each one has. */
+  height: 288px;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -781,7 +786,7 @@ body:has(.dotgrid)::before {
   margin: 0;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 5;
   overflow: hidden;
 }
 
