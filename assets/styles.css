@@ -752,7 +752,10 @@ body:has(.dotgrid)::before {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 22px 20px;
-  height: 232px;
+  /* 260px/4-line clamp (was 232px/3): the Code & process intelligence card's
+     copy needs a 4th line at this width, and a shared fixed height is what
+     keeps all six Product/Solutions cards level with each other. */
+  height: 260px;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -778,7 +781,7 @@ body:has(.dotgrid)::before {
   margin: 0;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   overflow: hidden;
 }
 
