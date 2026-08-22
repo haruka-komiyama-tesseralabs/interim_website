@@ -647,10 +647,10 @@ body:has(.dotgrid)::before {
 .logo-track {
   display: flex;
   width: max-content;
-  /* Measured: 2023px per group / 11.27px per sec = 179.6s. Recompute if the
+  /* Measured: 1934px per group / 11.27px per sec = 171.7s. Recompute if the
      logo heights or the gap below change, or the carousel drifts off the
      dashes' pace. */
-  animation: logoMarquee 179.6s linear infinite;
+  animation: logoMarquee 171.7s linear infinite;
 }
 .logo-group {
   display: flex;
@@ -682,7 +682,8 @@ body:has(.dotgrid)::before {
 .logo-group img[src$="salesforce.svg"] { height: 70.2px; }  /* +50% then +30% */
 .logo-group img[src$="snowflake.png"] { height: 32.4px; }  /* -10% */
 .logo-group img[src$="oracle.png"] { height: 15.12px; }    /* -30% then 60% of that */
-.logo-group img[src$="servicenow.png"] { height: 25.2px; } /* -30% */
+.logo-group img[src$="servicenow.png"] { height: 21.42px; } /* -30% then -15% */
+.logo-group img[src$="databricks.png"] { height: 25.2px; }  /* -30% */
 @keyframes logoMarquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -1568,11 +1569,12 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="salesforce.svg"] { height: 58.5px; }
   .logo-group img[src$="snowflake.png"] { height: 27px; }
   .logo-group img[src$="oracle.png"] { height: 12.6px; }
-  .logo-group img[src$="servicenow.png"] { height: 21px; }
+  .logo-group img[src$="servicenow.png"] { height: 17.85px; }
+  .logo-group img[src$="databricks.png"] { height: 21px; }
   .logo-group { gap: 85.5px; padding-right: 85.5px; }
   /* Track length scales with the logos and gap, so the duration scales with it
      to hold the same 11.27px/sec: measured 914px per group / 11.27 = 81.1s. */
-  .logo-track { animation-duration: 130.5s; }
+  .logo-track { animation-duration: 123.9s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1788,9 +1790,10 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="salesforce.svg"] { height: 52.65px; }
   .logo-group img[src$="snowflake.png"] { height: 24.3px; }
   .logo-group img[src$="oracle.png"] { height: 11.34px; }
-  .logo-group img[src$="servicenow.png"] { height: 18.9px; }
+  .logo-group img[src$="servicenow.png"] { height: 16.065px; }
+  .logo-group img[src$="databricks.png"] { height: 18.9px; }
   .logo-group { gap: 67.5px; padding-right: 67.5px; }
-  .logo-track { animation-duration: 110.8s; }  /* 1248px per group / 11.27 */
+  .logo-track { animation-duration: 104.8s; }  /* 1181px per group / 11.27 */
   .job-card { flex-basis: 86%; }
 }
 
