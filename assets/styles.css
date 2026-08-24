@@ -739,21 +739,6 @@ body:has(.dotgrid)::before {
    it only inflated the gap to the next section, making section-to-section
    spacing wider than the video-to-section gap above it on About. */
 .section-intro:last-child { margin-bottom: 0; }
-.section-lead {
-  font-weight: 600;
-  font-size: clamp(18px, 3.2vw, 24px);
-  line-height: 1.15;
-  margin: 0 0 4px;
-  color: var(--ink-soft);
-}
-/* Requested for these two sections only, not Security & Compliance's lead —
-   an extra line of space between the bold lead and the paragraph beneath it.
-   em-based so "one line" holds at the lead's own font-size at every width. */
-#product .section-lead,
-#solutions .section-lead {
-  margin-bottom: 1.5em;
-}
-
 /* Card grid — Product / Solutions: four separate boxes, matching the
    Compliance section's separated-widget treatment */
 .card-grid {
