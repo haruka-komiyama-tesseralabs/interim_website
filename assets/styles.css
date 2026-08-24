@@ -1227,7 +1227,7 @@ body:has(.dotgrid)::before {
 .job-card p {
   font-size: 18px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.15;
   margin: 0;
   flex: 1;
   display: -webkit-box;
