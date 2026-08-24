@@ -796,7 +796,7 @@ body:has(.dotgrid)::before {
 .card p {
   font-size: 18px;
   color: var(--muted);
-  line-height: 1.55;
+  line-height: 1.15;
   margin: 0;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -864,7 +864,7 @@ body:has(.dotgrid)::before {
 .blog-card p {
   font-size: 18px;
   color: var(--muted);
-  line-height: 1.55;
+  line-height: 1.15;
   margin: 0;
   flex: 1;
   display: -webkit-box;
@@ -1405,7 +1405,7 @@ body:has(.dotgrid)::before {
   flex: none;
 }
 .step h5 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
-.step p { font-size: 18px; color: var(--muted); line-height: 1.55; margin: 0; }
+.step p { font-size: 18px; color: var(--muted); line-height: 1.15; margin: 0; }
 
 /* ==========================================================================
    Responsive
