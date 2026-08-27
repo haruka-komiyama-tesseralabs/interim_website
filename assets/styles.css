@@ -690,6 +690,25 @@ body:has(.dotgrid)::before {
   to { transform: translateX(-50%); }
 }
 
+/* About "The dream team" carousel — same .logo-marquee/.logo-track/.logo-group
+   mechanics and sizing as the hero's, just a wider 10-logo set, so its own
+   group width needs its own animation-duration to hold the same 11.27px/sec
+   pace (see the .logo-track comment above). Scoped by #careers rather than a
+   new track class so both carousels stay visually identical by default. */
+.team-logos {
+  margin: 32px 0 8px;
+}
+#careers .logo-track {
+  /* 2340px per group / 11.27 */
+  animation-duration: 207.7s;
+}
+.logo-group img[src$="oracle-team.png"] { height: 28.8px; }   /* -20% */
+.logo-group img[src$="sap-team.png"] { height: 28.8px; }      /* -20% */
+.logo-group img[src$="netflix-team.png"] { height: 28.8px; }  /* -20% */
+.logo-group img[src$="palantir-team.svg"] { height: 28.8px; } /* -20% */
+.logo-group img[src$="apple-team.svg"] { height: 46.8px; }    /* +30% */
+.logo-group img[src$="meta-team.svg"] { height: 46.8px; }     /* +30% */
+
 /* Section pattern */
 /* 112px vertical, so two stacked sections are separated by 224px — the single
    spacing figure used between every section on the page. It's the old
@@ -1561,6 +1580,13 @@ body:has(.dotgrid)::before {
   /* Track length scales with the logos and gap, so the duration scales with it
      to hold the same 11.27px/sec: measured 914px per group / 11.27 = 81.1s. */
   .logo-track { animation-duration: 123.9s; }
+  .logo-group img[src$="oracle-team.png"] { height: 24px; }
+  .logo-group img[src$="sap-team.png"] { height: 24px; }
+  .logo-group img[src$="netflix-team.png"] { height: 24px; }
+  .logo-group img[src$="palantir-team.svg"] { height: 24px; }
+  .logo-group img[src$="apple-team.svg"] { height: 39px; }
+  .logo-group img[src$="meta-team.svg"] { height: 39px; }
+  #careers .logo-track { animation-duration: 149.1s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1780,6 +1806,13 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="databricks.png"] { height: 18.9px; }
   .logo-group { gap: 67.5px; padding-right: 67.5px; }
   .logo-track { animation-duration: 104.8s; }  /* 1181px per group / 11.27 */
+  .logo-group img[src$="oracle-team.png"] { height: 21.6px; }
+  .logo-group img[src$="sap-team.png"] { height: 21.6px; }
+  .logo-group img[src$="netflix-team.png"] { height: 21.6px; }
+  .logo-group img[src$="palantir-team.svg"] { height: 21.6px; }
+  .logo-group img[src$="apple-team.svg"] { height: 35.1px; }
+  .logo-group img[src$="meta-team.svg"] { height: 35.1px; }
+  #careers .logo-track { animation-duration: 125.8s; }
   .job-card { flex-basis: 86%; }
 }
 
