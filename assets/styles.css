@@ -331,7 +331,8 @@ body:has(.dotgrid)::before {
 /* nowrap only where there's genuinely room for the full line — below this the
    headline needs to be free to wrap rather than overflow the viewport */
 @media (min-width: 1201px) {
-  .hero h1 { white-space: nowrap; }
+  .hero h1,
+  .hero p.lede { white-space: nowrap; }
 
   /* The illustration only renders above this width, and its card outlines pass
      behind the headline. A white halo keeps the text readable over them: the
