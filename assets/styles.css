@@ -698,6 +698,11 @@ body:has(.dotgrid)::before {
 .team-logos {
   margin: 72px 0 64px;
 }
+/* A little extra room below the "Work alongside the team..." intro,
+   on top of .section-intro's shared 20px margin-bottom. */
+#careers .section-intro {
+  margin-bottom: 36px;
+}
 #careers .logo-track {
   /* 2564px per group / 11.27 */
   animation-duration: 227.6s;
