@@ -699,10 +699,10 @@ body:has(.dotgrid)::before {
   margin: 72px 0 64px;
 }
 #careers .logo-track {
-  /* 2469px per group / 11.27 */
-  animation-duration: 219.1s;
+  /* 2552px per group / 11.27 */
+  animation-duration: 226.5s;
 }
-.logo-group img[src$="yale-team.svg"] { height: 20.7px; }     /* -50% then +15% */
+.logo-group img[src$="yale-team.svg"] { height: 22.77px; }    /* -50%, +15%, then +10% */
 .logo-group img[src$="oracle-team.png"] { height: 17.28px; }  /* -20% then -40% */
 .logo-group img[src$="sap-team.png"] { height: 24.192px; }    /* -20%, -30%, then +20% */
 .logo-group img[src$="microsoft-team.svg"] { height: 58.5px; } /* +25% then +30% */
@@ -713,7 +713,7 @@ body:has(.dotgrid)::before {
 .logo-group img[src$="apple-team.svg"] { height: 39.78px; transform: translateY(-6%); } /* +30% then -15% */
 .logo-group img[src$="netflix-team.png"] { height: 25.92px; } /* -20% then -10% */
 .logo-group img[src$="palantir-team.svg"] { height: 26.4384px; } /* -20%, -15%, then +8% */
-.logo-group img[src$="meta-team.png"] { height: 27px; }       /* -25% */
+.logo-group img[src$="meta-team.png"] { height: 21.6px; }     /* -25% then -20% */
 
 /* Section pattern */
 /* 112px vertical, so two stacked sections are separated by 224px — the single
@@ -1586,7 +1586,7 @@ body:has(.dotgrid)::before {
   /* Track length scales with the logos and gap, so the duration scales with it
      to hold the same 11.27px/sec: measured 914px per group / 11.27 = 81.1s. */
   .logo-track { animation-duration: 123.9s; }
-  .logo-group img[src$="yale-team.svg"] { height: 17.25px; }
+  .logo-group img[src$="yale-team.svg"] { height: 18.975px; }
   .logo-group img[src$="oracle-team.png"] { height: 14.4px; }
   .logo-group img[src$="sap-team.png"] { height: 20.16px; }
   .logo-group img[src$="microsoft-team.svg"] { height: 48.75px; }
@@ -1594,8 +1594,8 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="apple-team.svg"] { height: 33.15px; }
   .logo-group img[src$="netflix-team.png"] { height: 21.6px; }
   .logo-group img[src$="palantir-team.svg"] { height: 22.032px; }
-  .logo-group img[src$="meta-team.png"] { height: 22.5px; }
-  #careers .logo-track { animation-duration: 156.2s; }
+  .logo-group img[src$="meta-team.png"] { height: 18px; }
+  #careers .logo-track { animation-duration: 162.4s; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1815,7 +1815,7 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="databricks.png"] { height: 18.9px; }
   .logo-group { gap: 67.5px; padding-right: 67.5px; }
   .logo-track { animation-duration: 104.8s; }  /* 1181px per group / 11.27 */
-  .logo-group img[src$="yale-team.svg"] { height: 15.525px; }
+  .logo-group img[src$="yale-team.svg"] { height: 17.0775px; }
   .logo-group img[src$="oracle-team.png"] { height: 12.96px; }
   .logo-group img[src$="sap-team.png"] { height: 18.144px; }
   .logo-group img[src$="microsoft-team.svg"] { height: 43.875px; }
@@ -1823,8 +1823,8 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="apple-team.svg"] { height: 29.835px; }
   .logo-group img[src$="netflix-team.png"] { height: 19.44px; }
   .logo-group img[src$="palantir-team.svg"] { height: 19.8288px; }
-  .logo-group img[src$="meta-team.png"] { height: 20.25px; }
-  #careers .logo-track { animation-duration: 131.4s; }
+  .logo-group img[src$="meta-team.png"] { height: 16.2px; }
+  #careers .logo-track { animation-duration: 136.9s; }
   .job-card { flex-basis: 86%; }
 }
 
