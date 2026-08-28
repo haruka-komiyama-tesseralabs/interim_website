@@ -699,13 +699,13 @@ body:has(.dotgrid)::before {
   margin: 72px 0 64px;
 }
 #careers .logo-track {
-  /* 2552px per group / 11.27 */
-  animation-duration: 226.5s;
+  /* 2564px per group / 11.27 */
+  animation-duration: 227.6s;
 }
 .logo-group img[src$="yale-team.svg"] { height: 22.77px; }    /* -50%, +15%, then +10% */
 .logo-group img[src$="oracle-team.png"] { height: 17.28px; }  /* -20% then -40% */
 .logo-group img[src$="sap-team.png"] { height: 24.192px; }    /* -20%, -30%, then +20% */
-.logo-group img[src$="microsoft-team.svg"] { height: 58.5px; } /* +25% then +30% */
+.logo-group img[src$="microsoft-team.svg"] { height: 64.35px; } /* +25%, +30%, then +10% */
 .logo-group img[src$="google-team.png"] { height: 32.4px; }   /* -10% */
 /* "Just a hair" up: the artwork's own bounding box leaves a hair more
    empty space under the leaf than above the base, so flex-centering
@@ -1589,13 +1589,14 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="yale-team.svg"] { height: 18.975px; }
   .logo-group img[src$="oracle-team.png"] { height: 14.4px; }
   .logo-group img[src$="sap-team.png"] { height: 20.16px; }
-  .logo-group img[src$="microsoft-team.svg"] { height: 48.75px; }
+  .logo-group img[src$="microsoft-team.svg"] { height: 53.625px; }
   .logo-group img[src$="google-team.png"] { height: 27px; }
   .logo-group img[src$="apple-team.svg"] { height: 33.15px; }
   .logo-group img[src$="netflix-team.png"] { height: 21.6px; }
   .logo-group img[src$="palantir-team.svg"] { height: 22.032px; }
   .logo-group img[src$="meta-team.png"] { height: 18px; }
-  #careers .logo-track { animation-duration: 162.4s; }
+  #careers .logo-track { animation-duration: 163.3s; }
+  .team-logos { margin: 40px 0 32px; }
   /* Scoped to .compact (the 3-logo group itself) rather than to any wrapper —
      this needs to follow the logos, not whichever section they're placed in,
      which has now changed several times. */
@@ -1818,13 +1819,14 @@ body:has(.dotgrid)::before {
   .logo-group img[src$="yale-team.svg"] { height: 17.0775px; }
   .logo-group img[src$="oracle-team.png"] { height: 12.96px; }
   .logo-group img[src$="sap-team.png"] { height: 18.144px; }
-  .logo-group img[src$="microsoft-team.svg"] { height: 43.875px; }
+  .logo-group img[src$="microsoft-team.svg"] { height: 48.2625px; }
   .logo-group img[src$="google-team.png"] { height: 24.3px; }
   .logo-group img[src$="apple-team.svg"] { height: 29.835px; }
   .logo-group img[src$="netflix-team.png"] { height: 19.44px; }
   .logo-group img[src$="palantir-team.svg"] { height: 19.8288px; }
   .logo-group img[src$="meta-team.png"] { height: 16.2px; }
-  #careers .logo-track { animation-duration: 136.9s; }
+  #careers .logo-track { animation-duration: 137.7s; }
+  .team-logos { margin: 32px 0 24px; }
   .job-card { flex-basis: 86%; }
 }
 
