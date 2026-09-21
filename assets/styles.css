@@ -567,6 +567,96 @@ body:has(.dotgrid)::before {
   color: var(--ink);
   margin-bottom: 48px;
 }
+/* Case studies — full-bleed photo cards with the copy overlaid at the
+   bottom, matching tesseralabs.ai's own case-study cards (measured off the
+   live site: 569x380 card, ::after gradient, card-copy padding, type
+   scale, and the white "Explore the story" pill are all taken from there
+   rather than guessed). The image and gradient are both position:absolute
+   so the copy and number badge — the only two things left in normal flow —
+   are what the card's flex column actually sizes around; justify-content:
+   flex-end is what pins that copy to the bottom of the fixed-height card. */
+.case-study-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.case-study-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 380px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #17252a;
+  text-decoration: none;
+}
+.case-study-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Near-transparent at the top, nearly opaque black at the bottom, so the
+   white copy stays legible against whatever the photo is doing there while
+   the top of the image is left clear. */
+.case-study-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.867));
+  pointer-events: none;
+}
+.case-study-card-copy {
+  position: relative;
+  z-index: 1;
+  padding: 28px 32px;
+  color: #fff;
+}
+.case-study-eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.99px;
+  color: #fff;
+}
+.case-study-card-copy h3 {
+  font-size: 27px;
+  font-weight: 400;
+  letter-spacing: -0.945px;
+  color: #fff;
+  margin: 12px 0;
+}
+.case-study-card-copy p {
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: -0.64px;
+  color: #eee;
+  margin: 0;
+}
+.case-study-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #fff;
+  color: #09090B;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.64px;
+}
+.case-study-number {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  right: 24px;
+  font-size: 12px;
+  color: #fff;
+}
+
 /* Full-bleed Fortune 500 band. The tint is carried on a section that spans the
    viewport while an inner wrapper re-applies the normal container, so the
    background reaches both edges of the screen. The generous breathing room
@@ -1620,7 +1710,8 @@ body:has(.dotgrid)::before {
      applies once each card owns the full width. */
   .card-grid,
   .blog-grid,
-  .check-grid {
+  .check-grid,
+  .case-study-grid {
     grid-template-columns: 1fr;
     gap: 10px;
   }
@@ -1629,8 +1720,18 @@ body:has(.dotgrid)::before {
      just widens the gap under the intro. */
   .card-grid,
   .check-grid,
+  .case-study-grid,
   .post-related .blog-grid {
     margin-top: 24px;
+  }
+  .case-study-card {
+    height: 280px;
+  }
+  .case-study-card-copy {
+    padding: 20px;
+  }
+  .case-study-card-copy h3 {
+    font-size: 22px;
   }
   .card,
   .blog-card {
